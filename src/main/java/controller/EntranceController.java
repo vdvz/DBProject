@@ -38,11 +38,10 @@ public class EntranceController extends BaseController implements Initializable 
     @FXML
     private Button backButton;
 
-
     @FXML
     public void defaultButtonTapped() {
         try {
-            connection.registerDefaultConnection();
+            connection.registerConnection();
             Main.getNavigation().load(MainController.URL_FXML).show();
         } catch (SQLException ex) {
             System.out.println("SQLException: error with connection to server");
@@ -70,8 +69,8 @@ public class EntranceController extends BaseController implements Initializable 
     public void loginButtonTapped() {
         if (isNotEmpty()) {
             try {
-                connection.registerLocalhostConnection(loginText.getText(), passwordText.getText());
-                Main.getNavigation().load(MainController.URL_FXML).show();
+                connection.registerConnection(loginText.getText(), passwordText.getText());
+                Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML).show();
             } catch (SQLException ex) {
                 System.out.println("SQLException: error with connection to server");
                 showAlert("error with connection to server", "Check your login and password");

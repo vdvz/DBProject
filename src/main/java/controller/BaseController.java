@@ -18,14 +18,7 @@ public class BaseController implements Controller {
 
     @Override
     public void show() {
-        PreShowing();
         Main.getNavigation().show(this);
-        PostShowing();
     }
 
-    public void PreShowing() {
-    }
-
-    public void PostShowing() {
-    }
 }

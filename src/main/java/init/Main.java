@@ -2,6 +2,8 @@ package init;
 
 import controller.EntranceController;
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Connection;
 import utils.Navigation;
@@ -14,13 +16,13 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
-        stage.setTitle("Information system of trade organization");
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("DB PROJECT");
 
-        navigation = new Navigation(stage);
+        navigation = new Navigation(primaryStage);
         Main.getNavigation().load(EntranceController.ENTRANCE_WINDOW_FXML).show();
 
-        stage.show();
+        primaryStage.show();
     }
 
     @Override

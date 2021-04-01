@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import utils.Connection;
 import utils.DatabaseManager;
@@ -14,14 +15,17 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainController extends BaseController implements Initializable {
-    public final static String URL_FXML = "/main_window.fxml";
-    private Connection connection;
-    private DatabaseManager manager;
+    public final static String URL_FXML = "/main__window.fxml";
+    private final Connection connection;
+    private final DatabaseManager manager;
 
     public MainController() {
         connection = Main.getConnection();
         manager = new DatabaseManager(connection);
     }
+
+    @FXML
+    public ContextMenu openTable;
 
     @FXML
     private ListView<String> tableListView;
@@ -42,7 +46,7 @@ public class MainController extends BaseController implements Initializable {
 
     private void configureTableView() {
         try {
-            ResultSet set = connection.executeQueryAndGetResult("select table_name from user_tables");
+            ResultSet set = connection.executeQuery("select table_name from user_tables");
 
             if (set != null) {
                 while (set.next()) {
