@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="nsu" uuid="2cc04664-b045-4d4b-88d6-397575ac0da1">
+      <database-info product="Oracle" version="Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production" jdbc-version="4.2" driver-name="Oracle JDBC driver" driver-version="21.1.0.0.0" dbms="ORACLE" exact-version="10.2.0.1.0" exact-driver-version="21.1">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>18208_VIZIR</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
