@@ -14,16 +14,11 @@ public class Connection {
     private static final String password = "Vadim090900";
     private static final String driver = "oracle.jdbc.driver.OracleDriver";
 
-    public Connection() {
-
-    }
-
-    public void registerConnection() throws SQLException, ClassNotFoundException {
+    public Connection() throws SQLException, ClassNotFoundException {
         registerConnection(nsuIp, login, password);
     }
 
-    public void registerConnection(String login, String password)
-        throws SQLException, ClassNotFoundException {
+    public Connection(String login, String password) throws SQLException, ClassNotFoundException {
         registerConnection(localhost, login, password);
     }
 
@@ -68,13 +63,12 @@ public class Connection {
 
     public ResultSet executeQuery(String sql) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        return preparedStatement.executeQuery(sql);
+        return preparedStatement.executeQuery();
     }
 
     public int executeUpdate(String sql) throws SQLException {
-        try(PreparedStatement preStatement = connection.prepareStatement(sql)) {
-            return preStatement.executeUpdate(sql);
-        }
+        PreparedStatement preStatement = connection.prepareStatement(sql);
+        return preStatement.executeUpdate(sql);
     }
 
 }

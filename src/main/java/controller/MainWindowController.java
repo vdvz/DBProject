@@ -2,38 +2,57 @@ package controller;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import init.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import utils.Connection;
 import utils.DatabaseManager;
 
-public class MainWindowController extends BaseController implements Initializable {
+public class MainWindowController extends Controller implements Initializable {
 
   public static final String MAIN_WINDOW_FXML = "/main__window.fxml";
-  private final Connection connection;
   private final DatabaseManager manager;
-  public MainWindowController() {
-    connection = Main.getConnection();
-    manager = new DatabaseManager(connection);
+
+  private Map<String, String> tableNameToControllerPath = new HashMap<String, String>(){{
+    put("GOODS","/");
   }
+  };
 
   @FXML
   private ListView<String> tableNamesView;
 
+  public MainWindowController() {
+    manager = Main.getDatabaseManager();
+
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     updateTableView();
+    ContextMenu contextMenu = new ContextMenu();
+    contextMenu.getItems().add(new MenuItem("Open"));
+    contextMenu.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+
+        Controller controller = Main.getNavigation().loadTable(TableWindowController.MAIN_WINDOW_FXML, new GoodsTableWindowController());
+        controller.setStage(Main.getNavigation().createNewStage());
+        controller.show();
+        System.out.println(tableNamesView.getSelectionModel().getSelectedItems());
+      }
+    });
+    tableNamesView.setContextMenu(contextMenu);
+
   }
 
-
-  public void openTable(){
-
-  }
 
   @FXML
   private void createTableButtonHandler() throws SQLException {
@@ -42,8 +61,24 @@ public class MainWindowController extends BaseController implements Initializabl
   }
 
   private void updateTableView() {
+    tableNamesView.getItems().clear();
     List<String> items = tableNamesView.getItems();
-    manager.getExistingTables().stream().filter(e->!items.contains(e)).forEach(e -> tableNamesView.getItems().add(e));
+    items.addAll(manager.getExistingTables());
+  }
+
+  @FXML
+  public void dropTableButtonHandler() {
+    try {
+      manager.dropTables();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    updateTableView();
+  }
+
+  public void handleMouseClickOnTable(MouseEvent mouseEvent) {
+    String selectedTable = tableNamesView.getSelectionModel().getSelectedItems().get(0);
+
   }
 
 }

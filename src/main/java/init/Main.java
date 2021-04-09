@@ -1,18 +1,32 @@
 package init;
 
+import controller.Controller;
 import controller.EntranceController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Connection;
+import utils.DatabaseManager;
 import utils.Navigation;
+
+import java.sql.SQLException;
 
 public class Main extends Application {
     private static Navigation navigation;
+    private static DatabaseManager databaseManager;
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+    public static void openConnection(String login, String password) throws SQLException, ClassNotFoundException {
+        databaseManager = new DatabaseManager(new Connection(login, password));
+    }
+
+    public static void openConnection() throws SQLException, ClassNotFoundException {
+        databaseManager = new DatabaseManager(new Connection());
     }
 
     @Override
@@ -20,14 +34,14 @@ public class Main extends Application {
         primaryStage.setTitle("DB PROJECT");
 
         navigation = new Navigation(primaryStage);
-        Main.getNavigation().load(EntranceController.ENTRANCE_WINDOW_FXML).show();
-
-        primaryStage.show();
+        Controller controller = Main.getNavigation().load(EntranceController.ENTRANCE_WINDOW_FXML);
+        controller.setStage(primaryStage);
+        controller.show();
     }
 
     @Override
     public void stop() throws Exception {
-        Main.getNavigation().getConnection().close();
+        databaseManager.closeConnection();
         super.stop();
     }
 
@@ -35,6 +49,8 @@ public class Main extends Application {
         return navigation;
     }
 
-    public static Connection getConnection() { return navigation.getConnection(); }
+    public static DatabaseManager getDatabaseManager(){
+        return databaseManager;
+    }
 
 }

@@ -4,6 +4,7 @@ import init.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,49 +16,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class TableWindowController extends BaseController implements Initializable {
+public abstract class TableWindowController extends Controller implements Initializable {
 
     public static final String MAIN_WINDOW_FXML = "/table_window.fxml";
-    private final DatabaseManager manager;
+    final DatabaseManager manager;
 
-    @FXML
+    public Button createNewRowButton;
+    public Button updateButton;
+    public Button backButton;
     public TableView table;
-    private final String tableName;
-    TableWindowController(String tableName){
-        manager = new DatabaseManager(Main.getConnection());
-        this.tableName = tableName;
+
+    TableWindowController(){
+        manager = Main.getDatabaseManager();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Map.Entry<String, List<String>>> list = manager.getTable(tableName);
+        createNewRowButton.setOnAction(e->{
 
-        for (Map.Entry<String, List<String>> entry : list) {
-            TableColumn column = new TableColumn(entry.getKey());
+        });
+        updateButton.setOnAction(e->{
 
-            column.setCellValueFactory(new PropertyValueFactory<String, String>(entry.getKey()));
-            table.getColumns().add(column);
-        }
+        });
+        backButton.setOnAction(e->{
 
+        });
+        System.out.println("Wow");
+        System.out.println(backButton.getId());
     }
 
+    abstract public void generateTable();
 
-    public void generateTable(){
-        exe
-        ResultSetMetaData rsmd = rs.getMetaData();
-        String name = rsmd.getColumnName(1);
+    abstract public void back();
 
-    }
+    abstract public void createNewRow();
 
-    public void back(){
-
-    }
-
-    public void createNewRow(){
-
-    }
-
-    public void update(ActionEvent actionEvent) {
-
-    }
+    abstract public void update();
 }

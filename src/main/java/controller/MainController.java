@@ -14,14 +14,12 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MainController extends BaseController implements Initializable {
+public class MainController extends Controller implements Initializable {
     public final static String URL_FXML = "/main__window.fxml";
-    private final Connection connection;
     private final DatabaseManager manager;
 
     public MainController() {
-        connection = Main.getConnection();
-        manager = new DatabaseManager(connection);
+        manager = Main.getDatabaseManager();
     }
 
     @FXML
@@ -45,21 +43,12 @@ public class MainController extends BaseController implements Initializable {
     }
 
     private void configureTableView() {
-        try {
-            ResultSet set = connection.executeQuery("select table_name from user_tables");
 
-            if (set != null) {
-                while (set.next()) {
-                    String name = set.getString(1);
-                    if (!tableListView.getItems().contains(name)) {
-                        tableListView.getItems().add(name);
-                    }
-                }
+        manager.getExistingTables().forEach(e->{
+            if (!tableListView.getItems().contains(e)) {
+                tableListView.getItems().add(e);
             }
-        }
-        catch(SQLException throwable) {
-            throwable.printStackTrace();
-        }
+        });
     }
 
     private void showAlert(String header, String content) {
@@ -69,4 +58,5 @@ public class MainController extends BaseController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

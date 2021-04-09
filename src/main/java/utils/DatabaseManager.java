@@ -1,5 +1,7 @@
 package utils;
 
+import controller.Operations;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,15 +10,19 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
 
-public class DatabaseManager {
-    private static final String[] tableNamesArray = {"TradeTypes.sql", "Goods.sql", "TradePoints.sql"}; //, "Seller.sql", "Sales.sql",
+public class DatabaseManager extends Operations {
+    private static final String[] tableNamesArray = {"TradePoints.sql", "Goods.sql", "TradeTypes.sql"}; //, "Seller.sql", "Sales.sql",
            // "Providers.sql", "Accounting.sql", "Customers.sql", "Deliveries.sql", "Deliveries_goods", "Purchase_compositions.sql",
            // "TradeRoom.sql", "TradeSectionPoints.sql"};
 
-    private final Connection connection;
+
     private List<String> tablesName;
     private final Executor executor;
+    private final Connection connection;
 
+    public void closeConnection() throws SQLException {
+        connection.close();
+    }
 
     public DatabaseManager(Connection connection) {
         this.connection = connection;
@@ -32,6 +38,7 @@ public class DatabaseManager {
             ResultSet set = connection.executeQuery("select table_name from user_tables");
             if (set != null) {
                 while (set.next()) {
+                    System.out.println("HERE");
                     String name = set.getString(1);
                     result.add(name);
                 }
@@ -51,10 +58,9 @@ public class DatabaseManager {
         for (String query: queries) {
             try {
                 connection.executeQuery(query);
-
             } catch (SQLIntegrityConstraintViolationException ignored) {
             } catch (SQLException e) {
-                if (!(e.getErrorCode() == 6550 || e.getErrorCode() == additionalCode.get())) {
+                if (!(e.getErrorCode() == 6550 /*|| e.getErrorCode() == additionalCode.ifPresent().get()*/)) {
                     e.printStackTrace();
                 }
             } finally {
@@ -63,20 +69,25 @@ public class DatabaseManager {
         }
     }
 
+    public void dropTables() throws SQLException {
+        execute(loadTableDrops(), null);
+        execute(loadSequencesDrops(), null);
+    }
+
     private void createTables() throws SQLException {
         List<String> tablesCreation = new LinkedList<>();
         for(String tableName: tablesName) {
-            tablesCreation.add(getScriptFromFile("tablesCreation/" + tableName));
+            tablesCreation.add(loadScriptFromFile("tablesCreation/" + tableName));
         }
 
-        execute(getTableDrops(), null);
-        execute(getSequencesDrops(), null);
+        execute(loadTableDrops(), null);
+        execute(loadSequencesDrops(), null);
         execute(tablesCreation, Optional.of(955));
-        execute(getSequences(), null);
-        execute(getAutoincrement(), null);
+        execute(loadSequences(), null);
+        execute(loadAutoincrement(), null);
     }
 
-    private String getScriptFromFile(String relativePath) {
+    private String loadScriptFromFile(String relativePath) {
         try {
             return new String(Files.readAllBytes(Paths.get(
                     "src/main/resources/" + relativePath)));
@@ -86,34 +97,34 @@ public class DatabaseManager {
         }
     }
 
-    private List<String> getSequences() {
+    private List<String> loadSequences() {
         List<String> sequences = new LinkedList<>();
         for(String name: tablesName) {
-            sequences.add(getScriptFromFile("sequences/" + name));
+            sequences.add(loadScriptFromFile("sequences/" + name));
         }
         return sequences;
     }
 
-    private List<String> getAutoincrement() {
+    private List<String> loadAutoincrement() {
         List<String> autoIncrements = new LinkedList<>();
         for(String name: tablesName) {
-            autoIncrements.add(getScriptFromFile("triggers/" + name));
+            autoIncrements.add(loadScriptFromFile("triggers/" + name));
         }
         return autoIncrements;
     }
 
-    private List<String> getSequencesDrops() {
+    private List<String> loadSequencesDrops() {
         List<String> autoIncrements = new LinkedList<>();
         for(String tableName: tablesName) {
-            autoIncrements.add(getScriptFromFile("dropSequences/" + tableName));
+            autoIncrements.add(loadScriptFromFile("dropSequences/" + tableName));
         }
         return autoIncrements;
     }
 
-    private List<String> getTableDrops() {
+    private List<String> loadTableDrops() {
         LinkedList<String> autoIncrements = new LinkedList<>();
         for(String tableName: tablesName) {
-            autoIncrements.addFirst(getScriptFromFile("dropTables/" + tableName));
+            autoIncrements.addFirst(loadScriptFromFile("dropTables/" + tableName));
         }
         return autoIncrements;
     }

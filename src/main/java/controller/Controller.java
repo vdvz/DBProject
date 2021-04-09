@@ -1,11 +1,35 @@
 package controller;
 
+import init.Main;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 
-public interface Controller {
-    Node getView();
+public abstract class Controller {
 
-    void setView(Node view);
+    private Node view;
+    private Stage currentStage;
+    private Stage stage;
+    public Node getView(){
+        return view;
+    }
 
-    void show();
+    public void setView(Node view){
+        this.view = view;
+    }
+
+    public void show(){
+        Main.getNavigation().show(this, getStage());
+    }
+
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    void close(){
+        getStage().close();
+    }
 }
