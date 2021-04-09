@@ -81,4 +81,10 @@ public class MainWindowController extends Controller implements Initializable {
 
   }
 
+  public void openAvailableRequestsButtonHandler(ActionEvent actionEvent) {
+
+  }
+
+  public void loadTestValuesButtonHandler(ActionEvent actionEvent) {
+  }
 }
