@@ -51,4 +51,7 @@ public abstract class TableManager {
         return rows;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
 }

@@ -1,16 +1,14 @@
 package controller.insertions;
 
-import controller.tables.TableWindowController;
+import controller.Entities.Good;
 import init.Main;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.util.Callback;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import utils.tableManagers.GoodsTableManager;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class PurchaseCompositionsInsertionWindowController extends InsertionWindowController {
@@ -24,25 +22,24 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
 
         tableView.setEditable(true);
 
-        TableColumn columnId = new TableColumn("good_id");
+        TableColumn columnId = new TableColumn("id");
         columnId.setEditable(false);
-        TableColumn columnGood = new TableColumn("good");
-        columnGood.setCellFactory(e->CheckBoxTableCell.<ObservableList<String>>forTableColumn(columnGood));
+
+        TableColumn<Good, Good> columnGood = new TableColumn<>("good");
+        columnGood.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnGood.setCellFactory(ComboBoxTableCell.forTableColumn(loadAvailableGoods()));
+
         TableColumn columnCount = new TableColumn("count");
         TableColumn columnResultPrice = new TableColumn("result_price");
 
         tableView.getColumns().addAll(columnId, columnGood, columnCount, columnResultPrice);
 
-        columnGood.getColumns().addAll(loadAvailableGoods());
+        columnGood.getColumns().addAll(columnId, columnGood, columnCount);
+
     }
 
-    private ObservableList<String> loadAvailableGoods(){
-        try {
-            return Main.getDatabaseManager().getTableManager("GOODS").getTableRows().get(1);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+    private ObservableList<Good> loadAvailableGoods(){
+        return ((GoodsTableManager)Main.getDatabaseManager().getTableManager("GOODS")).getGoods();
     }
 
 

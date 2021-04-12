@@ -1,9 +1,11 @@
 package controller.tables;
 
+import controller.Entities.Customer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -18,18 +20,13 @@ public class CustomersTableWindowController extends TableWindowController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        TableColumn columnId = new TableColumn("id");
-        TableColumn columnName = new TableColumn("name");
-        TableColumn columnAge = new TableColumn("age");
+        TableColumn<Customer, String> columnId = new TableColumn<>("id");
+        TableColumn<Customer, String> columnName = new TableColumn<>("name");
+        TableColumn<Customer, String> columnAge = new TableColumn<>("age");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0)));
-
-        columnName.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1)));
-
-        columnAge.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3)));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
 
         table.getColumns().addAll(columnId, columnName, columnAge);
     }
