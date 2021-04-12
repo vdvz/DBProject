@@ -20,13 +20,9 @@ import java.util.Map;
 public class Navigation {
 
     private final List<Controller> controllers = new ArrayList<>();
+    private final Map<String, Controller> loadedScenes = new HashMap<>();
 
-    private Map<Controller, Stage> existingStages = new HashMap<>();
-    private Map<String, Controller> loadedScenes = new HashMap<>();
-
-
-    public Navigation(Stage stage) {
-
+    public Navigation(Stage primaryStage) {
     }
 
     public Controller load(String sUrl) {
@@ -57,6 +53,7 @@ public class Navigation {
             System.out.println(targetController.getClass());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sUrl));
             fxmlLoader.setController(targetController);
+            System.out.println(sUrl);
             Node root = fxmlLoader.load();
             targetController.setView(root);
             System.out.println("Loaded");

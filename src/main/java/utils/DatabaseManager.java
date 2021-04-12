@@ -1,6 +1,5 @@
 package utils;
 
-import controller.Operations;
 import utils.tableManagers.TableManager;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class DatabaseManager extends Operations {
+public class DatabaseManager {
     private static final List<String> tableNames = new ArrayList<String>(){
         {
             add("TradeTypes.sql");

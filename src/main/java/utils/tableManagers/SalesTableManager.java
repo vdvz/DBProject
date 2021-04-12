@@ -1,9 +1,5 @@
 package utils.tableManagers;
 
-import TableRows.ProviderTableRow;
-import controller.tables.TableWindowController;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import utils.Connection;
 
 import java.util.List;

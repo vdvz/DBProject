@@ -1,36 +1,34 @@
-package controller.tables;
+package controller.table;
 
-import TableRows.ProviderTableRow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TradeRoomTableWindowController extends TableWindowController {
+public class ProvidersTableWindowController extends TableWindowController {
 
-    public TradeRoomTableWindowController() {
-        super("TRADE_ROOM");
+
+    public ProvidersTableWindowController() {
+        super("PROVIDERS");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-
         TableColumn columnId = new TableColumn("id");
-        TableColumn columnTradePointsId = new TableColumn("trade_points_id");
+        TableColumn columnName = new TableColumn("name");
 
         columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
                 param -> new SimpleStringProperty(param.getValue().get(0)));
 
-        columnTradePointsId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
+        columnName.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
                 param -> new SimpleStringProperty(param.getValue().get(1)));
 
-        table.getColumns().addAll(columnId, columnTradePointsId);
+        table.getColumns().addAll(columnId, columnName);
     }
 
     @Override

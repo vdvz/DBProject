@@ -1,4 +1,4 @@
-package controller.Entities;
+package Entities;
 
 import javafx.beans.property.StringProperty;
 

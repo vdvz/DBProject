@@ -1,4 +1,4 @@
-package controller.tables;
+package controller.table;
 
 import controller.Controller;
 import init.Main;
@@ -58,11 +58,11 @@ public abstract class TableWindowController extends Controller implements Initia
     }
 
     public void generateTable() {
-        try {
+        /*try {
             table.getItems().addAll(Main.getDatabaseManager().getTableManager(tableName).getTableRows());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
     }
     abstract public void createNewRow();
 

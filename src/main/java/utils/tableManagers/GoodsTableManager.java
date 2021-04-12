@@ -1,6 +1,6 @@
 package utils.tableManagers;
 
-import controller.Entities.Good;
+import Entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -56,7 +56,9 @@ public class GoodsTableManager extends TableManager {
             result = getConnection().executeQuery("select id, name from goods");
             while(result.next()){
                 String id = result.getObject("id").toString();
+                System.out.println(id);
                 String displayedName = result.getObject("name").toString();
+                System.out.println(displayedName);
                 resultList.add(new Good(id, displayedName));
             }
         } catch (SQLException throwables) {

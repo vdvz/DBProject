@@ -1,13 +1,11 @@
-package controller.tables;
+package controller.table;
 
-import TableRows.ProviderTableRow;
 import controller.Controller;
 import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.lang.reflect.InvocationTargetException;

@@ -1,17 +1,12 @@
-package controller.tables;
+package controller.table;
 
-import controller.Entities.Good;
+import Entities.Good;
 import init.Main;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import utils.tableManagers.GoodsTableManager;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class GoodsTableWindowController extends TableWindowController {

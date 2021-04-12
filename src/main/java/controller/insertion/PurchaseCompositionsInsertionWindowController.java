@@ -1,6 +1,6 @@
-package controller.insertions;
+package controller.insertion;
 
-import controller.Entities.Good;
+import Entities.Good;
 import init.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

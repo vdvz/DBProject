@@ -1,12 +1,8 @@
-package controller.tables;
+package controller.table;
 
-import controller.Entities.Customer;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
+import Entities.Customer;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;

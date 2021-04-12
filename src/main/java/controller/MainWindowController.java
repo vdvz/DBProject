@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import controller.tables.TableWindowController;
+import controller.table.TableWindowController;
 import init.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,20 +23,20 @@ public class MainWindowController extends Controller implements Initializable {
   private final DatabaseManager manager;
 
   private final Map<String, String> tableNameToController = new HashMap<String, String>(){{
-    put("GOODS","controller.tables.GoodsTableWindowController");
-    put("ACCOUNTING","controller.tables.AccountingTableWindowController");
-    put("CUSTOMERS","controller.tables.CustomersTableWindowController");
-    put("DELIVERIES","controller.tables.DeliveriesTableWindowController");
-    put("DELIVERIES_GOODS","controller.tables.DeliveriesGoodsTableWindowController");
-    put("PROVIDERS","controller.tables.ProvidersTableWindowController");
-    put("PURCHASE_COMPOSITIONS","controller.tables.PurchaseCompositionsTableWindowController");
-    put("SALES","controller.tables.SalesTableWindowController");
-    put("SELLERS","controller.tables.SellersTableWindowController");
-    put("TRADE_SECTION_POINT","controller.tables.TradeSectionPointTableWindowController");
-    put("TRADE_POINTS","controller.tables.TradePointsTableWindowController");
-    put("TRADE_SECTION","controller.tables.TradeSectionTableWindowController");
-    put("TRADE_TYPES","controller.tables.TradeTypesTableWindowController");
-    put("TRADE_ROOM","controller.tables.TradeRoomTableWindowController");
+    put("GOODS","controller.table.GoodsTableWindowController");
+    put("ACCOUNTING","controller.table.AccountingTableWindowController");
+    put("CUSTOMERS","controller.table.CustomersTableWindowController");
+    put("DELIVERIES","controller.table.DeliveriesTableWindowController");
+    put("DELIVERIES_GOODS","controller.table.DeliveriesGoodsTableWindowController");
+    put("PROVIDERS","controller.table.ProvidersTableWindowController");
+    put("PURCHASE_COMPOSITIONS","controller.table.PurchaseCompositionsTableWindowController");
+    put("SALES","controller.table.SalesTableWindowController");
+    put("SELLERS","controller.table.SellersTableWindowController");
+    put("TRADE_SECTION_POINT","controller.table.TradeSectionPointTableWindowController");
+    put("TRADE_POINTS","controller.table.TradePointsTableWindowController");
+    put("TRADE_SECTION","controller.table.TradeSectionTableWindowController");
+    put("TRADE_TYPES","controller.table.TradeTypesTableWindowController");
+    put("TRADE_ROOM","controller.table.TradeRoomTableWindowController");
   }
   };
 

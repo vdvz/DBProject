@@ -1,16 +1,8 @@
 package utils.tableManagers;
 
-import controller.tables.TableWindowController;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.util.Callback;
 import utils.Connection;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class DeliveriesGoodsTableManager extends TableManager {
 

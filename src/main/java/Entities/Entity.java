@@ -1,4 +1,4 @@
-package controller.Entities;
+package Entities;
 
 public interface Entity {
 }

@@ -31,7 +31,7 @@ public abstract class TableManager {
     public abstract String loadUpdateQuery();
     abstract List<String> getColumnNames();
 
-
+    /*
     public ObservableList<ObservableList<String>> getTableRows() throws SQLException {
         ResultSet result = connection.executeQuery(selectionQuery);
         ObservableList<ObservableList<String>> rows = FXCollections.observableArrayList();
@@ -50,7 +50,7 @@ public abstract class TableManager {
         }
         return rows;
     }
-
+    */
     public Connection getConnection() {
         return connection;
     }

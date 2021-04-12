@@ -1,4 +1,4 @@
-package controller.insertions;
+package controller.insertion;
 
 import controller.Controller;
 import javafx.fxml.Initializable;

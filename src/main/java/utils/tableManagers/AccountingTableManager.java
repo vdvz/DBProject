@@ -1,12 +1,8 @@
 package utils.tableManagers;
 
-import controller.tables.TableWindowController;
-import javafx.scene.control.TableColumn;
 import utils.Connection;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class AccountingTableManager extends TableManager {
 
