@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GoodsTableManager extends TableManager {
 
@@ -47,6 +48,11 @@ public class GoodsTableManager extends TableManager {
     @Override
     List<String> getColumnNames() {
         return columnNames;
+    }
+
+    @Override
+    public void insertRow(Map<String, String> row) {
+
     }
 
     public ObservableList<Good> getGoods(){

@@ -7,6 +7,7 @@ import utils.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public abstract class TableManager {
 
@@ -30,6 +31,8 @@ public abstract class TableManager {
     public abstract String loadDeleteQuery();
     public abstract String loadUpdateQuery();
     abstract List<String> getColumnNames();
+
+    public abstract void insertRow(Map<String, String> row);
 
     /*
     public ObservableList<ObservableList<String>> getTableRows() throws SQLException {

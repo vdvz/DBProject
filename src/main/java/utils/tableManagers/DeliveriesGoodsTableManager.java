@@ -3,6 +3,7 @@ package utils.tableManagers;
 import utils.Connection;
 
 import java.util.List;
+import java.util.Map;
 
 public class DeliveriesGoodsTableManager extends TableManager {
 
@@ -34,5 +35,10 @@ public class DeliveriesGoodsTableManager extends TableManager {
     @Override
     List<String> getColumnNames() {
         return null;
+    }
+
+    @Override
+    public void insertRow(Map<String, String> row) {
+
     }
 }

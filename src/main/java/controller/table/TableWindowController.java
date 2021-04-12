@@ -41,6 +41,7 @@ public abstract class TableWindowController extends Controller implements Initia
             }
             if(targetItem.equals(deleteItem)){
                 System.out.println("Selected delete item " + table.getSelectionModel().getSelectedItems());
+                deleteRow(table.getSelectionModel().getSelectedItems().get(0).toString());
             }
         });
         table.setContextMenu(contextMenu);
@@ -53,9 +54,7 @@ public abstract class TableWindowController extends Controller implements Initia
         });
     }
 
-    public void deleteRow(){
-
-    }
+    public abstract void deleteRow(String id);
 
     public void generateTable() {
         /*try {

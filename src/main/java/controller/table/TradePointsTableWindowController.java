@@ -53,6 +53,11 @@ public class TradePointsTableWindowController extends TableWindowController {
     }
 
     @Override
+    public void deleteRow(String id) {
+
+    }
+
+    @Override
     public void createNewRow() {
 
     }

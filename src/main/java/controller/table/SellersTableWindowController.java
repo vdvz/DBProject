@@ -45,6 +45,11 @@ public class SellersTableWindowController extends TableWindowController {
     }
 
     @Override
+    public void deleteRow(String id) {
+
+    }
+
+    @Override
     public void createNewRow() {
 
     }

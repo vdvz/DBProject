@@ -59,12 +59,8 @@ public class MainWindowController extends Controller implements Initializable {
       String classForName = null;
       if((classForName = tableNameToController.get(selectedItem))!=null){
         Controller controller = null;
-        try {
-          controller = Main.getNavigation().loadTable(TableWindowController.TABLE_WINDOW_FXML,
-                  classForName);
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-          e.printStackTrace();
-        }
+        controller = Main.getNavigation().loadTable(TableWindowController.TABLE_WINDOW_FXML,
+                classForName);
         controller.setStage(Main.getNavigation().createNewStage());
         controller.show();
       }
@@ -76,7 +72,7 @@ public class MainWindowController extends Controller implements Initializable {
 
 
   @FXML
-  private void createTableButtonHandler() throws SQLException {
+  private void createTableButtonHandler(){
     manager.createDatabase();
     updateTableView();
   }

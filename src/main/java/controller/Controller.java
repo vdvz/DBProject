@@ -32,4 +32,8 @@ public abstract class Controller {
     void close(){
         getStage().close();
     }
+
+    public void shutdown(){
+
+    }
 }

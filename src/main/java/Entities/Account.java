@@ -1,21 +1,22 @@
 package Entities;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Account {
 
-    private final StringProperty id;
-    private final StringProperty tradePoint;
-    private final StringProperty good;
-    private final StringProperty count;
-    private final StringProperty price;
+    private final StringProperty id = new SimpleStringProperty("");
+    private final StringProperty tradePoint = new SimpleStringProperty("");;
+    private final StringProperty good = new SimpleStringProperty("");;
+    private final StringProperty count = new SimpleStringProperty("");;
+    private final StringProperty price = new SimpleStringProperty("");;
 
-    public Account(StringProperty id, StringProperty tradePoint, StringProperty good, StringProperty count, StringProperty price) {
-        this.id = id;
-        this.tradePoint = tradePoint;
-        this.good = good;
-        this.count = count;
-        this.price = price;
+    public Account(String id, String tradePoint, String good, String count, String price) {
+        setId(id);
+        setTradePoint(tradePoint);
+        setGood(good);
+        setCount(count);
+        setPrice(price);
     }
 
 

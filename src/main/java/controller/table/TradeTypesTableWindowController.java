@@ -35,6 +35,11 @@ public class TradeTypesTableWindowController extends TableWindowController {
     }
 
     @Override
+    public void deleteRow(String id) {
+
+    }
+
+    @Override
     public void createNewRow() {
 
     }

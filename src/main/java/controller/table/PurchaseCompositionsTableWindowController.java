@@ -1,11 +1,13 @@
 package controller.table;
 
+import Entities.PurchaseComposition;
 import controller.Controller;
 import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,34 +25,28 @@ public class PurchaseCompositionsTableWindowController extends TableWindowContro
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        TableColumn columnId = new TableColumn("good_id");
-        TableColumn columnGood = new TableColumn("good");
-        TableColumn columnCount = new TableColumn("count");
-        TableColumn columnResultPrice = new TableColumn("result_price");
+        TableColumn<PurchaseComposition, String> columnId = new TableColumn<>("good_id");
+        TableColumn<PurchaseComposition, String> columnGood = new TableColumn<>("good");
+        TableColumn<PurchaseComposition, String> columnCount = new TableColumn<>("count");
+        TableColumn<PurchaseComposition, String> columnResultPrice = new TableColumn<>("result_price");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0)));
-
-        columnGood.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1)));
-
-        columnCount.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(2)));
-
-        columnResultPrice.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3)));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("goodId"));
+        columnGood.setCellValueFactory(new PropertyValueFactory<>("good"));
+        columnCount.setCellValueFactory(new PropertyValueFactory<>("count"));
+        columnResultPrice.setCellValueFactory(new PropertyValueFactory<>("resultPrice"));
 
         table.getColumns().addAll(columnId, columnGood, columnCount, columnResultPrice);
     }
 
     @Override
+    public void deleteRow(String id) {
+
+    }
+
+    @Override
     public void createNewRow() {
-        try {
-            Controller controller = Main.getNavigation().loadTable("/insertion_window", "controller.insertions.PurchaseCompositionsInsertionWindowController");
-            Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            e.printStackTrace();
-        }
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.PurchaseCompositionsInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 

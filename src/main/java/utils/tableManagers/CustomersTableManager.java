@@ -4,6 +4,7 @@ import utils.Connection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CustomersTableManager extends TableManager {
 
@@ -39,6 +40,11 @@ public class CustomersTableManager extends TableManager {
     @Override
     List<String> getColumnNames() {
         return null;
+    }
+
+    @Override
+    public void insertRow(Map<String, String> row) {
+
     }
 
 }

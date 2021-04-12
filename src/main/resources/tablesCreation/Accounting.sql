@@ -5,5 +5,3 @@ good REFERENCES Goods(id) NOT NULL,
 count NUMBER(11) NOT NULL,
 price NUMBER(11) NOT NULL
 )
-
-SELECT id, name FROM GOODS

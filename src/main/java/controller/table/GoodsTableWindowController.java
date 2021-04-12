@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 public class GoodsTableWindowController extends TableWindowController {
 
+    private final GoodsTableManager tableManager = ((GoodsTableManager)Main.getDatabaseManager().getTableManager("GOODS"));
 
     public GoodsTableWindowController() {
         super("GOODS");
@@ -31,8 +32,12 @@ public class GoodsTableWindowController extends TableWindowController {
     }
 
     @Override
+    public void deleteRow(String id) {
+    }
+
+    @Override
     public void generateTable() {
-        table.getItems().addAll(((GoodsTableManager)Main.getDatabaseManager().getTableManager("GOODS")).getGoods());
+        table.getItems().addAll(tableManager.getGoods());
     }
 
     @Override

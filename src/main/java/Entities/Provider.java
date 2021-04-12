@@ -3,12 +3,12 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Good implements Entity{
+public class Provider {
 
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty name = new SimpleStringProperty("");
 
-    public Good(String id, String name){
+    public Provider(String id, String name){
         idProperty().set(id);
         nameProperty().set(name);
     }
@@ -36,4 +36,6 @@ public class Good implements Entity{
     public void setId(String id) {
         this.id.set(id);
     }
+
+
 }

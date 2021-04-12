@@ -5,29 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Navigation {
 
-    private final List<Controller> controllers = new ArrayList<>();
-    private final Map<String, Controller> loadedScenes = new HashMap<>();
+    private final Map<String, Controller> loadedControllers = new HashMap<>();
 
     public Navigation(Stage primaryStage) {
     }
 
     public Controller load(String sUrl) {
-        Controller controller = null;
-        if((controller = loadedScenes.get(sUrl)) != null){
+        Controller controller;
+        if((controller = loadedControllers.get(sUrl)) != null){
             return controller;
         }
         try {
@@ -36,56 +30,65 @@ public class Navigation {
 
             controller = fxmlLoader.getController();
             controller.setView(root);
+            loadedControllers.put(sUrl, controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return controller;
     }
 
-    public boolean isLoaded(String path){
-        return loadedScenes.containsKey(path);
-    }
+    public Controller loadTable(String sUrl, String classPathController) {
+        Controller controller;
+        if((controller = loadedControllers.get(classPathController)) != null){
+            return controller;
+        }
 
-    public Controller loadTable(String sUrl, String classPathController) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
-        Controller targetController = (Controller) Class.forName(classPathController).getConstructor().newInstance();
+        Controller targetController = null;
         try {
-            System.out.println(targetController.getClass());
+            targetController = (Controller) Class.forName(classPathController).getConstructor().newInstance();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sUrl));
             fxmlLoader.setController(targetController);
-            System.out.println(sUrl);
             Node root = fxmlLoader.load();
             targetController.setView(root);
-            System.out.println("Loaded");
-            loadedScenes.put(classPathController, targetController);
-            return targetController;
-        } catch (Exception e) {
+            loadedControllers.put(classPathController, targetController);
+        } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return targetController;
     }
 
     public Stage createNewStage(){
         return new Stage();
     }
 
+    Map<Controller, Stage> activeControllers = new HashMap<>();
     public void show(Controller controller, Stage stage) {
+        if(activeControllers.containsKey(controller)){
+            stage.close();
+            Stage activeStage = activeControllers.get(controller);
+            activeStage.show();
+            return;
+        }
         try {
+            stage.setOnCloseRequest(e -> {
+                activeControllers.remove(e.getTarget());
+            });
             stage.setScene(new Scene((Parent) controller.getView()));
-            controllers.add(controller);
+            activeControllers.put(controller, stage);
             stage.show();
-            System.out.println("Add to history: " + controller.toString() + ". Total scenes: " + controllers.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void clearHistory() {
-        while (controllers.size() > 1) {
-            controllers.remove(0);
-        }
+    public void shutdownAllStage(){
+        activeControllers.values().forEach(Stage::close);
+        activeControllers.clear();
+    }
 
-        System.out.println("ClearHistory. Total scenes: " + controllers.size());
+    public void shutdownAllControllers(){
+        loadedControllers.values().forEach(Controller::shutdown);
+        loadedControllers.clear();
     }
 
 }

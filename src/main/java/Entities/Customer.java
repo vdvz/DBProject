@@ -1,17 +1,18 @@
 package Entities;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Customer {
 
-    private final StringProperty id;
-    private final StringProperty name;
-    private final StringProperty age;
+    private final StringProperty id = new SimpleStringProperty("");
+    private final StringProperty name = new SimpleStringProperty("");;
+    private final StringProperty age = new SimpleStringProperty("");;
 
-    public Customer(StringProperty id, StringProperty name, StringProperty age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    public Customer(String id, String name, String age) {
+        setId(id);
+        setName(name);
+        setAge(age);
     }
 
     public String getId() {
@@ -22,6 +23,10 @@ public class Customer {
         return id;
     }
 
+    public void setId(String id) {
+        this.id.set(id);
+    }
+
     public String getName() {
         return name.get();
     }
@@ -30,11 +35,19 @@ public class Customer {
         return name;
     }
 
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
     public String getAge() {
         return age.get();
     }
 
     public StringProperty ageProperty() {
         return age;
+    }
+
+    public void setAge(String age) {
+        this.age.set(age);
     }
 }
