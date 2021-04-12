@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Navigation {
 
     private Map<Controller, Stage> existingStages = new HashMap<>();
     private Map<String, Controller> loadedScenes = new HashMap<>();
+
 
     public Navigation(Stage stage) {
 
@@ -44,29 +46,31 @@ public class Navigation {
         return controller;
     }
 
-    public Controller loadTable(String sUrl, Controller targetController) {
-        Controller controller = null;
-        if((controller = loadedScenes.get(sUrl)) != null){
-            return controller;
-        }
+    public boolean isLoaded(String path){
+        return loadedScenes.containsKey(path);
+    }
+
+    public Controller loadTable(String sUrl, String classPathController) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+        Controller targetController = (Controller) Class.forName(classPathController).getConstructor().newInstance();
         try {
+            System.out.println(targetController.getClass());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sUrl));
             fxmlLoader.setController(targetController);
             Node root = fxmlLoader.load();
             targetController.setView(root);
             System.out.println("Loaded");
+            loadedScenes.put(classPathController, targetController);
             return targetController;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return controller;
+        return null;
     }
-
 
     public Stage createNewStage(){
         return new Stage();
     }
-
 
     public void show(Controller controller, Stage stage) {
         try {

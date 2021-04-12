@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
-import utils.Connection;
 import utils.DatabaseManager;
 
 import java.net.URL;
@@ -15,7 +14,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainController extends Controller implements Initializable {
-    public final static String URL_FXML = "/main__window.fxml";
+    public final static String URL_FXML = "/main_window.fxml";
     private final DatabaseManager manager;
 
     public MainController() {

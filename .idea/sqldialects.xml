@@ -14,7 +14,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Goods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Purchase_compositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Sales.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Seller.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sequences/TradePoints.sql" dialect="OracleSqlPlus" />
@@ -27,7 +27,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Goods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Purchase_compositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Sales.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Seller.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/TradePoints.sql" dialect="OracleSqlPlus" />
@@ -40,7 +40,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Goods.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Purchase_compositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Sales.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Seller.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradePoints.sql" dialect="OracleSqlPlus" />
@@ -48,5 +48,8 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradeTypes.sql" dialect="OracleSqlPlus" />
     <file url="PROJECT" dialect="OracleSqlPlus" />
+  </component>
+  <component name="SqlResolveMappings">
+    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Goods.sql" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;2cc04664-b045-4d4b-88d6-397575ac0da1&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;18208_VIZIR&quot;      }     }    }   }  } }}" />
   </component>
 </project>

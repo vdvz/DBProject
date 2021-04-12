@@ -1,23 +1,51 @@
 package utils;
 
 import controller.Operations;
+import utils.tableManagers.TableManager;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
 
 public class DatabaseManager extends Operations {
-    private static final String[] tableNamesArray = {"TradePoints.sql", "Goods.sql", "TradeTypes.sql"}; //, "Seller.sql", "Sales.sql",
-           // "Providers.sql", "Accounting.sql", "Customers.sql", "Deliveries.sql", "Deliveries_goods", "Purchase_compositions.sql",
-           // "TradeRoom.sql", "TradeSectionPoints.sql"};
+    private static final List<String> tableNames = new ArrayList<String>(){
+        {
+            add("TradeTypes.sql");
+            add("TradePoints.sql");
+            add("Goods.sql");
+            add("TradeRoom.sql");
+            add("Seller.sql");
+            add("Accounting.sql");
+            add("PurchaseCompositions.sql");
+            add("Providers.sql");
+            add("Deliveries.sql");
+            add("DeliveriesGoods.sql");
+            add("Customers.sql");
+            add("Sales.sql");
+            add("TradeSectionPoint.sql");
+    }
+    };
+    private static final Map<String, String> classForTableManagers = new HashMap<String, String>(){{
+        put("GOODS","utils.tableManagers.GoodsTableManager");
+        put("ACCOUNTING","utils.tableManagers.AccountingTableManager");
+        put("CUSTOMERS","utils.tableManagers.CustomersTableManager");
+        put("DELIVERIES","utils.tableManagers.DeliveriesTableManager");
+        put("DELIVERIES_GOODS","utils.tableManagers.DeliveriesGoodsTableManager");
+        put("PROVIDERS","utils.tableManagers.ProvidersTableManager");
+        put("PURCHASE_COMPOSITIONS","utils.tableManagers.PurchaseCompositionsTableManager");
+        put("SALES","utils.tableManagers.SalesTableManager");
+        put("SELLERS","utils.tableManagers.SellersTableManager");
+        put("TRADE_SECTION_POINT","utils.tableManagers.TradeSectionPointTableManager");
+        put("TRADE_POINTS","utils.tableManagers.TradePointsTableManager");
+        put("TRADE_TYPES","utils.tableManagers.TradeTypesTableManager");
+        put("TRADE_ROOM","utils.tableManagers.TradeRoomTableManager");
+    }};
 
 
-    private List<String> tablesName;
-    private final Executor executor;
     private final Connection connection;
 
     public void closeConnection() throws SQLException {
@@ -26,10 +54,25 @@ public class DatabaseManager extends Operations {
 
     public DatabaseManager(Connection connection) {
         this.connection = connection;
-        executor = new Executor(connection);
-        tablesName = new LinkedList<>();
-        tablesName.addAll(Arrays.asList(tableNamesArray));
+    }
 
+
+    private final Map<String, TableManager> tableManagers = new HashMap<>();
+
+    public TableManager getTableManager(String tableName){
+        if(tableManagers.containsKey(tableName)){
+            return tableManagers.get(tableName);
+        }
+
+        TableManager tableManager = null;
+        try {
+            tableManager = (TableManager) Class.forName(classForTableManagers.get(tableName)).getConstructor(Connection.class).newInstance(connection);
+            tableManagers.put(tableName, tableManager);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return tableManager;
     }
 
     public List<String> getExistingTables(){
@@ -38,7 +81,6 @@ public class DatabaseManager extends Operations {
             ResultSet set = connection.executeQuery("select table_name from user_tables");
             if (set != null) {
                 while (set.next()) {
-                    System.out.println("HERE");
                     String name = set.getString(1);
                     result.add(name);
                 }
@@ -50,41 +92,84 @@ public class DatabaseManager extends Operations {
         return result;
     }
 
-    public void createDatabase() throws SQLException {
+    public void createDatabase(){
+        clearDatabase();
+
         createTables();
+        createSequences();
+        createAutoincrement();
     }
 
-    private void execute(List<String> queries, Optional<Integer> additionalCode) throws SQLException {
-        for (String query: queries) {
+    public void clearDatabase(){
+        dropTables();
+        dropSequences();
+    }
+
+    private void dropTables(){
+        List<String> sub = new ArrayList<>(loadTableDrops());
+        Collections.reverse(sub);
+        for (String query : sub) {
             try {
-                connection.executeQuery(query);
-            } catch (SQLIntegrityConstraintViolationException ignored) {
-            } catch (SQLException e) {
-                if (!(e.getErrorCode() == 6550 /*|| e.getErrorCode() == additionalCode.ifPresent().get()*/)) {
-                    e.printStackTrace();
-                }
-            } finally {
-                System.out.println("Execute query: " + query.toString());
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         }
     }
 
-    public void dropTables() throws SQLException {
-        execute(loadTableDrops(), null);
-        execute(loadSequencesDrops(), null);
+    private void createTables(){
+        for (String query : loadCreationTables()) {
+            try {
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 
-    private void createTables() throws SQLException {
-        List<String> tablesCreation = new LinkedList<>();
-        for(String tableName: tablesName) {
-            tablesCreation.add(loadScriptFromFile("tablesCreation/" + tableName));
+    private void dropSequences(){
+        List<String> sub = new ArrayList<>(loadSequencesDrops());
+        Collections.reverse(sub);
+        for (String query : sub) {
+            try {
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
+    }
 
-        execute(loadTableDrops(), null);
-        execute(loadSequencesDrops(), null);
-        execute(tablesCreation, Optional.of(955));
-        execute(loadSequences(), null);
-        execute(loadAutoincrement(), null);
+    private void createAutoincrement(){
+        for (String query : loadAutoincrement()) {
+            try {
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    private void createSequences(){
+        for (String query : loadSequences()) {
+            try {
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    private List<String> loadCreationTables(){
+        List<String> sequences = new ArrayList<>();
+        for(String name: tableNames) {
+            sequences.add(loadScriptFromFile("tablesCreation/" + name));
+        }
+        return sequences;
     }
 
     private String loadScriptFromFile(String relativePath) {
@@ -98,38 +183,42 @@ public class DatabaseManager extends Operations {
     }
 
     private List<String> loadSequences() {
-        List<String> sequences = new LinkedList<>();
-        for(String name: tablesName) {
+        List<String> sequences = new ArrayList<>();
+        for(String name: tableNames) {
             sequences.add(loadScriptFromFile("sequences/" + name));
         }
         return sequences;
     }
 
     private List<String> loadAutoincrement() {
-        List<String> autoIncrements = new LinkedList<>();
-        for(String name: tablesName) {
+        List<String> autoIncrements = new ArrayList<>();
+        for(String name: tableNames) {
             autoIncrements.add(loadScriptFromFile("triggers/" + name));
         }
         return autoIncrements;
     }
 
     private List<String> loadSequencesDrops() {
-        List<String> autoIncrements = new LinkedList<>();
-        for(String tableName: tablesName) {
-            autoIncrements.add(loadScriptFromFile("dropSequences/" + tableName));
+        List<String> sequencesDrops = new ArrayList<>();
+        for(String tableName: tableNames) {
+            sequencesDrops.add(loadScriptFromFile("dropSequences/" + tableName));
         }
-        return autoIncrements;
+        return sequencesDrops;
     }
 
     private List<String> loadTableDrops() {
-        LinkedList<String> autoIncrements = new LinkedList<>();
-        for(String tableName: tablesName) {
-            autoIncrements.addFirst(loadScriptFromFile("dropTables/" + tableName));
+        List<String> tableDrops = new ArrayList<>();
+        for(String tableName: tableNames) {
+            tableDrops.add(loadScriptFromFile("dropTables/" + tableName));
         }
-        return autoIncrements;
+        return tableDrops;
     }
 
-    public List<Map.Entry<String, List<String>>> getTable(String table) {
-        return null;
+    public void initTestValues() {
+        try {
+            connection.execute(loadScriptFromFile("testValues"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
