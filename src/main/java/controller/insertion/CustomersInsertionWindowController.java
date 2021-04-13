@@ -9,6 +9,7 @@ import utils.TableNames;
 import utils.table_managers.CustomersTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -30,7 +31,7 @@ public class CustomersInsertionWindowController extends InsertionWindowControlle
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
@@ -41,7 +42,6 @@ public class CustomersInsertionWindowController extends InsertionWindowControlle
         } else {
             tableManager.updateRow(valuesMap);
         }
-
     }
 
     @Override

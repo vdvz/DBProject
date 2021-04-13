@@ -9,6 +9,7 @@ import utils.TableNames;
 import utils.table_managers.SalesTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -36,7 +37,7 @@ public class SalesInsertionWindowController extends InsertionWindowController {
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(sellerItem.getColumnName(), sellerItem.getSelectedItem().getId());
@@ -51,8 +52,12 @@ public class SalesInsertionWindowController extends InsertionWindowController {
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        Sale value = (Sale) entity;
+        getIdItem().setText(value.getId());
+        sellerItem.setSelectItem(value.getSeller());
+        customerItem.setSelectItem(value.getCustomer());
+        purchaseCompositionItem.setSelectItem(value.getPurchaseComposition());
     }
 
     private ObservableList<Entity> loadAvailableSellers(){

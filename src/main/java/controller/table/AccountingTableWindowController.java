@@ -6,6 +6,7 @@ import init.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,12 +34,6 @@ public class AccountingTableWindowController extends TableWindowController {
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnGood, columnCount, columnPrice);
-    }
-
-    @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.AccountingInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

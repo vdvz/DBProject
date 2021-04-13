@@ -8,12 +8,13 @@ import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SellersTableManager extends TableManager {
 
 
-    public SellersTableManager(Connection connection) {
+    public SellersTableManager(Connection connection) throws SQLException {
         super(connection);
     }
 
@@ -37,14 +38,17 @@ public class SellersTableManager extends TableManager {
         return null;
     }
 
+    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+        {
+            put("name", String.class);
+            put("salary", Integer.class);
+            put("trade_point", Integer.class);
+            put("trade_room", Integer.class);
+        }
+    };
     @Override
-    public void insertRow(Map<String, String> row) {
-
-    }
-
-    @Override
-    public void updateRow(Map<String, String> row) {
-
+    public Map<String, Class> getColumns() {
+        return columns;
     }
 
     @Override

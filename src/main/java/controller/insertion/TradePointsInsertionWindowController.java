@@ -1,9 +1,6 @@
 package controller.insertion;
 
-import Entities.Entity;
-import Entities.Good;
-import Entities.TradePoint;
-import Entities.TradeType;
+import Entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -13,6 +10,7 @@ import utils.TableNames;
 import utils.table_managers.TradePointsTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -24,7 +22,7 @@ public class TradePointsInsertionWindowController extends InsertionWindowControl
     private SelectItem typeItem;
     private EnterItem nameItem;
     private EnterItem pointSizeItem;
-    private EnterItem rentSizeItem;
+    private EnterItem rentPriceItem;
     private EnterItem communalPaymentsItem;
     private EnterItem numberOfCountersItem;
 
@@ -35,23 +33,23 @@ public class TradePointsInsertionWindowController extends InsertionWindowControl
         typeItem = new SelectItem("type");
         nameItem = new EnterItem("name");
         pointSizeItem = new EnterItem("point_size");
-        rentSizeItem = new EnterItem("rent_size");
+        rentPriceItem = new EnterItem("rent_price");
         communalPaymentsItem = new EnterItem("communal_payments");
         numberOfCountersItem = new EnterItem("number_of_counters");
 
         loadAvailableTradeTypes().stream().map(e->new ChoiceUnit(((TradeType)e).getId(), ((TradeType)e).getName())).forEach(typeItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(typeItem, nameItem, pointSizeItem, rentSizeItem, communalPaymentsItem, numberOfCountersItem);
+        hBox.getChildren().addAll(typeItem, nameItem, pointSizeItem, rentPriceItem, communalPaymentsItem, numberOfCountersItem);
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(typeItem.getColumnName(), typeItem.getSelectedItem().getId());
         valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
         valuesMap.put(pointSizeItem.getColumnName(), pointSizeItem.getEnteredText());
-        valuesMap.put(rentSizeItem.getColumnName(), rentSizeItem.getEnteredText());
+        valuesMap.put(rentPriceItem.getColumnName(), rentPriceItem.getEnteredText());
         valuesMap.put(communalPaymentsItem.getColumnName(), communalPaymentsItem.getEnteredText());
         valuesMap.put(numberOfCountersItem.getColumnName(), numberOfCountersItem.getEnteredText());
 
@@ -63,8 +61,15 @@ public class TradePointsInsertionWindowController extends InsertionWindowControl
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        TradePoint value = (TradePoint) entity;
+        getIdItem().setText(value.getId());
+        typeItem.setSelectItem(value.getType());
+        nameItem.setText(value.getName());
+        pointSizeItem.setText(value.getPointSize());
+        rentPriceItem.setText(value.getRentPrice());
+        communalPaymentsItem.setText(value.getCommunalPayments());
+        numberOfCountersItem.setText(value.getNumberOfCounters());
     }
 
     private ObservableList<Entity> loadAvailableTradeTypes(){

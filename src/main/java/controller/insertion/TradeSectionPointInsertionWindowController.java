@@ -3,6 +3,7 @@ package controller.insertion;
 import Entities.Entity;
 import Entities.Good;
 import Entities.TradePoint;
+import Entities.TradeSectionPoint;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -12,6 +13,7 @@ import utils.TableNames;
 import utils.table_managers.TradeSectionPointTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -37,7 +39,7 @@ public class TradeSectionPointInsertionWindowController extends InsertionWindowC
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(tradePointsItem.getColumnName(), tradePointsItem.getSelectedItem().getId());
@@ -53,8 +55,12 @@ public class TradeSectionPointInsertionWindowController extends InsertionWindowC
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        TradeSectionPoint value = (TradeSectionPoint) entity;
+        getIdItem().setText(value.getId());
+        tradePointsItem.setSelectItem(value.getTradePoint());
+        floorItem.setText(value.getFloor());
+        managersNameItem.setText(value.getManagersName());
     }
 
     private ObservableList<Entity> loadAvailableTradePoints(){

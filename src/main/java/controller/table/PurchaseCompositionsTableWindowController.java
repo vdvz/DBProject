@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,13 +38,5 @@ public class PurchaseCompositionsTableWindowController extends TableWindowContro
 
         table.getColumns().addAll(columnId, columnGood, columnCount, columnResultPrice);
     }
-
-
-    @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.PurchaseCompositionsInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
-    }
-
 
 }

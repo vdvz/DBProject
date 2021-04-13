@@ -10,6 +10,7 @@ import utils.TableNames;
 import utils.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());

@@ -3,6 +3,7 @@ package controller.insertion;
 import Entities.Entity;
 import Entities.Good;
 import Entities.TradePoint;
+import Entities.TradeRoom;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -12,6 +13,7 @@ import utils.TableNames;
 import utils.table_managers.TradeRoomTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -29,11 +31,10 @@ public class TradeRoomInsertionWindowController extends InsertionWindowControlle
         loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(tradePointsId::addItemsToSelect);
 
         hBox.getChildren().addAll(tradePointsId);
-
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(tradePointsId.getColumnName(), tradePointsId.getSelectedItem().getId());
@@ -46,8 +47,10 @@ public class TradeRoomInsertionWindowController extends InsertionWindowControlle
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        TradeRoom value = (TradeRoom) entity;
+        getIdItem().setText(value.getId());
+        tradePointsId.setSelectItem(value.getTradePointId());
     }
 
     private ObservableList<Entity> loadAvailableTradePoints(){

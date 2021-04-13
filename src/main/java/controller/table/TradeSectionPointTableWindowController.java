@@ -1,11 +1,14 @@
 package controller.table;
 
 import Entities.TradeSectionPoint;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -32,11 +35,6 @@ public class TradeSectionPointTableWindowController extends TableWindowControlle
         columnManagerName.setCellValueFactory(new PropertyValueFactory<>("managersName"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnFloor, columnManagerName);
-    }
-
-    @Override
-    public void createNewRow() {
-
     }
 
 }

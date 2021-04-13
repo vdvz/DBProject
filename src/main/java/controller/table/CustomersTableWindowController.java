@@ -6,6 +6,7 @@ import init.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,12 +29,6 @@ public class CustomersTableWindowController extends TableWindowController {
         columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
 
         table.getColumns().addAll(columnId, columnName, columnAge);
-    }
-
-    @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.CustomersInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

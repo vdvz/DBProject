@@ -4,11 +4,13 @@ import Entities.Entity;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TradeTypesTableManager extends TableManager {
 
-    public TradeTypesTableManager(Connection connection) {
+    public TradeTypesTableManager(Connection connection) throws SQLException {
         super(connection);
     }
 
@@ -32,14 +34,14 @@ public class TradeTypesTableManager extends TableManager {
         return null;
     }
 
+    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+        {
+            put("name", String.class);
+        }
+    };
     @Override
-    public void insertRow(Map<String, String> row) {
-
-    }
-
-    @Override
-    public void updateRow(Map<String, String> row) {
-
+    public Map<String, Class> getColumns() {
+        return columns;
     }
 
     @Override

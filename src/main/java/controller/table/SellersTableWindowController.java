@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -36,12 +37,6 @@ public class SellersTableWindowController extends TableWindowController {
         columnTradeRoom.setCellValueFactory(new PropertyValueFactory<>("tradeRoom"));
 
         table.getColumns().addAll(columnId, columnName, columnSalary, columnTradePoint, columnTradeRoom);
-    }
-
-    @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.SellersInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

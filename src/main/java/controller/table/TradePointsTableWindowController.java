@@ -1,11 +1,14 @@
 package controller.table;
 
 import Entities.TradePoint;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -40,10 +43,4 @@ public class TradePointsTableWindowController extends TableWindowController {
 
         table.getColumns().addAll(columnId, columnType, columnName, columnPointSize, columnRentSize, columnCommunalPayments, columnNumberOfCounters);
     }
-
-    @Override
-    public void createNewRow() {
-
-    }
-
 }

@@ -10,10 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import utils.DatabaseManager;
 import utils.table_managers.TableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public abstract class TableWindowController extends Controller implements Initializable {
@@ -25,13 +27,12 @@ public abstract class TableWindowController extends Controller implements Initia
     public Button updateTableButton;
     public TableView table;
     private final String tableName;
-    private TableManager tableManager;
+    private final TableManager tableManager;
 
     TableWindowController(String tableName){
         this.tableName = tableName;
         manager = Main.getDatabaseManager();
         tableManager = Main.getDatabaseManager().getTableManager(tableName);
-
     }
 
     @Override
@@ -44,16 +45,16 @@ public abstract class TableWindowController extends Controller implements Initia
             MenuItem targetItem = (MenuItem)event.getTarget();
             if(targetItem.equals(editItem)){
                 System.out.println("Selected edit item " + table.getSelectionModel().getSelectedItems());
-                InsertionWindowController controller = (InsertionWindowController) Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.GoodsInsertionWindowController");
-                controller.setMode(InsertionWindowController.MODE.UPDATING);
-                controller.initUpdating((Entity) table.getSelectionModel().getSelectedItems().get(0));
-                Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
-
+                updateRow((Entity) table.getSelectionModel().getSelectedItems().get(0));
             }
             if(targetItem.equals(deleteItem)){
                 System.out.println("Selected delete item " + table.getSelectionModel().getSelectedItems());
-                Main.getDatabaseManager().getTableManager(tableName)
-                        .deleteRow(((Entity)table.getSelectionModel().getSelectedItems().get(0)).getId());
+                try {
+                    Main.getDatabaseManager().getTableManager(tableName)
+                            .deleteRow(((Entity)table.getSelectionModel().getSelectedItems().get(0)).getId());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
         table.setContextMenu(contextMenu);
@@ -70,7 +71,23 @@ public abstract class TableWindowController extends Controller implements Initia
         table.getItems().addAll(tableManager.getTableRows());
     }
 
-    abstract public void createNewRow();
+    public void createNewRow(){
+        InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
+                .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(tableName));
+        Stage newStage = Main.getNavigation().createNewStage();
+        controller.setMode(InsertionWindowController.MODE.INSERTING);
+        controller.setStage(newStage);
+        controller.show();
+    }
+
+    public void updateRow(Entity entity){
+        InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
+                .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(tableName));
+        controller.setStage(Main.getNavigation().createNewStage());
+        controller.setMode(InsertionWindowController.MODE.UPDATING);
+        controller.initUpdating(entity);
+        controller.show();
+    }
 
     public void updateTable(){
         table.getItems().clear();

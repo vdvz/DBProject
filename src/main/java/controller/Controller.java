@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 public abstract class Controller {
 
     private Node view;
-    private Stage currentStage;
     private Stage stage;
     public Node getView(){
         return view;

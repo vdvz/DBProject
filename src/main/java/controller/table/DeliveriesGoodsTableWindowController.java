@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -37,12 +38,6 @@ public class DeliveriesGoodsTableWindowController extends TableWindowController 
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(columnId, columnProviderId, columnGoodId, columnDeliveryName, columnPrice);
-    }
-
-  @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.DeliveriesGoodsInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

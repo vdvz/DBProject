@@ -1,11 +1,14 @@
 package controller.table;
 
 import Entities.TradeType;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -29,11 +32,6 @@ public class TradeTypesTableWindowController extends TableWindowController {
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         table.getColumns().addAll(columnId, columnName);
-
-    }
-
-    @Override
-    public void createNewRow() {
 
     }
 

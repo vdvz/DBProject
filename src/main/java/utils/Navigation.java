@@ -16,9 +16,6 @@ public class Navigation {
 
     private final Map<String, Controller> loadedControllers = new HashMap<>();
 
-    public Navigation(Stage primaryStage) {
-    }
-
     public Controller load(String sUrl) {
         Controller controller;
         if((controller = loadedControllers.get(sUrl)) != null){
@@ -89,6 +86,11 @@ public class Navigation {
     public void shutdownAllControllers(Controller except){
         loadedControllers.values().stream().filter(e->!e.equals(except)).forEach(Controller::shutdown);
         loadedControllers.clear();
+    }
+
+    public void closeStage(Stage stage){
+        activeControllers.remove(stage);
+        System.out.println("Cloose");
     }
 
 }

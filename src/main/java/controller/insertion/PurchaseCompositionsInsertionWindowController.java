@@ -1,7 +1,9 @@
 package controller.insertion;
 
+import Entities.Customer;
 import Entities.Entity;
 import Entities.Good;
+import Entities.PurchaseComposition;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -11,6 +13,7 @@ import utils.TableNames;
 import utils.table_managers.PurchaseCompositionsTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -37,7 +40,7 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
@@ -52,8 +55,12 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        PurchaseComposition value = (PurchaseComposition) entity;
+        getIdItem().setText(value.getId());
+        countItem.setText(value.getCount());
+        goodItem.setSelectItem(value.getGood());
+        resultPriceItem.setText(value.getResultPrice());
     }
 
     private ObservableList<Entity> loadAvailableGoods(){

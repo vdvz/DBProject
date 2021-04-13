@@ -8,14 +8,13 @@ import init.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import utils.table_managers.GoodsTableManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GoodsTableWindowController extends TableWindowController {
-
-    private final GoodsTableManager tableManager = ((GoodsTableManager)Main.getDatabaseManager().getTableManager("GOODS"));
 
     public GoodsTableWindowController() {
         super("GOODS");
@@ -34,11 +33,4 @@ public class GoodsTableWindowController extends TableWindowController {
 
         generateTable();
     }
-
-    @Override
-    public void createNewRow() {
-        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.GoodsInsertionWindowController");
-        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
-    }
-
 }

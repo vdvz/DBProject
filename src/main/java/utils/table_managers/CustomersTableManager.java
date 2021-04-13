@@ -9,6 +9,7 @@ import utils.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class CustomersTableManager extends TableManager {
         add("name");
     }};
 
-    public CustomersTableManager(Connection connection) {
+    public CustomersTableManager(Connection connection) throws SQLException {
         super(connection);
     }
 
@@ -43,15 +44,16 @@ public class CustomersTableManager extends TableManager {
         return null;
     }
 
+    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+        {
+            put("name", String.class);
+            put("age", Integer.class);
+        }
+    };
 
     @Override
-    public void insertRow(Map<String, String> row) {
-
-    }
-
-    @Override
-    public void updateRow(Map<String, String> row) {
-
+    public Map<String, Class> getColumns() {
+        return columns;
     }
 
     @Override

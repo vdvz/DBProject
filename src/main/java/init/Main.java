@@ -30,8 +30,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("DB PROJECT");
+        navigation = new Navigation();
 
-        navigation = new Navigation(primaryStage);
         Controller controller = Main.getNavigation().load(LoginController.ENTRANCE_WINDOW_FXML);
         controller.setStage(primaryStage);
         controller.show();

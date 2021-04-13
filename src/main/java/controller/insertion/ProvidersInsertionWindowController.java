@@ -1,12 +1,15 @@
 package controller.insertion;
 
+import Entities.Customer;
 import Entities.Entity;
+import Entities.Provider;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;
 import utils.table_managers.ProvidersTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -25,7 +28,7 @@ public class ProvidersInsertionWindowController extends InsertionWindowControlle
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
@@ -38,8 +41,10 @@ public class ProvidersInsertionWindowController extends InsertionWindowControlle
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        Provider value = (Provider) entity;
+        getIdItem().setText(value.getId());
+        nameItem.setText(value.getName());
     }
 
 }

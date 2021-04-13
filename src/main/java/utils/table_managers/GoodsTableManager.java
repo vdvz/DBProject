@@ -9,21 +9,26 @@ import utils.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GoodsTableManager extends TableManager {
 
 
-    private final List<String> columnNames = new ArrayList<String>(){
+    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            add("id");
-            add("name");
+            put("name", String.class);
         }
     };
 
-    public GoodsTableManager(Connection connection) {
+    public GoodsTableManager(Connection connection) throws SQLException {
         super(connection);
+    }
+
+    @Override
+    public Map<String, Class> getColumns() {
+        return columns;
     }
 
     @Override
@@ -33,28 +38,15 @@ public class GoodsTableManager extends TableManager {
 
     @Override
     public String loadInsertionQuery() {
-        return null;
+        return "INSERT INTO goods (name) VALUES (?)";
     }
 
     @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
+    public String loadDeleteQuery() { return "DELETE FROM goods WHERE id = ?";}
 
     @Override
     public String loadUpdateQuery() {
-        return null;
-    }
-
-
-    @Override
-    public void insertRow(Map<String, String> row) {
-
-    }
-
-    @Override
-    public void updateRow(Map<String, String> row) {
-
+        return "UPDATE goods SET name = ? WHERE id = ?";
     }
 
     @Override

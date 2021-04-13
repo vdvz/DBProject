@@ -6,13 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class AccountingTableManager extends TableManager {
 
-    public AccountingTableManager(Connection connection) {
+    public AccountingTableManager(Connection connection) throws SQLException {
         super(connection);
     }
 
@@ -23,7 +27,7 @@ public class AccountingTableManager extends TableManager {
 
     @Override
     public String loadInsertionQuery() {
-        return null;
+        return "INSERT INTO accounting (id, trade_point, good, count, price) VALUES (?, ?, ?, ?, ?);";
     }
 
     @Override
@@ -37,14 +41,18 @@ public class AccountingTableManager extends TableManager {
     }
 
     @Override
-    public void insertRow(Map<String, String> row) {
-
+    public Map<String, Class> getColumns() {
+        return columns;
     }
 
-    @Override
-    public void updateRow(Map<String, String> row) {
-
-    }
+    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+        {
+            put("trade_point", Integer.class);
+            put("good", Integer.class);
+            put("count", Integer.class);
+            put("price", Integer.class);
+        }
+    };
 
     @Override
     public ObservableList<Entity> getTableRows() {

@@ -1,7 +1,6 @@
 package controller.insertion;
 
-import Entities.Entity;
-import Entities.Good;
+import Entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -11,6 +10,7 @@ import utils.TableNames;
 import utils.table_managers.SellersTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -19,30 +19,32 @@ public class SellersInsertionWindowController extends InsertionWindowController 
 
 
     private final SellersTableManager tableManager = (SellersTableManager) Main.getDatabaseManager().getTableManager(TableNames.SELLERS);
-    private EnterItem countItem;
-    private SelectItem goodItem;
-    private EnterItem resultPriceItem;
+    private EnterItem nameItem;
+    private EnterItem salaryItem;
+    private SelectItem tradePointItem;
+    private SelectItem tradeRoomItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        countItem = new EnterItem("count");
-        goodItem = new SelectItem("good");
-        resultPriceItem = new EnterItem("result_price");
+        nameItem = new EnterItem("name");
+        salaryItem = new EnterItem("salary");
+        tradePointItem = new SelectItem("trade_point");
+        tradeRoomItem = new SelectItem("trade_room");
 
-        loadAvailableGoods().stream().map(e->new ChoiceUnit(((Good)e).getId(), ((Good)e).getName())).forEach(goodItem::addItemsToSelect);
+        loadAvailableTradePoint().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(tradePointItem::addItemsToSelect);
+        loadAvailableTradeRoom().stream().map(e->new ChoiceUnit(((TradeRoom)e).getId(), ((TradeRoom)e).getId())).forEach(tradeRoomItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(countItem, goodItem, resultPriceItem);
-
+        hBox.getChildren().addAll(nameItem, salaryItem, tradePointItem, tradeRoomItem);
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
-        valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
-        valuesMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
-        valuesMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
+        valuesMap.put(salaryItem.getColumnName(), salaryItem.getEnteredText());
+        valuesMap.put(tradePointItem.getColumnName(), tradePointItem.getSelectedItem().getId());
+        valuesMap.put(tradeRoomItem.getColumnName(), tradeRoomItem.getSelectedItem().getId());
 
         if (getMode().equals(MODE.INSERTING)) {
             tableManager.insertRow(valuesMap);
@@ -52,12 +54,19 @@ public class SellersInsertionWindowController extends InsertionWindowController 
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        Seller value = (Seller) entity;
+        getIdItem().setText(value.getId());
+        salaryItem.setText(value.getSalary());
+        tradePointItem.setSelectItem(value.getTradePoint());
+        tradeRoomItem.setSelectItem(value.getTradeRoom());
     }
 
-    private ObservableList<Entity> loadAvailableGoods(){
-        return Main.getDatabaseManager().getTableManager(TableNames.GOODS).getTableRows();
+    private ObservableList<Entity> loadAvailableTradePoint(){
+        return Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS).getTableRows();
+    }
+    private ObservableList<Entity> loadAvailableTradeRoom(){
+        return Main.getDatabaseManager().getTableManager(TableNames.TRADE_ROOM).getTableRows();
     }
 
 }

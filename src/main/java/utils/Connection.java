@@ -71,4 +71,7 @@ public class Connection {
         return preStatement.executeUpdate(sql);
     }
 
+    public PreparedStatement prepareStatement(String query) throws SQLException {
+        return connection.prepareStatement(query);
+    }
 }

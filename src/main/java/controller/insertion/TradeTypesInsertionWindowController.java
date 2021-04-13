@@ -2,6 +2,7 @@ package controller.insertion;
 
 import Entities.Entity;
 import Entities.Good;
+import Entities.TradeSectionPoint;
 import Entities.TradeType;
 import init.Main;
 import javafx.collections.ObservableList;
@@ -12,13 +13,14 @@ import utils.TableNames;
 import utils.table_managers.TradeTypesTableManager;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class TradeTypesInsertionWindowController extends InsertionWindowController {
 
-    private TradeTypesTableManager tableManager = (TradeTypesTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_TYPE);
+    private final TradeTypesTableManager tableManager = (TradeTypesTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_TYPE);
     private EnterItem nameItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,7 +32,7 @@ public class TradeTypesInsertionWindowController extends InsertionWindowControll
     }
 
     @Override
-    public void insertRow() {
+    public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
@@ -43,8 +45,10 @@ public class TradeTypesInsertionWindowController extends InsertionWindowControll
     }
 
     @Override
-    public void initUpdating(Entity value) {
-
+    public void initUpdating(Entity entity) {
+        TradeType value = (TradeType) entity;
+        getIdItem().setText(value.getId());
+        nameItem.setText(value.getName());
     }
 
 }
