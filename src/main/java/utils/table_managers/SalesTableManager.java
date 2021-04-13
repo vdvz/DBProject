@@ -1,7 +1,6 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
-import Entities.Good;
 import Entities.PurchaseComposition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,13 +8,12 @@ import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class PurchaseCompositionsTableManager extends TableManager {
+public class SalesTableManager extends TableManager {
 
 
-    public PurchaseCompositionsTableManager(Connection connection) {
+    public SalesTableManager(Connection connection) {
         super(connection);
     }
 
@@ -39,29 +37,34 @@ public class PurchaseCompositionsTableManager extends TableManager {
         return null;
     }
 
-
     @Override
     public void insertRow(Map<String, String> row) {
-        System.out.println(row.toString());
+
     }
 
     @Override
-    public ObservableList<Entity> getTableRows(){
+    public void updateRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public ObservableList<Entity> getTableRows() {
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
         try {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String good = result.getObject("good").toString();
-                String count = result.getObject("count").toString();
-                String resultPrice = result.getObject("result_price").toString();
+                String seller = result.getObject("seller").toString();
+                String customer = result.getObject("customer").toString();
+                String purchaseComposition = result.getObject("purchase_composition").toString();
 
-                resultList.add(new PurchaseComposition(id, good, count, resultPrice));
+                resultList.add(new PurchaseComposition(id, seller, customer, purchaseComposition));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
     }
+
 }

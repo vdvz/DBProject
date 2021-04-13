@@ -38,10 +38,6 @@ public class PurchaseCompositionsTableWindowController extends TableWindowContro
         table.getColumns().addAll(columnId, columnGood, columnCount, columnResultPrice);
     }
 
-    @Override
-    public void deleteRow(String id) {
-
-    }
 
     @Override
     public void createNewRow() {

@@ -35,11 +35,6 @@ public class TradeSectionPointTableWindowController extends TableWindowControlle
     }
 
     @Override
-    public void deleteRow(String id) {
-
-    }
-
-    @Override
     public void createNewRow() {
 
     }

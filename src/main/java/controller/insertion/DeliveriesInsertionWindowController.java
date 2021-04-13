@@ -7,7 +7,7 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.tableManagers.GoodsTableManager;
+import utils.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -16,14 +16,11 @@ import java.util.ResourceBundle;
 
 public class DeliveriesInsertionWindowController extends InsertionWindowController {
 
-
-    public DeliveriesInsertionWindowController() {
-    }
-
-    SelectItem providerIdItem;
-    SelectItem tradePointIdItem;
-    EnterItem countItem;
-    EnterItem deliverDateItem;
+    private final DeliveriesTableManager tableManager = (DeliveriesTableManager) Main.getDatabaseManager().getTableManager(TableNames.DELIVERIES);
+    private SelectItem providerIdItem;
+    private SelectItem tradePointIdItem;
+    private EnterItem countItem;
+    private EnterItem deliverDateItem;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,14 +40,28 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
+        valuesMap.put(tradePointIdItem.getColumnName(), tradePointIdItem.getSelectedItem().getId());
+        valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
+        valuesMap.put(deliverDateItem.getColumnName(), deliverDateItem.getEnteredText());
 
-        insertionMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
-        insertionMap.put(tradePointIdItem.getColumnName(), tradePointIdItem.getSelectedItem().getId());
-        insertionMap.put(countItem.getColumnName(), countItem.getEnteredText());
-        insertionMap.put(deliverDateItem.getColumnName(), deliverDateItem.getEnteredText());
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+    }
 
-        Main.getDatabaseManager().getTableManager(TableNames.DELIVERIES).insertRow(insertionMap);
+    @Override
+    public void initUpdating(Entity entity) {
+        Delivery value = (Delivery) entity;
+        getIdItem().setText(value.getId());
+        providerIdItem.setSelectItem(value.getProviderId());
+        tradePointIdItem.setSelectItem(value.getTradePointId());
+        countItem.setText(value.getCount());
+        deliverDateItem.setText(value.getDeliverDate());
     }
 
     private ObservableList<Entity> loadAvailableProviders(){

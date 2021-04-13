@@ -39,11 +39,6 @@ public class SellersTableWindowController extends TableWindowController {
     }
 
     @Override
-    public void deleteRow(String id) {
-
-    }
-
-    @Override
     public void createNewRow() {
         Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.SellersInsertionWindowController");
         Main.getNavigation().show(controller, Main.getNavigation().createNewStage());

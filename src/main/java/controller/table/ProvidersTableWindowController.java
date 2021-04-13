@@ -32,10 +32,6 @@ public class ProvidersTableWindowController extends TableWindowController {
         table.getColumns().addAll(columnId, columnName);
     }
 
-    @Override
-    public void deleteRow(String id) {
-
-    }
 
     @Override
     public void createNewRow() {

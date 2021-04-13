@@ -9,6 +9,7 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
+import utils.table_managers.TradeRoomTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -17,11 +18,8 @@ import java.util.ResourceBundle;
 
 public class TradeRoomInsertionWindowController extends InsertionWindowController {
 
-
-    public TradeRoomInsertionWindowController() {
-    }
-
-    SelectItem tradePointsId;
+    private TradeRoomTableManager tableManager = (TradeRoomTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_ROOM);
+    private SelectItem tradePointsId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -36,10 +34,20 @@ public class TradeRoomInsertionWindowController extends InsertionWindowControlle
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
-        insertionMap.put(tradePointsId.getColumnName(), tradePointsId.getSelectedItem().getId());
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(tradePointsId.getColumnName(), tradePointsId.getSelectedItem().getId());
 
-        Main.getDatabaseManager().getTableManager(TableNames.SELLERS).insertRow(insertionMap);
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+    }
+
+    @Override
+    public void initUpdating(Entity value) {
+
     }
 
     private ObservableList<Entity> loadAvailableTradePoints(){

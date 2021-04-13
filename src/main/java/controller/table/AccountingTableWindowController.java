@@ -3,6 +3,7 @@ package controller.table;
 import Entities.Account;
 import controller.Controller;
 import init.Main;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -32,11 +33,6 @@ public class AccountingTableWindowController extends TableWindowController {
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnGood, columnCount, columnPrice);
-    }
-
-    @Override
-    public void deleteRow(String id) {
-
     }
 
     @Override

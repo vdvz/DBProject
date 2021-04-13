@@ -23,20 +23,19 @@ public class MainWindowController extends Controller implements Initializable {
   private final DatabaseManager manager;
 
   private final Map<String, String> tableNameToController = new HashMap<String, String>(){{
-    put("GOODS","controller.table.GoodsTableWindowController");
     put("ACCOUNTING","controller.table.AccountingTableWindowController");
     put("CUSTOMERS","controller.table.CustomersTableWindowController");
-    put("DELIVERIES","controller.table.DeliveriesTableWindowController");
     put("DELIVERIES_GOODS","controller.table.DeliveriesGoodsTableWindowController");
+    put("DELIVERIES","controller.table.DeliveriesTableWindowController");
+    put("GOODS","controller.table.GoodsTableWindowController");
     put("PROVIDERS","controller.table.ProvidersTableWindowController");
     put("PURCHASE_COMPOSITIONS","controller.table.PurchaseCompositionsTableWindowController");
     put("SALES","controller.table.SalesTableWindowController");
     put("SELLERS","controller.table.SellersTableWindowController");
-    put("TRADE_SECTION_POINT","controller.table.TradeSectionPointTableWindowController");
     put("TRADE_POINTS","controller.table.TradePointsTableWindowController");
-    put("TRADE_SECTION","controller.table.TradeSectionTableWindowController");
-    put("TRADE_TYPES","controller.table.TradeTypesTableWindowController");
     put("TRADE_ROOM","controller.table.TradeRoomTableWindowController");
+    put("TRADE_SECTION_POINT","controller.table.TradeSectionPointTableWindowController");
+    put("TRADE_TYPES","controller.table.TradeTypesTableWindowController");
   }
   };
 

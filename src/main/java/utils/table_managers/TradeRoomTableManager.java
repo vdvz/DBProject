@@ -1,7 +1,6 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
-import Entities.Good;
 import Entities.TradeRoom;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +8,6 @@ import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 public class TradeRoomTableManager extends TableManager {
@@ -40,6 +38,11 @@ public class TradeRoomTableManager extends TableManager {
 
     @Override
     public void insertRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public void updateRow(Map<String, String> row) {
 
     }
 

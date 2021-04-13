@@ -39,10 +39,8 @@ public class DeliveriesTableWindowController extends TableWindowController {
         table.getColumns().addAll(columnId, columnProviderId, columnTradePointId, columnCount, columnDeliverDate);
     }
 
-    @Override
-    public void deleteRow(String id) {
 
-    }
+
 
     @Override
     public void createNewRow() {

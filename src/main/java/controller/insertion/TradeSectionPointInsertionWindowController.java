@@ -9,19 +9,19 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
+import utils.table_managers.TradeSectionPointTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class TradeSectionInsertionPointWindowController extends InsertionWindowController {
+public class TradeSectionPointInsertionWindowController extends InsertionWindowController {
 
-    public TradeSectionInsertionPointWindowController() {
-    }
-    SelectItem tradePointsItem;
-    EnterItem floorItem;
-    EnterItem managersNameItem;
+    private TradeSectionPointTableManager tableManager = (TradeSectionPointTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_SECTION_POINT);
+    private SelectItem tradePointsItem;
+    private EnterItem floorItem;
+    private EnterItem managersNameItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -38,12 +38,22 @@ public class TradeSectionInsertionPointWindowController extends InsertionWindowC
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
-        insertionMap.put(tradePointsItem.getColumnName(), tradePointsItem.getSelectedItem().getId());
-        insertionMap.put(floorItem.getColumnName(), floorItem.getEnteredText());
-        insertionMap.put(managersNameItem.getColumnName(), managersNameItem.getEnteredText());
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(tradePointsItem.getColumnName(), tradePointsItem.getSelectedItem().getId());
+        valuesMap.put(floorItem.getColumnName(), floorItem.getEnteredText());
+        valuesMap.put(managersNameItem.getColumnName(), managersNameItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.TRADE_SECTION).insertRow(insertionMap);
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+
+    }
+
+    @Override
+    public void initUpdating(Entity value) {
 
     }
 

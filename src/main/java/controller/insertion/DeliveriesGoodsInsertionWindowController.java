@@ -1,16 +1,14 @@
 package controller.insertion;
 
-import Entities.Delivery;
-import Entities.Entity;
-import Entities.Good;
-import Entities.Provider;
+import Entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.tableManagers.GoodsTableManager;
+import utils.table_managers.DeliveriesGoodsTableManager;
+import utils.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -20,13 +18,11 @@ import java.util.ResourceBundle;
 public class DeliveriesGoodsInsertionWindowController extends InsertionWindowController {
 
 
-    public DeliveriesGoodsInsertionWindowController() {
-    }
-
-    SelectItem providerIdItem;
-    SelectItem goodIdItem;
-    SelectItem deliveryIdItem;
-    EnterItem priceItem;
+    private SelectItem providerIdItem;
+    private SelectItem goodIdItem;
+    private SelectItem deliveryIdItem;
+    private EnterItem priceItem;
+    private final DeliveriesGoodsTableManager tableManager = (DeliveriesGoodsTableManager) Main.getDatabaseManager().getTableManager(TableNames.DELIVERIES_GOODS);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,20 +37,33 @@ public class DeliveriesGoodsInsertionWindowController extends InsertionWindowCon
         loadAvailableGoods().stream().map(e->new ChoiceUnit(((Good)e).getId(), ((Good)e).getName())).forEach(goodIdItem::addItemsToSelect);
         loadAvailableDeliveries().stream().map(e->new ChoiceUnit(((Delivery)e).getId(), ((Delivery)e).getId())).forEach(deliveryIdItem::addItemsToSelect);
 
-
         hBox.getChildren().addAll(providerIdItem, goodIdItem, deliveryIdItem, priceItem);
-
     }
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
-        insertionMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
-        insertionMap.put(goodIdItem.getColumnName(), goodIdItem.getSelectedItem().getId());
-        insertionMap.put(deliveryIdItem.getColumnName(), deliveryIdItem.getSelectedItem().getId());
-        insertionMap.put(priceItem.getColumnName(), priceItem.getEnteredText());
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
+        valuesMap.put(goodIdItem.getColumnName(), goodIdItem.getSelectedItem().getId());
+        valuesMap.put(deliveryIdItem.getColumnName(), deliveryIdItem.getSelectedItem().getId());
+        valuesMap.put(priceItem.getColumnName(), priceItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.DELIVERIES_GOODS).insertRow(insertionMap);
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+    }
+
+    @Override
+    public void initUpdating(Entity entity) {
+        DeliveriesGood value = (DeliveriesGood) entity;
+        getIdItem().setText(value.getId());
+        providerIdItem.setSelectItem(value.getProviderId());
+        goodIdItem.setSelectItem(value.getGoodId());
+        deliveryIdItem.setSelectItem(value.getDeliveryId());
+        priceItem.setText(value.getPrice());
     }
 
     private ObservableList<Entity> loadAvailableGoods(){

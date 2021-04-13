@@ -8,7 +8,7 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.tableManagers.GoodsTableManager;
+import utils.table_managers.SellersTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -18,13 +18,10 @@ import java.util.ResourceBundle;
 public class SellersInsertionWindowController extends InsertionWindowController {
 
 
-    public SellersInsertionWindowController() {
-    }
-
-
-    EnterItem countItem;
-    SelectItem goodItem;
-    EnterItem resultPriceItem;
+    private final SellersTableManager tableManager = (SellersTableManager) Main.getDatabaseManager().getTableManager(TableNames.SELLERS);
+    private EnterItem countItem;
+    private SelectItem goodItem;
+    private EnterItem resultPriceItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -41,12 +38,21 @@ public class SellersInsertionWindowController extends InsertionWindowController 
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
-        insertionMap.put(countItem.getColumnName(), countItem.getEnteredText());
-        insertionMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
-        insertionMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
+        valuesMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
+        valuesMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.SELLERS).insertRow(insertionMap);
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+    }
+
+    @Override
+    public void initUpdating(Entity value) {
 
     }
 

@@ -36,6 +36,10 @@ public class EnterItem extends AnchorPane {
         this.getChildren().addAll(columnNameLabel, textField);
     }
 
+    public void setText(String text) {
+        textField.setText(text);
+    }
+
     public String getColumnName(){
         return columnNameLabel.getText();
     }

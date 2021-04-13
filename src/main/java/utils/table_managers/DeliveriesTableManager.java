@@ -1,7 +1,6 @@
-package utils.tableManagers;
+package utils.table_managers;
 
-import Entities.Customer;
-import Entities.DeliveriesGood;
+import Entities.Delivery;
 import Entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,13 +8,12 @@ import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class DeliveriesGoodsTableManager extends TableManager {
+public class DeliveriesTableManager extends TableManager {
 
 
-    public DeliveriesGoodsTableManager(Connection connection) {
+    public DeliveriesTableManager(Connection connection) {
         super(connection);
     }
 
@@ -39,8 +37,14 @@ public class DeliveriesGoodsTableManager extends TableManager {
         return null;
     }
 
+
     @Override
     public void insertRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public void updateRow(Map<String, String> row) {
 
     }
 
@@ -53,11 +57,11 @@ public class DeliveriesGoodsTableManager extends TableManager {
             while(result.next()){
                 String id = result.getObject("id").toString();
                 String providerId = result.getObject("provider_id").toString();
-                String goodId = result.getObject("good_id").toString();
-                String deliveryId = result.getObject("delivery_id").toString();
-                String price = result.getObject("price").toString();
+                String tradePointId = result.getObject("trade_point_id").toString();
+                String count = result.getObject("count").toString();
+                String deliveryDate = result.getObject("delivery_date").toString();
 
-                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
+                resultList.add(new Delivery(id, providerId, tradePointId, count, deliveryDate));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -65,4 +69,5 @@ public class DeliveriesGoodsTableManager extends TableManager {
         return resultList;
 
     }
+
 }

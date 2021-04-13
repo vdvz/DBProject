@@ -1,20 +1,19 @@
-package utils.tableManagers;
+package utils.table_managers;
 
-import Entities.Account;
+import Entities.DeliveriesGood;
 import Entities.Entity;
-import Entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class AccountingTableManager extends TableManager {
+public class DeliveriesGoodsTableManager extends TableManager {
 
-    public AccountingTableManager(Connection connection) {
+
+    public DeliveriesGoodsTableManager(Connection connection) {
         super(connection);
     }
 
@@ -44,6 +43,11 @@ public class AccountingTableManager extends TableManager {
     }
 
     @Override
+    public void updateRow(Map<String, String> row) {
+
+    }
+
+    @Override
     public ObservableList<Entity> getTableRows() {
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
@@ -51,17 +55,17 @@ public class AccountingTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String tradePoint = result.getObject("trade_point").toString();
-                String good = result.getObject("good").toString();
-                String count = result.getObject("count").toString();
+                String providerId = result.getObject("provider_id").toString();
+                String goodId = result.getObject("good_id").toString();
+                String deliveryId = result.getObject("delivery_id").toString();
                 String price = result.getObject("price").toString();
 
-                resultList.add(new Account(id, tradePoint, good, count, price));
+                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
-    }
 
+    }
 }

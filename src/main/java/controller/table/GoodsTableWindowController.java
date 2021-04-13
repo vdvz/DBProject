@@ -1,11 +1,14 @@
 package controller.table;
 
+import Entities.Entity;
 import Entities.Good;
 import controller.Controller;
+import controller.insertion.InsertionWindowController;
 import init.Main;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import utils.tableManagers.GoodsTableManager;
+import utils.table_managers.GoodsTableManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,17 +36,9 @@ public class GoodsTableWindowController extends TableWindowController {
     }
 
     @Override
-    public void deleteRow(String id) {
-    }
-
-    @Override
-    public void generateTable() {
-        table.getItems().addAll(tableManager.getTableRows());
-    }
-
-    @Override
     public void createNewRow() {
         Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.GoodsInsertionWindowController");
         Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
+
 }

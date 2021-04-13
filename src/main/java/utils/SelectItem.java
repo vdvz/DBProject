@@ -38,6 +38,9 @@ public class SelectItem extends AnchorPane {
         comboBox.getItems().addAll(items);
     }
 
+    public void setSelectItem(String id){
+        comboBox.getSelectionModel().select(comboBox.getItems().filtered(e->e.getId().equals(id)).get(0));
+    }
 
     public void removeAllItems(){
         comboBox.getItems().clear();

@@ -1,4 +1,4 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
 import javafx.collections.ObservableList;
@@ -29,6 +29,12 @@ public abstract class TableManager {
     public abstract String loadUpdateQuery();
 
     public abstract void insertRow(Map<String, String> row);
+
+    public abstract void updateRow(Map<String, String> row);
+
+    public void deleteRow(String rowId){
+        System.out.println(rowId);
+    }
 
     public abstract ObservableList<Entity> getTableRows();
 

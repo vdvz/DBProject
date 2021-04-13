@@ -1,21 +1,18 @@
-package utils.tableManagers;
+package utils.table_managers;
 
+import Entities.Account;
 import Entities.Entity;
-import Entities.Good;
-import Entities.Provider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class ProvidersTableManager extends TableManager {
+public class AccountingTableManager extends TableManager {
 
-
-    public ProvidersTableManager(Connection connection) {
+    public AccountingTableManager(Connection connection) {
         super(connection);
     }
 
@@ -45,6 +42,11 @@ public class ProvidersTableManager extends TableManager {
     }
 
     @Override
+    public void updateRow(Map<String, String> row) {
+
+    }
+
+    @Override
     public ObservableList<Entity> getTableRows() {
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
@@ -52,8 +54,12 @@ public class ProvidersTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String name = result.getObject("name").toString();
-                resultList.add(new Provider(id, name));
+                String tradePoint = result.getObject("trade_point").toString();
+                String good = result.getObject("good").toString();
+                String count = result.getObject("count").toString();
+                String price = result.getObject("price").toString();
+
+                resultList.add(new Account(id, tradePoint, good, count, price));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

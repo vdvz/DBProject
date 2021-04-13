@@ -1,10 +1,9 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
-import java.util.List;
 import java.util.Map;
 
 public class TradeSectionPointTableManager extends TableManager {
@@ -35,7 +34,10 @@ public class TradeSectionPointTableManager extends TableManager {
 
     @Override
     public void insertRow(Map<String, String> row) {
+    }
 
+    @Override
+    public void updateRow(Map<String, String> row) {
     }
 
     @Override

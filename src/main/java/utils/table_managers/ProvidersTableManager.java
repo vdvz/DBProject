@@ -1,21 +1,19 @@
-package utils.tableManagers;
+package utils.table_managers;
 
-import Entities.DeliveriesGood;
-import Entities.Delivery;
 import Entities.Entity;
+import Entities.Provider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class DeliveriesTableManager extends TableManager {
+public class ProvidersTableManager extends TableManager {
 
 
-    public DeliveriesTableManager(Connection connection) {
+    public ProvidersTableManager(Connection connection) {
         super(connection);
     }
 
@@ -39,9 +37,13 @@ public class DeliveriesTableManager extends TableManager {
         return null;
     }
 
-
     @Override
     public void insertRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public void updateRow(Map<String, String> row) {
 
     }
 
@@ -53,18 +55,13 @@ public class DeliveriesTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String providerId = result.getObject("provider_id").toString();
-                String tradePointId = result.getObject("trade_point_id").toString();
-                String count = result.getObject("count").toString();
-                String deliveryDate = result.getObject("delivery_date").toString();
-
-                resultList.add(new Delivery(id, providerId, tradePointId, count, deliveryDate));
+                String name = result.getObject("name").toString();
+                resultList.add(new Provider(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
-
     }
 
 }

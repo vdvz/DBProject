@@ -39,12 +39,7 @@ public class DeliveriesGoodsTableWindowController extends TableWindowController 
         table.getColumns().addAll(columnId, columnProviderId, columnGoodId, columnDeliveryName, columnPrice);
     }
 
-    @Override
-    public void deleteRow(String id) {
-
-    }
-
-    @Override
+  @Override
     public void createNewRow() {
         Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.DeliveriesGoodsInsertionWindowController");
         Main.getNavigation().show(controller, Main.getNavigation().createNewStage());

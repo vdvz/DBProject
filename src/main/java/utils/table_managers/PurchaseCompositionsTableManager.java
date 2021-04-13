@@ -1,4 +1,4 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
 import Entities.PurchaseComposition;
@@ -8,13 +8,12 @@ import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-public class SalesTableManager extends TableManager {
+public class PurchaseCompositionsTableManager extends TableManager {
 
 
-    public SalesTableManager(Connection connection) {
+    public PurchaseCompositionsTableManager(Connection connection) {
         super(connection);
     }
 
@@ -38,29 +37,34 @@ public class SalesTableManager extends TableManager {
         return null;
     }
 
+
     @Override
     public void insertRow(Map<String, String> row) {
+        System.out.println(row.toString());
+    }
+
+    @Override
+    public void updateRow(Map<String, String> row) {
 
     }
 
     @Override
-    public ObservableList<Entity> getTableRows() {
+    public ObservableList<Entity> getTableRows(){
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
         try {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String seller = result.getObject("seller").toString();
-                String customer = result.getObject("customer").toString();
-                String purchaseComposition = result.getObject("purchase_composition").toString();
+                String good = result.getObject("good").toString();
+                String count = result.getObject("count").toString();
+                String resultPrice = result.getObject("result_price").toString();
 
-                resultList.add(new PurchaseComposition(id, seller, customer, purchaseComposition));
+                resultList.add(new PurchaseComposition(id, good, count, resultPrice));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
     }
-
 }

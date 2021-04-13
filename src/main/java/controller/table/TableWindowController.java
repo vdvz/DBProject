@@ -1,17 +1,19 @@
 package controller.table;
 
+import Entities.Entity;
 import controller.Controller;
+import controller.insertion.InsertionWindowController;
 import init.Main;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import utils.DatabaseManager;
-import utils.tableManagers.TableManager;
+import utils.table_managers.TableManager;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public abstract class TableWindowController extends Controller implements Initializable {
@@ -42,10 +44,16 @@ public abstract class TableWindowController extends Controller implements Initia
             MenuItem targetItem = (MenuItem)event.getTarget();
             if(targetItem.equals(editItem)){
                 System.out.println("Selected edit item " + table.getSelectionModel().getSelectedItems());
+                InsertionWindowController controller = (InsertionWindowController) Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.GoodsInsertionWindowController");
+                controller.setMode(InsertionWindowController.MODE.UPDATING);
+                controller.initUpdating((Entity) table.getSelectionModel().getSelectedItems().get(0));
+                Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
+
             }
             if(targetItem.equals(deleteItem)){
                 System.out.println("Selected delete item " + table.getSelectionModel().getSelectedItems());
-                deleteRow(table.getSelectionModel().getSelectedItems().get(0).toString());
+                Main.getDatabaseManager().getTableManager(tableName)
+                        .deleteRow(((Entity)table.getSelectionModel().getSelectedItems().get(0)).getId());
             }
         });
         table.setContextMenu(contextMenu);
@@ -58,11 +66,10 @@ public abstract class TableWindowController extends Controller implements Initia
         });
     }
 
-    public abstract void deleteRow(String id);
-
     public void generateTable() {
         table.getItems().addAll(tableManager.getTableRows());
     }
+
     abstract public void createNewRow();
 
     public void updateTable(){

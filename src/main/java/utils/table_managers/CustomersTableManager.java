@@ -1,20 +1,25 @@
-package utils.tableManagers;
+package utils.table_managers;
 
+import Entities.Customer;
 import Entities.Entity;
-import Entities.Seller;
-import Entities.TradePoint;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TradePointsTableManager extends TableManager {
+public class CustomersTableManager extends TableManager {
 
-    public TradePointsTableManager(Connection connection) {
+    public List<String> columnNames = new ArrayList<String>(){{
+        add("id");
+        add("name");
+    }};
+
+    public CustomersTableManager(Connection connection) {
         super(connection);
     }
 
@@ -38,27 +43,29 @@ public class TradePointsTableManager extends TableManager {
         return null;
     }
 
+
     @Override
     public void insertRow(Map<String, String> row) {
 
     }
 
     @Override
-    public ObservableList<Entity> getTableRows(){
+    public void updateRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public ObservableList<Entity> getTableRows() {
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
         try {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String type = result.getObject("type").toString();
                 String name = result.getObject("name").toString();
-                String pointSize = result.getObject("point_size").toString();
-                String rentSize = result.getObject("rent_size").toString();
-                String communalPayments = result.getObject("communal_payments").toString();
-                String numberOfCounters = result.getObject("number_of_counters").toString();
+                String age = result.getObject("age").toString();
 
-                resultList.add(new TradePoint(id, type, name, pointSize, rentSize, communalPayments, numberOfCounters));
+                resultList.add(new Customer(id, name,age));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

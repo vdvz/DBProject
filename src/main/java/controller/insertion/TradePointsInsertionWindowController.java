@@ -10,6 +10,7 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
+import utils.table_managers.TradePointsTableManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -19,15 +20,14 @@ import java.util.ResourceBundle;
 public class TradePointsInsertionWindowController extends InsertionWindowController {
 
 
-    public TradePointsInsertionWindowController() {
-    }
+    private TradePointsTableManager tableManager = (TradePointsTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS);
+    private SelectItem typeItem;
+    private EnterItem nameItem;
+    private EnterItem pointSizeItem;
+    private EnterItem rentSizeItem;
+    private EnterItem communalPaymentsItem;
+    private EnterItem numberOfCountersItem;
 
-    SelectItem typeItem;
-    EnterItem nameItem;
-    EnterItem pointSizeItem;
-    EnterItem rentSizeItem;
-    EnterItem communalPaymentsItem;
-    EnterItem numberOfCountersItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -46,15 +46,25 @@ public class TradePointsInsertionWindowController extends InsertionWindowControl
 
     @Override
     public void insertRow() {
-        Map<String, String> insertionMap = new HashMap<>();
-        insertionMap.put(typeItem.getColumnName(), typeItem.getSelectedItem().getId());
-        insertionMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
-        insertionMap.put(pointSizeItem.getColumnName(), pointSizeItem.getEnteredText());
-        insertionMap.put(rentSizeItem.getColumnName(), rentSizeItem.getEnteredText());
-        insertionMap.put(communalPaymentsItem.getColumnName(), communalPaymentsItem.getEnteredText());
-        insertionMap.put(numberOfCountersItem.getColumnName(), numberOfCountersItem.getEnteredText());
+        Map<String, String> valuesMap = new HashMap<>();
+        valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(typeItem.getColumnName(), typeItem.getSelectedItem().getId());
+        valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
+        valuesMap.put(pointSizeItem.getColumnName(), pointSizeItem.getEnteredText());
+        valuesMap.put(rentSizeItem.getColumnName(), rentSizeItem.getEnteredText());
+        valuesMap.put(communalPaymentsItem.getColumnName(), communalPaymentsItem.getEnteredText());
+        valuesMap.put(numberOfCountersItem.getColumnName(), numberOfCountersItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS).insertRow(insertionMap);
+        if (getMode().equals(MODE.INSERTING)) {
+            tableManager.insertRow(valuesMap);
+        } else {
+            tableManager.updateRow(valuesMap);
+        }
+    }
+
+    @Override
+    public void initUpdating(Entity value) {
+
     }
 
     private ObservableList<Entity> loadAvailableTradeTypes(){

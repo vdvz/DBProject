@@ -1,27 +1,34 @@
-package utils.tableManagers;
+package utils.table_managers;
 
 import Entities.Entity;
-import Entities.PurchaseComposition;
-import Entities.Seller;
+import Entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SellersTableManager extends TableManager {
+public class GoodsTableManager extends TableManager {
 
 
-    public SellersTableManager(Connection connection) {
+    private final List<String> columnNames = new ArrayList<String>(){
+        {
+            add("id");
+            add("name");
+        }
+    };
+
+    public GoodsTableManager(Connection connection) {
         super(connection);
     }
 
     @Override
     public String loadSelectionQuery() {
-        return null;
+        return "SELECT * FROM goods";
     }
 
     @Override
@@ -39,13 +46,19 @@ public class SellersTableManager extends TableManager {
         return null;
     }
 
+
     @Override
     public void insertRow(Map<String, String> row) {
 
     }
 
     @Override
-    public ObservableList<Entity> getTableRows(){
+    public void updateRow(Map<String, String> row) {
+
+    }
+
+    @Override
+    public ObservableList<Entity> getTableRows() {
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
         try {
@@ -53,15 +66,12 @@ public class SellersTableManager extends TableManager {
             while(result.next()){
                 String id = result.getObject("id").toString();
                 String name = result.getObject("name").toString();
-                String salary = result.getObject("salary").toString();
-                String tradePoint = result.getObject("trade_point").toString();
-                String tradeRoom = result.getObject("trade_room").toString();
-
-                resultList.add(new Seller(id, name, salary, tradePoint, tradeRoom));
+                resultList.add(new Good(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
     }
+
 }

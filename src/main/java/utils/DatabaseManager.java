@@ -1,6 +1,6 @@
 package utils;
 
-import utils.tableManagers.TableManager;
+import utils.table_managers.TableManager;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -29,19 +29,19 @@ public class DatabaseManager {
     }
     };
     private static final Map<String, String> classForTableManagers = new HashMap<String, String>(){{
-        put("GOODS","utils.tableManagers.GoodsTableManager");
-        put("ACCOUNTING","utils.tableManagers.AccountingTableManager");
-        put("CUSTOMERS","utils.tableManagers.CustomersTableManager");
-        put("DELIVERIES","utils.tableManagers.DeliveriesTableManager");
-        put("DELIVERIES_GOODS","utils.tableManagers.DeliveriesGoodsTableManager");
-        put("PROVIDERS","utils.tableManagers.ProvidersTableManager");
-        put("PURCHASE_COMPOSITIONS","utils.tableManagers.PurchaseCompositionsTableManager");
-        put("SALES","utils.tableManagers.SalesTableManager");
-        put("SELLERS","utils.tableManagers.SellersTableManager");
-        put("TRADE_SECTION_POINT","utils.tableManagers.TradeSectionPointTableManager");
-        put("TRADE_POINTS","utils.tableManagers.TradePointsTableManager");
-        put("TRADE_TYPES","utils.tableManagers.TradeTypesTableManager");
-        put("TRADE_ROOM","utils.tableManagers.TradeRoomTableManager");
+        put("GOODS","utils.table_managers.GoodsTableManager");
+        put("ACCOUNTING","utils.table_managers.AccountingTableManager");
+        put("CUSTOMERS","utils.table_managers.CustomersTableManager");
+        put("DELIVERIES","utils.table_managers.DeliveriesTableManager");
+        put("DELIVERIES_GOODS","utils.table_managers.DeliveriesGoodsTableManager");
+        put("PROVIDERS","utils.table_managers.ProvidersTableManager");
+        put("PURCHASE_COMPOSITIONS","utils.table_managers.PurchaseCompositionsTableManager");
+        put("SALES","utils.table_managers.SalesTableManager");
+        put("SELLERS","utils.table_managers.SellersTableManager");
+        put("TRADE_SECTION_POINT","utils.table_managers.TradeSectionPointTableManager");
+        put("TRADE_POINTS","utils.table_managers.TradePointsTableManager");
+        put("TRADE_TYPES","utils.table_managers.TradeTypesTableManager");
+        put("TRADE_ROOM","utils.table_managers.TradeRoomTableManager");
     }};
 
 

@@ -3,6 +3,7 @@ package controller.table;
 import Entities.Customer;
 import controller.Controller;
 import init.Main;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -27,11 +28,6 @@ public class CustomersTableWindowController extends TableWindowController {
         columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
 
         table.getColumns().addAll(columnId, columnName, columnAge);
-    }
-
-    @Override
-    public void deleteRow(String id) {
-
     }
 
     @Override
