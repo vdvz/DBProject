@@ -1,7 +1,14 @@
 package utils.tableManagers;
 
+import Entities.Customer;
+import Entities.DeliveriesGood;
+import Entities.Entity;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +40,29 @@ public class DeliveriesGoodsTableManager extends TableManager {
     }
 
     @Override
-    List<String> getColumnNames() {
-        return null;
+    public void insertRow(Map<String, String> row) {
+
     }
 
     @Override
-    public void insertRow(Map<String, String> row) {
+    public ObservableList<Entity> getTableRows() {
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String providerId = result.getObject("provider_id").toString();
+                String goodId = result.getObject("good_id").toString();
+                String deliveryId = result.getObject("delivery_id").toString();
+                String price = result.getObject("price").toString();
+
+                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
 
     }
 }

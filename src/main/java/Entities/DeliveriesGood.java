@@ -3,7 +3,7 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class DeliveriesGood {
+public class DeliveriesGood implements Entity {
 
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty providerId = new SimpleStringProperty("");
@@ -12,7 +12,7 @@ public class DeliveriesGood {
     private final StringProperty price = new SimpleStringProperty("");
 
 
-    DeliveriesGood(String id, String providerId, String goodId, String deliveryId, String price){
+    public DeliveriesGood(String id, String providerId, String goodId, String deliveryId, String price){
         setId(id);
         setProviderId(providerId);
         setGoodId(goodId);

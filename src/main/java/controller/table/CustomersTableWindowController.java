@@ -1,6 +1,8 @@
 package controller.table;
 
 import Entities.Customer;
+import controller.Controller;
+import init.Main;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -34,7 +36,8 @@ public class CustomersTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.CustomersInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

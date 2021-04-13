@@ -15,10 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class PurchaseCompositionsInsertionWindowController extends InsertionWindowController {
+public class SellersInsertionWindowController extends InsertionWindowController {
 
 
-    public PurchaseCompositionsInsertionWindowController() {
+    public SellersInsertionWindowController() {
     }
 
 
@@ -46,8 +46,7 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
         insertionMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
         insertionMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.PURCHASE_COMPOSITIONS).insertRow(insertionMap);
-
+        Main.getDatabaseManager().getTableManager(TableNames.SELLERS).insertRow(insertionMap);
 
     }
 

@@ -3,17 +3,16 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Customer implements Entity {
+public class TradeType implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
-    private final StringProperty name = new SimpleStringProperty("");;
-    private final StringProperty age = new SimpleStringProperty("");;
+    private final StringProperty name = new SimpleStringProperty("");
 
-    public Customer(String id, String name, String age) {
+    TradeType(String id, String name){
         setId(id);
         setName(name);
-        setAge(age);
     }
+
 
     public String getId() {
         return id.get();
@@ -37,17 +36,5 @@ public class Customer implements Entity {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public String getAge() {
-        return age.get();
-    }
-
-    public StringProperty ageProperty() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age.set(age);
     }
 }

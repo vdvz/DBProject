@@ -3,7 +3,7 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Account {
+public class Account implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty tradePoint = new SimpleStringProperty("");;
@@ -18,7 +18,6 @@ public class Account {
         setCount(count);
         setPrice(price);
     }
-
 
     public String getId() {
         return id.get();

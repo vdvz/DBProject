@@ -1,6 +1,8 @@
 package controller.table;
 
 import Entities.DeliveriesGood;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -44,6 +46,8 @@ public class DeliveriesGoodsTableWindowController extends TableWindowController 
 
     @Override
     public void createNewRow() {
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.DeliveriesGoodsInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

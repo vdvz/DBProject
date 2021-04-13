@@ -81,13 +81,13 @@ public class Navigation {
         }
     }
 
-    public void shutdownAllStage(){
-        activeControllers.values().forEach(Stage::close);
+    public void shutdownAllStage(Stage except){
+        activeControllers.values().stream().filter(e->!e.equals(except)).forEach(Stage::close);
         activeControllers.clear();
     }
 
-    public void shutdownAllControllers(){
-        loadedControllers.values().forEach(Controller::shutdown);
+    public void shutdownAllControllers(Controller except){
+        loadedControllers.values().stream().filter(e->!e.equals(except)).forEach(Controller::shutdown);
         loadedControllers.clear();
     }
 

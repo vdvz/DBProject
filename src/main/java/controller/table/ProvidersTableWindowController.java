@@ -1,6 +1,8 @@
 package controller.table;
 
 import Entities.Provider;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -37,7 +39,8 @@ public class ProvidersTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.ProvidersInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

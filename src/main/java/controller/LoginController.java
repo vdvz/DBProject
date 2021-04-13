@@ -12,12 +12,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EntranceController extends Controller implements Initializable {
+public class LoginController extends Controller implements Initializable {
     public final static String ENTRANCE_WINDOW_FXML = "/entrance_window.fxml";
     public final static String LOGIN_WINDOW_FXML = "/login_window.fxml";
-
-    public EntranceController() {
-    }
 
     @FXML
     private TextArea loginText;
@@ -31,8 +28,8 @@ public class EntranceController extends Controller implements Initializable {
             Main.openConnection();
             Controller controller = Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML);
             controller.setStage(Main.getNavigation().createNewStage());
-            this.close();
             controller.show();
+            this.close();
         } catch (SQLException ex) {
             System.out.println("SQLException: error with connection to server");
             showAlert("error with connection to server", "");

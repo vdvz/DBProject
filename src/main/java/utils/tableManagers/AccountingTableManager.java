@@ -1,12 +1,18 @@
 package utils.tableManagers;
 
+import Entities.Account;
+import Entities.Entity;
+import Entities.Good;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 public class AccountingTableManager extends TableManager {
-
 
     public AccountingTableManager(Connection connection) {
         super(connection);
@@ -33,13 +39,29 @@ public class AccountingTableManager extends TableManager {
     }
 
     @Override
-    List<String> getColumnNames() {
-        return null;
+    public void insertRow(Map<String, String> row) {
+
     }
 
     @Override
-    public void insertRow(Map<String, String> row) {
+    public ObservableList<Entity> getTableRows() {
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String tradePoint = result.getObject("trade_point").toString();
+                String good = result.getObject("good").toString();
+                String count = result.getObject("count").toString();
+                String price = result.getObject("price").toString();
 
+                resultList.add(new Account(id, tradePoint, good, count, price));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
     }
 
 }

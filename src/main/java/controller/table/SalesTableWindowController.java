@@ -1,6 +1,8 @@
 package controller.table;
 
 import Entities.Sale;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -41,7 +43,8 @@ public class SalesTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.SalesInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

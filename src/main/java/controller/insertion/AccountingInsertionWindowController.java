@@ -2,6 +2,7 @@ package controller.insertion;
 
 import Entities.Entity;
 import Entities.Good;
+import Entities.TradePoint;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -15,27 +16,29 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class PurchaseCompositionsInsertionWindowController extends InsertionWindowController {
+public class AccountingInsertionWindowController extends InsertionWindowController {
 
 
-    public PurchaseCompositionsInsertionWindowController() {
+    public AccountingInsertionWindowController() {
     }
 
-
-    EnterItem countItem;
+    SelectItem tradePointItem;
     SelectItem goodItem;
-    EnterItem resultPriceItem;
+    EnterItem countItem;
+    EnterItem priceItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
         countItem = new EnterItem("count");
+        tradePointItem = new SelectItem("trade_point");
         goodItem = new SelectItem("good");
-        resultPriceItem = new EnterItem("result_price");
+        priceItem = new EnterItem("price");
 
         loadAvailableGoods().stream().map(e->new ChoiceUnit(((Good)e).getId(), ((Good)e).getName())).forEach(goodItem::addItemsToSelect);
+        loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(tradePointItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(countItem, goodItem, resultPriceItem);
+        hBox.getChildren().addAll(countItem, tradePointItem, goodItem, priceItem);
 
     }
 
@@ -43,12 +46,15 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
     public void insertRow() {
         Map<String, String> insertionMap = new HashMap<>();
         insertionMap.put(countItem.getColumnName(), countItem.getEnteredText());
+        insertionMap.put(tradePointItem.getColumnName(), tradePointItem.getSelectedItem().getId());
         insertionMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
-        insertionMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
+        insertionMap.put(priceItem.getColumnName(), priceItem.getEnteredText());
 
-        Main.getDatabaseManager().getTableManager(TableNames.PURCHASE_COMPOSITIONS).insertRow(insertionMap);
+        Main.getDatabaseManager().getTableManager(TableNames.ACCOUNTING).insertRow(insertionMap);
+    }
 
-
+    private ObservableList<Entity> loadAvailableTradePoints(){
+        return Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS).getTableRows();
     }
 
     private ObservableList<Entity> loadAvailableGoods(){

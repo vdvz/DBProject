@@ -1,6 +1,8 @@
 package controller.table;
 
 import Entities.Account;
+import controller.Controller;
+import init.Main;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -39,7 +41,8 @@ public class AccountingTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.AccountingInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

@@ -45,7 +45,6 @@ public class MainWindowController extends Controller implements Initializable {
 
   public MainWindowController() {
     manager = Main.getDatabaseManager();
-
   }
 
   @Override
@@ -55,7 +54,6 @@ public class MainWindowController extends Controller implements Initializable {
     contextMenu.getItems().add(new MenuItem("Open"));
     contextMenu.setOnAction(event -> {
       String selectedItem = tableNamesView.getSelectionModel().getSelectedItems().get(0);
-
       String classForName = null;
       if((classForName = tableNameToController.get(selectedItem))!=null){
         Controller controller = null;
@@ -73,6 +71,8 @@ public class MainWindowController extends Controller implements Initializable {
 
   @FXML
   private void createTableButtonHandler(){
+    Main.getNavigation().shutdownAllControllers(this);
+    Main.getNavigation().shutdownAllStage(this.getStage());
     manager.createDatabase();
     updateTableView();
   }
@@ -85,13 +85,10 @@ public class MainWindowController extends Controller implements Initializable {
 
   @FXML
   public void dropTableButtonHandler() {
+    Main.getNavigation().shutdownAllControllers(this);
+    Main.getNavigation().shutdownAllStage(this.getStage());
     manager.clearDatabase();
     updateTableView();
-  }
-
-  public void handleMouseClickOnTable(MouseEvent mouseEvent) {
-    String selectedTable = tableNamesView.getSelectionModel().getSelectedItems().get(0);
-
   }
 
   public void openAvailableRequestsButtonHandler(ActionEvent actionEvent) {
@@ -100,6 +97,6 @@ public class MainWindowController extends Controller implements Initializable {
 
   public void loadTestValuesButtonHandler() {
     Main.getDatabaseManager().initTestValues();
-
   }
+
 }

@@ -1,9 +1,13 @@
 package controller.table;
 
+import Entities.Delivery;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -20,22 +24,17 @@ public class DeliveriesTableWindowController extends TableWindowController {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        TableColumn columnId = new TableColumn("id");
-        TableColumn columnProviderId = new TableColumn("provider_id");
-        TableColumn columnTradePointId = new TableColumn("trade_point_id");
-        TableColumn columnCount = new TableColumn("count");
-        TableColumn columnDeliverDate = new TableColumn("deliver_date");
+        TableColumn<Delivery, String> columnId = new TableColumn<>("id");
+        TableColumn<Delivery, String> columnProviderId = new TableColumn<>("provider_id");
+        TableColumn<Delivery, String> columnTradePointId = new TableColumn<>("trade_point_id");
+        TableColumn<Delivery, String> columnCount = new TableColumn<>("count");
+        TableColumn<Delivery, String> columnDeliverDate = new TableColumn<>("deliver_date");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0).toString()));
-        columnProviderId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1).toString()));
-        columnTradePointId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(2).toString()));
-        columnCount.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3).toString()));
-        columnDeliverDate.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(4).toString()));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnProviderId.setCellValueFactory(new PropertyValueFactory<>("providerId"));
+        columnTradePointId.setCellValueFactory(new PropertyValueFactory<>("tradePointId"));
+        columnCount.setCellValueFactory(new PropertyValueFactory<>("count"));
+        columnDeliverDate.setCellValueFactory(new PropertyValueFactory<>("deliverDate"));
 
         table.getColumns().addAll(columnId, columnProviderId, columnTradePointId, columnCount, columnDeliverDate);
     }
@@ -47,7 +46,8 @@ public class DeliveriesTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.DeliveriesInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

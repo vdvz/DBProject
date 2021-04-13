@@ -3,7 +3,7 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Sale {
+public class Sale implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty seller = new SimpleStringProperty("");

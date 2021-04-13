@@ -1,6 +1,7 @@
 package controller.table;
 
 import Entities.Good;
+import controller.Controller;
 import init.Main;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,11 +38,12 @@ public class GoodsTableWindowController extends TableWindowController {
 
     @Override
     public void generateTable() {
-        table.getItems().addAll(tableManager.getGoods());
+        table.getItems().addAll(tableManager.getTableRows());
     }
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.GoodsInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 }

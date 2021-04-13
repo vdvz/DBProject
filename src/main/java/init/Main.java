@@ -1,10 +1,8 @@
 package init;
 
 import controller.Controller;
-import controller.EntranceController;
+import controller.LoginController;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Connection;
 import utils.DatabaseManager;
@@ -34,7 +32,7 @@ public class Main extends Application {
         primaryStage.setTitle("DB PROJECT");
 
         navigation = new Navigation(primaryStage);
-        Controller controller = Main.getNavigation().load(EntranceController.ENTRANCE_WINDOW_FXML);
+        Controller controller = Main.getNavigation().load(LoginController.ENTRANCE_WINDOW_FXML);
         controller.setStage(primaryStage);
         controller.show();
     }

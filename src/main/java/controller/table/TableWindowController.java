@@ -8,6 +8,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import utils.DatabaseManager;
+import utils.tableManagers.TableManager;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,10 +23,13 @@ public abstract class TableWindowController extends Controller implements Initia
     public Button updateTableButton;
     public TableView table;
     private final String tableName;
+    private TableManager tableManager;
 
     TableWindowController(String tableName){
         this.tableName = tableName;
         manager = Main.getDatabaseManager();
+        tableManager = Main.getDatabaseManager().getTableManager(tableName);
+
     }
 
     @Override
@@ -57,11 +61,7 @@ public abstract class TableWindowController extends Controller implements Initia
     public abstract void deleteRow(String id);
 
     public void generateTable() {
-        /*try {
-            table.getItems().addAll(Main.getDatabaseManager().getTableManager(tableName).getTableRows());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }*/
+        table.getItems().addAll(tableManager.getTableRows());
     }
     abstract public void createNewRow();
 

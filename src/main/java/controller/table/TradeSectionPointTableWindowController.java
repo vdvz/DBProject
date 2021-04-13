@@ -1,9 +1,11 @@
 package controller.table;
 
+import Entities.TradeSectionPoint;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -19,22 +21,15 @@ public class TradeSectionPointTableWindowController extends TableWindowControlle
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        TableColumn columnId = new TableColumn("id");
-        TableColumn columnTradePoint = new TableColumn("trade_point");
-        TableColumn columnFloor = new TableColumn("floor");
-        TableColumn columnManagerName = new TableColumn("managers_name");
+        TableColumn<TradeSectionPoint, String> columnId = new TableColumn<>("id");
+        TableColumn<TradeSectionPoint, String> columnTradePoint = new TableColumn<>("trade_point");
+        TableColumn<TradeSectionPoint, String> columnFloor = new TableColumn<>("floor");
+        TableColumn<TradeSectionPoint, String> columnManagerName = new TableColumn<>("managers_name");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0)));
-
-        columnTradePoint.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1)));
-
-        columnFloor.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(2)));
-
-        columnManagerName.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3)));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnTradePoint.setCellValueFactory(new PropertyValueFactory<>("tradePoint"));
+        columnFloor.setCellValueFactory(new PropertyValueFactory<>("floor"));
+        columnManagerName.setCellValueFactory(new PropertyValueFactory<>("managersName"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnFloor, columnManagerName);
     }

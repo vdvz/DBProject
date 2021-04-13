@@ -1,7 +1,14 @@
 package utils.tableManagers;
 
+import Entities.Account;
+import Entities.Customer;
+import Entities.Entity;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +44,29 @@ public class CustomersTableManager extends TableManager {
         return null;
     }
 
-    @Override
-    List<String> getColumnNames() {
-        return null;
-    }
 
     @Override
     public void insertRow(Map<String, String> row) {
 
+    }
+
+    @Override
+    public ObservableList<Entity> getTableRows() {
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String name = result.getObject("name").toString();
+                String age = result.getObject("age").toString();
+
+                resultList.add(new Customer(id, name,age));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
     }
 
 }

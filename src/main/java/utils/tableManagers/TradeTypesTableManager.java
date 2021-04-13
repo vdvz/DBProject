@@ -1,5 +1,7 @@
 package utils.tableManagers;
 
+import Entities.Entity;
+import javafx.collections.ObservableList;
 import utils.Connection;
 
 import java.util.List;
@@ -32,13 +34,13 @@ public class TradeTypesTableManager extends TableManager {
     }
 
     @Override
-    List<String> getColumnNames() {
-        return null;
+    public void insertRow(Map<String, String> row) {
+
     }
 
     @Override
-    public void insertRow(Map<String, String> row) {
-
+    public ObservableList<Entity> getTableRows() {
+        return null;
     }
 
 }

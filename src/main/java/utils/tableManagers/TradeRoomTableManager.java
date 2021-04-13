@@ -1,7 +1,14 @@
 package utils.tableManagers;
 
+import Entities.Entity;
+import Entities.Good;
+import Entities.TradeRoom;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.Connection;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +39,25 @@ public class TradeRoomTableManager extends TableManager {
     }
 
     @Override
-    List<String> getColumnNames() {
-        return null;
+    public void insertRow(Map<String, String> row) {
+
     }
 
     @Override
-    public void insertRow(Map<String, String> row) {
-
+    public ObservableList<Entity> getTableRows() {
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String tradePointsId = result.getObject("trade_points_id").toString();
+                resultList.add(new TradeRoom(id, tradePointsId));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
     }
 
 }

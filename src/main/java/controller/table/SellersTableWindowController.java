@@ -1,9 +1,13 @@
 package controller.table;
 
+import Entities.Seller;
+import controller.Controller;
+import init.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -19,27 +23,17 @@ public class SellersTableWindowController extends TableWindowController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        TableColumn columnId = new TableColumn("id");
-        TableColumn columnName = new TableColumn("name");
-        TableColumn columnSalary = new TableColumn("salary");
-        TableColumn columnTradePoint = new TableColumn("trade_point");
-        TableColumn columnTradeRoom = new TableColumn("trade_room");
+        TableColumn<Seller, String> columnId = new TableColumn<>("id");
+        TableColumn<Seller, String> columnName = new TableColumn<>("name");
+        TableColumn<Seller, String> columnSalary = new TableColumn<>("salary");
+        TableColumn<Seller, String> columnTradePoint = new TableColumn<>("trade_point");
+        TableColumn<Seller, String> columnTradeRoom = new TableColumn<>("trade_room");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0)));
-
-        columnName.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1)));
-
-        columnSalary.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(2)));
-
-        columnTradePoint.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3)));
-
-        columnTradeRoom.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(4)));
-
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        columnTradePoint.setCellValueFactory(new PropertyValueFactory<>("tradePoint"));
+        columnTradeRoom.setCellValueFactory(new PropertyValueFactory<>("tradeRoom"));
 
         table.getColumns().addAll(columnId, columnName, columnSalary, columnTradePoint, columnTradeRoom);
     }
@@ -51,7 +45,8 @@ public class SellersTableWindowController extends TableWindowController {
 
     @Override
     public void createNewRow() {
-
+        Controller controller = Main.getNavigation().loadTable("/insertion_window.fxml", "controller.insertion.SellersInsertionWindowController");
+        Main.getNavigation().show(controller, Main.getNavigation().createNewStage());
     }
 
 }

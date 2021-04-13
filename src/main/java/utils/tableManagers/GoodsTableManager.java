@@ -1,5 +1,6 @@
 package utils.tableManagers;
 
+import Entities.Entity;
 import Entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,35 +46,27 @@ public class GoodsTableManager extends TableManager {
         return null;
     }
 
-    @Override
-    List<String> getColumnNames() {
-        return columnNames;
-    }
 
     @Override
     public void insertRow(Map<String, String> row) {
 
     }
 
-    public ObservableList<Good> getGoods(){
-        ObservableList<Good> resultList = FXCollections.observableArrayList();
-        ResultSet result = null;
+    @Override
+    public ObservableList<Entity> getTableRows() {
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
         try {
-            result = getConnection().executeQuery("select id, name from goods");
+            result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                System.out.println(id);
-                String displayedName = result.getObject("name").toString();
-                System.out.println(displayedName);
-                resultList.add(new Good(id, displayedName));
+                String name = result.getObject("name").toString();
+                resultList.add(new Good(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
     }
-
-
-
 
 }

@@ -3,7 +3,7 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Seller {
+public class Seller implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty name = new SimpleStringProperty("");
@@ -11,7 +11,7 @@ public class Seller {
     private final StringProperty tradePoint = new SimpleStringProperty("");
     private final StringProperty tradeRoom = new SimpleStringProperty("");
 
-    Seller(String id, String name, String salary, String tradePoint, String tradeRoom){
+    public Seller(String id, String name, String salary, String tradePoint, String tradeRoom){
         setId(id);
         setName(name);
         setSalary(salary);

@@ -1,9 +1,11 @@
 package controller.table;
 
+import Entities.TradePoint;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -20,34 +22,21 @@ public class TradePointsTableWindowController extends TableWindowController {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        TableColumn columnId = new TableColumn("id");
-        TableColumn columnType = new TableColumn("type");
-        TableColumn columnName = new TableColumn("name");
-        TableColumn columnPointSize = new TableColumn("point_size");
-        TableColumn columnRentSize = new TableColumn("rent_size");
-        TableColumn columnCommunalPayments = new TableColumn("communal_payments");
-        TableColumn columnNumberOfCounters = new TableColumn("number_of_counters");
+        TableColumn<TradePoint, String> columnId = new TableColumn<>("id");
+        TableColumn<TradePoint, String> columnType = new TableColumn<>("type");
+        TableColumn<TradePoint, String> columnName = new TableColumn<>("name");
+        TableColumn<TradePoint, String> columnPointSize = new TableColumn<>("point_size");
+        TableColumn<TradePoint, String> columnRentSize = new TableColumn<>("rent_size");
+        TableColumn<TradePoint, String> columnCommunalPayments = new TableColumn<>("communal_payments");
+        TableColumn<TradePoint, String> columnNumberOfCounters = new TableColumn<>("number_of_counters");
 
-        columnId.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(0)));
-
-        columnType.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(1)));
-
-        columnName.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(2)));
-
-        columnPointSize.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(3)));
-
-        columnRentSize.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(4)));
-
-        columnCommunalPayments.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(5)));
-
-        columnNumberOfCounters.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>)
-                param -> new SimpleStringProperty(param.getValue().get(6)));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnPointSize.setCellValueFactory(new PropertyValueFactory<>("pointSize"));
+        columnRentSize.setCellValueFactory(new PropertyValueFactory<>("rentSize"));
+        columnCommunalPayments.setCellValueFactory(new PropertyValueFactory<>("communalPayments"));
+        columnNumberOfCounters.setCellValueFactory(new PropertyValueFactory<>("numberOfCounters"));
 
         table.getColumns().addAll(columnId, columnType, columnName, columnPointSize, columnRentSize, columnCommunalPayments, columnNumberOfCounters);
     }

@@ -3,7 +3,7 @@ package Entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class PurchaseComposition {
+public class PurchaseComposition implements Entity {
 
     private StringProperty id = new SimpleStringProperty("");
     private StringProperty good = new SimpleStringProperty("");
@@ -11,7 +11,7 @@ public class PurchaseComposition {
     private StringProperty resultPrice = new SimpleStringProperty("");
 
 
-    PurchaseComposition(String id, String good, String count, String resultPrice){
+    public PurchaseComposition(String id, String good, String count, String resultPrice){
         setId(id);
         setGood(good);
         setCount(count);
