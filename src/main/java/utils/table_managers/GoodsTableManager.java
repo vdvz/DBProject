@@ -1,16 +1,15 @@
 package utils.table_managers;
 
-import Entities.Entity;
-import Entities.Good;
+import entities.Entity;
+import entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GoodsTableManager extends TableManager {
@@ -23,30 +22,12 @@ public class GoodsTableManager extends TableManager {
     };
 
     public GoodsTableManager(Connection connection) throws SQLException {
-        super(connection);
+        super(connection, TableNames.GOODS);
     }
 
     @Override
     public Map<String, Class> getColumns() {
         return columns;
-    }
-
-    @Override
-    public String loadSelectionQuery() {
-        return "SELECT * FROM goods";
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return "INSERT INTO goods (name) VALUES (?)";
-    }
-
-    @Override
-    public String loadDeleteQuery() { return "DELETE FROM goods WHERE id = ?";}
-
-    @Override
-    public String loadUpdateQuery() {
-        return "UPDATE goods SET name = ? WHERE id = ?";
     }
 
     @Override

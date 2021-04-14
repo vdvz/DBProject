@@ -1,9 +1,8 @@
 package controller.insertion;
 
-import Entities.Customer;
-import Entities.Entity;
-import Entities.Good;
-import Entities.PurchaseComposition;
+import entities.Entity;
+import entities.Good;
+import entities.PurchaseComposition;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;

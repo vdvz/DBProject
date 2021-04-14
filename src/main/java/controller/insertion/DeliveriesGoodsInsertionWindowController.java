@@ -1,6 +1,6 @@
 package controller.insertion;
 
-import Entities.*;
+import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -8,7 +8,6 @@ import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
 import utils.table_managers.DeliveriesGoodsTableManager;
-import utils.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

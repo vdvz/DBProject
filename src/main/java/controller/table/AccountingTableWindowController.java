@@ -1,12 +1,8 @@
 package controller.table;
 
-import Entities.Account;
-import controller.Controller;
-import init.Main;
-import javafx.collections.ObservableList;
+import entities.Account;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;

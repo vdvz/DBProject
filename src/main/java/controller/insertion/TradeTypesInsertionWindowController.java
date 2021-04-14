@@ -1,14 +1,9 @@
 package controller.insertion;
 
-import Entities.Entity;
-import Entities.Good;
-import Entities.TradeSectionPoint;
-import Entities.TradeType;
+import entities.Entity;
+import entities.TradeType;
 import init.Main;
-import javafx.collections.ObservableList;
-import utils.ChoiceUnit;
 import utils.EnterItem;
-import utils.SelectItem;
 import utils.TableNames;
 import utils.table_managers.TradeTypesTableManager;
 

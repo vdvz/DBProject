@@ -1,43 +1,21 @@
 package utils.table_managers;
 
-import Entities.Account;
-import Entities.Entity;
+import entities.Account;
+import entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class AccountingTableManager extends TableManager {
 
     public AccountingTableManager(Connection connection) throws SQLException {
-        super(connection);
-    }
-
-    @Override
-    public String loadSelectionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return "INSERT INTO accounting (id, trade_point, good, count, price) VALUES (?, ?, ?, ?, ?);";
-    }
-
-    @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadUpdateQuery() {
-        return null;
+        super(connection, TableNames.ACCOUNTING);
     }
 
     @Override

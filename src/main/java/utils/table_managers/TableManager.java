@@ -1,6 +1,6 @@
 package utils.table_managers;
 
-import Entities.Entity;
+import entities.Entity;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class TableManager {
 
@@ -22,7 +23,10 @@ public abstract class TableManager {
     public final PreparedStatement preparedDeleteStatement;
     public final PreparedStatement preparedUpdateStatement;
 
-    public TableManager(Connection connection) throws SQLException {
+    private final String tableName;
+
+    public TableManager(Connection connection, String tableName) throws SQLException {
+        this.tableName = tableName;
         this.connection = connection;
         selectionQuery = loadSelectionQuery();
         insertionQuery = loadInsertionQuery();
@@ -35,10 +39,19 @@ public abstract class TableManager {
 
     }
 
-    public abstract String loadSelectionQuery();
-    public abstract String loadInsertionQuery();
-    public abstract String loadDeleteQuery();
-    public abstract String loadUpdateQuery();
+    public String loadSelectionQuery(){
+        return "SELECT * FROM " + tableName;
+    }
+    public String loadInsertionQuery(){
+        return "INSERT INTO " + tableName + " (" + String.join(", ", getColumns().keySet()) + ") VALUES (" + getColumns().keySet().stream()
+                .map(e->"?").collect(Collectors.joining(", ")) + ")";
+    }
+    public String loadDeleteQuery(){
+        return "DELETE FROM " + tableName + " WHERE id=?" ;
+    }
+    public String loadUpdateQuery(){
+        return "UPDATE " + tableName + " SET " + String.join("=?, ", getColumns().keySet()) + "=? WHERE id = ?";
+    }
 
     public void insertRow(Map<String, String> row) throws SQLException{
         int index = 1;

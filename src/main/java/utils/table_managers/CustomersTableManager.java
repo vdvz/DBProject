@@ -1,10 +1,11 @@
 package utils.table_managers;
 
-import Entities.Customer;
-import Entities.Entity;
+import entities.Customer;
+import entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,27 +22,7 @@ public class CustomersTableManager extends TableManager {
     }};
 
     public CustomersTableManager(Connection connection) throws SQLException {
-        super(connection);
-    }
-
-    @Override
-    public String loadSelectionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadUpdateQuery() {
-        return null;
+        super(connection, TableNames.CUSTOMERS);
     }
 
     private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){

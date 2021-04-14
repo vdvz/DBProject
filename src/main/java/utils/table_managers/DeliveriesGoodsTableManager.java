@@ -1,10 +1,11 @@
 package utils.table_managers;
 
-import Entities.DeliveriesGood;
-import Entities.Entity;
+import entities.DeliveriesGood;
+import entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class DeliveriesGoodsTableManager extends TableManager {
 
     public DeliveriesGoodsTableManager(Connection connection) throws SQLException {
-        super(connection);
+        super(connection, TableNames.DELIVERIES_GOODS);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package controller.insertion;
 
-import Entities.*;
+import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;

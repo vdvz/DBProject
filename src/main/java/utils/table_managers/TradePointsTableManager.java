@@ -1,10 +1,11 @@
 package utils.table_managers;
 
-import Entities.Entity;
-import Entities.TradePoint;
+import entities.Entity;
+import entities.TradePoint;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,27 +15,7 @@ import java.util.Map;
 public class TradePointsTableManager extends TableManager {
 
     public TradePointsTableManager(Connection connection) throws SQLException {
-        super(connection);
-    }
-
-    @Override
-    public String loadSelectionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadUpdateQuery() {
-        return null;
+        super(connection, TableNames.TRADE_POINTS);
     }
 
     private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){

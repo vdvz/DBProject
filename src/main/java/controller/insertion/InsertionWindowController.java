@@ -1,11 +1,8 @@
 package controller.insertion;
 
-import Entities.Entity;
+import entities.Entity;
 import controller.Controller;
 import init.Main;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

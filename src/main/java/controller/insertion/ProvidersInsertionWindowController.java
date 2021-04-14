@@ -1,8 +1,7 @@
 package controller.insertion;
 
-import Entities.Customer;
-import Entities.Entity;
-import Entities.Provider;
+import entities.Entity;
+import entities.Provider;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;

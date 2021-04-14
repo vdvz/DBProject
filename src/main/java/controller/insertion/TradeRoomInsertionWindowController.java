@@ -1,13 +1,11 @@
 package controller.insertion;
 
-import Entities.Entity;
-import Entities.Good;
-import Entities.TradePoint;
-import Entities.TradeRoom;
+import entities.Entity;
+import entities.TradePoint;
+import entities.TradeRoom;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
-import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
 import utils.table_managers.TradeRoomTableManager;

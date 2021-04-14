@@ -1,10 +1,11 @@
 package utils.table_managers;
 
-import Entities.Delivery;
-import Entities.Entity;
+import entities.Delivery;
+import entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
+import utils.TableNames;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -16,27 +17,7 @@ public class DeliveriesTableManager extends TableManager {
 
 
     public DeliveriesTableManager(Connection connection) throws SQLException {
-        super(connection);
-    }
-
-    @Override
-    public String loadSelectionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadUpdateQuery() {
-        return null;
+        super(connection, TableNames.DELIVERIES);
     }
 
     private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){

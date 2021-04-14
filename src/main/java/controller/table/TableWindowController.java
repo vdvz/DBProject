@@ -1,10 +1,9 @@
 package controller.table;
 
-import Entities.Entity;
+import entities.Entity;
 import controller.Controller;
 import controller.insertion.InsertionWindowController;
 import init.Main;
-import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;

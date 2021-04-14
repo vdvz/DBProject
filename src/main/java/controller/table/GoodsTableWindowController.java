@@ -1,15 +1,8 @@
 package controller.table;
 
-import Entities.Entity;
-import Entities.Good;
-import controller.Controller;
-import controller.insertion.InsertionWindowController;
-import init.Main;
-import javafx.collections.ObservableList;
+import entities.Good;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import utils.table_managers.GoodsTableManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;

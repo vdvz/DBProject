@@ -1,8 +1,7 @@
 package controller.insertion;
 
-import Entities.DeliveriesGood;
-import Entities.Entity;
-import Entities.Good;
+import entities.Entity;
+import entities.Good;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;

@@ -1,9 +1,9 @@
 package controller.insertion;
 
-import Entities.Account;
-import Entities.Entity;
-import Entities.Good;
-import Entities.TradePoint;
+import entities.Account;
+import entities.Entity;
+import entities.Good;
+import entities.TradePoint;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
