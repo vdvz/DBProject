@@ -9,10 +9,7 @@ import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CustomersTableManager extends TableManager {
 
@@ -25,7 +22,7 @@ public class CustomersTableManager extends TableManager {
         super(connection, TableNames.CUSTOMERS);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
             put("age", Integer.class);
@@ -46,8 +43,12 @@ public class CustomersTableManager extends TableManager {
             while(result.next()){
                 String id = result.getObject("id").toString();
                 String name = result.getObject("name").toString();
-                String age = result.getObject("age").toString();
-
+                String age;
+                try{
+                    age = Objects.requireNonNull(result.getObject("age")).toString();
+                } catch (NullPointerException e){
+                    age = "NULL";
+                }
                 resultList.add(new Customer(id, name,age));
             }
         } catch (SQLException throwables) {

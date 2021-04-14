@@ -1,6 +1,1 @@
-CREATE OR REPLACE TRIGGER tr_ai_sales before INSERT ON Sales FOR each row
-BEGIN
-  SELECT sq_sales.NEXT
-  INTO :new.id
-  FROM dual;
-END;
+CREATE OR REPLACE TRIGGER tr_ai_sales before INSERT ON Sales FOR each row BEGIN if :new.id is null then SELECT sq_sales.nextval INTO :new.id FROM dual; end if; END;

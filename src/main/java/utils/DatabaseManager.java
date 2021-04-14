@@ -22,7 +22,7 @@ public class DatabaseManager {
             add("PurchaseCompositions.sql");
             add("Providers.sql");
             add("Deliveries.sql");
-            add("DeliveriesGood.sql");
+            add("DeliveriesGoods.sql");
             add("Customers.sql");
             add("Sales.sql");
             add("TradeSectionPoint.sql");

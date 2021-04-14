@@ -18,7 +18,7 @@ public class TradeRoomTableManager extends TableManager {
         super(connection, TableNames.TRADE_ROOM);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("trade_points_id", Integer.class);
         }

@@ -19,7 +19,7 @@ public class SellersTableManager extends TableManager {
         super(connection, TableNames.SELLERS);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
             put("salary", Integer.class);

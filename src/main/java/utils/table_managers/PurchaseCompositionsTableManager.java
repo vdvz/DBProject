@@ -19,7 +19,7 @@ public class PurchaseCompositionsTableManager extends TableManager {
         super(connection, TableNames.PURCHASE_COMPOSITIONS);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("good", Integer.class);
             put("count", Integer.class);

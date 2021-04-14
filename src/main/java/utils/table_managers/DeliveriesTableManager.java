@@ -20,7 +20,7 @@ public class DeliveriesTableManager extends TableManager {
         super(connection, TableNames.DELIVERIES);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("provider_id", Integer.class);
             put("trade_point_id", Integer.class);

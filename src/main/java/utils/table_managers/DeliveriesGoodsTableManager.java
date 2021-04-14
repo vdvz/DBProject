@@ -18,27 +18,7 @@ public class DeliveriesGoodsTableManager extends TableManager {
         super(connection, TableNames.DELIVERIES_GOODS);
     }
 
-    @Override
-    public String loadSelectionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadInsertionQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadDeleteQuery() {
-        return null;
-    }
-
-    @Override
-    public String loadUpdateQuery() {
-        return null;
-    }
-
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("provider_id", Integer.class);
             put("good_id", Integer.class);

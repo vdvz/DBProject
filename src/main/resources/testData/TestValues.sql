@@ -1,0 +1,14 @@
+INSERT INTO customers (name, age) VALUES ('Василье Василий', 21);
+INSERT INTO customers (name, age) VALUES ('Ардаков Игорь', 27);
+INSERT INTO customers (name, age) VALUES ('Донченко Иван', 23);
+INSERT INTO customers (name, age) VALUES ('Кулагина Юлия', 22);
+INSERT INTO customers (name, age) VALUES ('Бирюков Евгений', 37);
+INSERT INTO customers (name, age) VALUES ('Васильев Валера', 18);
+INSERT INTO customers (name, age) VALUES ('Дылдин Алексей', 54);
+INSERT INTO customers (name, age) VALUES ('Девин Игорь', 56);
+INSERT INTO customers (name) VALUES ('Угаров Виктор');
+INSERT INTO customers (name, age) VALUES ('Демчук Алексей', 81);
+INSERT INTO customers (name, age) VALUES ('Зюлькин Григорий', 98);
+INSERT INTO customers (name, age) VALUES ('Гришина Ольга', 21);
+INSERT INTO customers (name) VALUES ('Карсева Полина');
+commit;

@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class CustomersInsertionWindowController extends InsertionWindowController {
 
-    private final CustomersTableManager tableManager = (CustomersTableManager) Main.getDatabaseManager().getTableManager(TableNames.PURCHASE_COMPOSITIONS);
+    private final CustomersTableManager tableManager = (CustomersTableManager) Main.getDatabaseManager().getTableManager(TableNames.CUSTOMERS);
     EnterItem nameItem;
     EnterItem ageItem;
     @Override

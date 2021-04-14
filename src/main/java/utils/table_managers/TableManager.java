@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class TableManager {
@@ -43,6 +44,7 @@ public abstract class TableManager {
         return "SELECT * FROM " + tableName;
     }
     public String loadInsertionQuery(){
+        System.out.println(getColumns());
         return "INSERT INTO " + tableName + " (" + String.join(", ", getColumns().keySet()) + ") VALUES (" + getColumns().keySet().stream()
                 .map(e->"?").collect(Collectors.joining(", ")) + ")";
     }
@@ -58,13 +60,22 @@ public abstract class TableManager {
         Map<String, Class> columns = getColumns();
         for(Map.Entry<String, Class> entry: columns.entrySet()){
             if(entry.getValue() == Integer.class){
-                preparedInsertionStatement.setInt(index, Integer.parseInt(row.get(entry.getKey())));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setInt(index, Integer.parseInt(val));
+                }
             }
             if(entry.getValue() == String.class){
-                preparedInsertionStatement.setString(index, row.get(entry.getKey()));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setString(index, val);
+                }
             }
             if(entry.getValue() == Date.class){
-                preparedInsertionStatement.setDate(index, Date.valueOf(row.get(entry.getKey())));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setDate(index, Date.valueOf(val));
+                }
             }
             index++;
         }
@@ -78,13 +89,28 @@ public abstract class TableManager {
         Map<String, Class> columns = getColumns();
         for(Map.Entry<String, Class> entry: columns.entrySet()){
             if(entry.getValue() == Integer.class){
-                preparedUpdateStatement.setInt(index, Integer.parseInt(row.get(entry.getKey())));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setInt(index, Integer.parseInt(val));
+                } else {
+                    preparedInsertionStatement.setObject(index, null);
+                }
             }
             if(entry.getValue() == String.class){
-                preparedUpdateStatement.setString(index, row.get(entry.getKey()));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setString(index, val);
+                } else {
+                    preparedInsertionStatement.setObject(index, null);
+                }
             }
             if(entry.getValue() == Date.class){
-                preparedUpdateStatement.setDate(index, Date.valueOf(row.get(entry.getKey())));
+                String val = row.get(entry.getKey());
+                if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    preparedInsertionStatement.setDate(index, Date.valueOf(val));
+                } else {
+                    preparedInsertionStatement.setObject(index, null);
+                }
             }
             index++;
         }

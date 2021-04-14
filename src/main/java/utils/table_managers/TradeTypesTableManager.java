@@ -15,7 +15,7 @@ public class TradeTypesTableManager extends TableManager {
         super(connection, TableNames.TRADE_TYPE);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
         }

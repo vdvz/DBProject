@@ -1,6 +1,1 @@
-CREATE OR REPLACE TRIGGER tr_ai_purchase_compositions before INSERT ON Purchase_compositions FOR each row
-BEGIN
-  SELECT sq_purchase_compositions.NEXT
-  INTO :new.id
-  FROM dual;
-END;
+CREATE OR REPLACE TRIGGER tr_ai_purchase_compositions before INSERT ON Purchase_compositions FOR each row BEGIN if :new.id is null then SELECT sq_purchase_compositions.nextval INTO :new.id FROM dual; end if; END;

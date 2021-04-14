@@ -1,6 +1,1 @@
-CREATE OR REPLACE TRIGGER tr_ai_providers before INSERT ON Providers FOR each row
-BEGIN
-  SELECT sq_providers.NEXT
-  INTO :new.id
-  FROM dual;
-END;
+CREATE OR REPLACE TRIGGER tr_ai_providers before INSERT ON Providers FOR each row BEGIN if :new.id is null then SELECT sq_providers.nextval INTO :new.id FROM dual; end if; END;

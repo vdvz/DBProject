@@ -15,7 +15,7 @@ import java.util.Map;
 public class GoodsTableManager extends TableManager {
 
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private final static Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
         }

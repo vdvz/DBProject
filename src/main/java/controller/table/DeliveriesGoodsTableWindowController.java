@@ -3,6 +3,7 @@ package controller.table;
 import entities.DeliveriesGood;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utils.TableNames;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,7 +12,7 @@ public class DeliveriesGoodsTableWindowController extends TableWindowController 
 
 
     public DeliveriesGoodsTableWindowController() {
-        super("DELIVERIES_GOODS");
+        super(TableNames.DELIVERIES_GOODS);
     }
 
     @Override

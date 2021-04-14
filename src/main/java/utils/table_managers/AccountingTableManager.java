@@ -23,7 +23,7 @@ public class AccountingTableManager extends TableManager {
         return columns;
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("trade_point", Integer.class);
             put("good", Integer.class);

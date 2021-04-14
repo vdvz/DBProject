@@ -19,7 +19,7 @@ public class ProvidersTableManager extends TableManager {
         super(connection, TableNames.PROVIDERS);
     }
 
-    private final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
         }
