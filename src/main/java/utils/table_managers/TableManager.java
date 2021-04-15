@@ -7,6 +7,7 @@ import utils.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,9 +17,6 @@ public abstract class TableManager {
     private final Connection connection;
 
     public final String selectionQuery;
-    public final String insertionQuery;
-    public final String deleteQuery;
-    public final String updateQuery;
 
     public final PreparedStatement preparedInsertionStatement;
     public final PreparedStatement preparedDeleteStatement;
@@ -30,9 +28,6 @@ public abstract class TableManager {
         this.tableName = tableName;
         this.connection = connection;
         selectionQuery = loadSelectionQuery();
-        insertionQuery = loadInsertionQuery();
-        deleteQuery = loadDeleteQuery();
-        updateQuery = loadUpdateQuery();
 
         preparedInsertionStatement = getConnection().prepareStatement(loadInsertionQuery());
         preparedDeleteStatement = getConnection().prepareStatement(loadDeleteQuery());
@@ -63,18 +58,24 @@ public abstract class TableManager {
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
                     preparedInsertionStatement.setInt(index, Integer.parseInt(val));
+                } else {
+                    preparedInsertionStatement.setNull(index, Types.NUMERIC);
                 }
             }
             if(entry.getValue() == String.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
                     preparedInsertionStatement.setString(index, val);
+                } else {
+                    preparedInsertionStatement.setNull(index, Types.VARCHAR);
                 }
             }
             if(entry.getValue() == Date.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
                     preparedInsertionStatement.setDate(index, Date.valueOf(val));
+                } else {
+                    preparedInsertionStatement.setNull(index, Types.DATE);
                 }
             }
             index++;
@@ -91,25 +92,25 @@ public abstract class TableManager {
             if(entry.getValue() == Integer.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
-                    preparedInsertionStatement.setInt(index, Integer.parseInt(val));
+                    preparedUpdateStatement.setInt(index, Integer.parseInt(val));
                 } else {
-                    preparedInsertionStatement.setObject(index, null);
+                    preparedUpdateStatement.setNull(index, Types.NUMERIC);
                 }
             }
             if(entry.getValue() == String.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
-                    preparedInsertionStatement.setString(index, val);
+                    preparedUpdateStatement.setString(index, val);
                 } else {
-                    preparedInsertionStatement.setObject(index, null);
+                    preparedUpdateStatement.setNull(index, Types.VARCHAR);
                 }
             }
             if(entry.getValue() == Date.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
-                    preparedInsertionStatement.setDate(index, Date.valueOf(val));
+                    preparedUpdateStatement.setDate(index, Date.valueOf(val));
                 } else {
-                    preparedInsertionStatement.setObject(index, null);
+                    preparedUpdateStatement.setNull(index, Types.DATE);
                 }
             }
             index++;
