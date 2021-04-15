@@ -1,10 +1,14 @@
 package utils.table_managers;
 
 import entities.Entity;
+import entities.TradeRoom;
+import entities.TradeType;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 import utils.TableNames;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,7 +31,19 @@ public class TradeTypesTableManager extends TableManager {
 
     @Override
     public ObservableList<Entity> getTableRows() {
-        return null;
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String name = result.getObject("name").toString();
+                resultList.add(new TradeType(id, name));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
     }
 
 }

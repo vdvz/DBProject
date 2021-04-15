@@ -67,6 +67,7 @@ public abstract class TableWindowController extends Controller implements Initia
     }
 
     public void generateTable() {
+        System.out.println(tableManager.getTableRows());
         table.getItems().addAll(tableManager.getTableRows());
     }
 

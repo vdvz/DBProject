@@ -1,10 +1,14 @@
 package utils.table_managers;
 
 import entities.Entity;
+import entities.TradeRoom;
+import entities.TradeSectionPoint;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 import utils.TableNames;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +33,21 @@ public class TradeSectionPointTableManager extends TableManager {
 
     @Override
     public ObservableList<Entity> getTableRows() {
-        return null;
+        ObservableList<Entity> resultList = FXCollections.observableArrayList();
+        ResultSet result;
+        try {
+            result = getConnection().executeQuery(selectionQuery);
+            while(result.next()){
+                String id = result.getObject("id").toString();
+                String trade_point = result.getObject("trade_point").toString();
+                String floor = result.getObject("floor").toString();
+                String manager_name = result.getObject("floor").toString();
+                resultList.add(new TradeSectionPoint(id, trade_point, floor, manager_name));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultList;
     }
 
 }

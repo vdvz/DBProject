@@ -44,11 +44,11 @@ public class TradePointsTableManager extends TableManager {
                 String type = result.getObject("type").toString();
                 String name = result.getObject("name").toString();
                 String pointSize = result.getObject("point_size").toString();
-                String rentSize = result.getObject("rent_size").toString();
+                String rentPize = result.getObject("rent_price").toString();
                 String communalPayments = result.getObject("communal_payments").toString();
                 String numberOfCounters = result.getObject("number_of_counters").toString();
 
-                resultList.add(new TradePoint(id, type, name, pointSize, rentSize, communalPayments, numberOfCounters));
+                resultList.add(new TradePoint(id, type, name, pointSize, rentPize, communalPayments, numberOfCounters));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -22,7 +22,7 @@ public class TradePointsTableWindowController extends TableWindowController {
         TableColumn<TradePoint, String> columnType = new TableColumn<>("type");
         TableColumn<TradePoint, String> columnName = new TableColumn<>("name");
         TableColumn<TradePoint, String> columnPointSize = new TableColumn<>("point_size");
-        TableColumn<TradePoint, String> columnRentSize = new TableColumn<>("rent_size");
+        TableColumn<TradePoint, String> columnRentSize = new TableColumn<>("rent_price");
         TableColumn<TradePoint, String> columnCommunalPayments = new TableColumn<>("communal_payments");
         TableColumn<TradePoint, String> columnNumberOfCounters = new TableColumn<>("number_of_counters");
 
@@ -30,7 +30,7 @@ public class TradePointsTableWindowController extends TableWindowController {
         columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnPointSize.setCellValueFactory(new PropertyValueFactory<>("pointSize"));
-        columnRentSize.setCellValueFactory(new PropertyValueFactory<>("rentSize"));
+        columnRentSize.setCellValueFactory(new PropertyValueFactory<>("rentPrice"));
         columnCommunalPayments.setCellValueFactory(new PropertyValueFactory<>("communalPayments"));
         columnNumberOfCounters.setCellValueFactory(new PropertyValueFactory<>("numberOfCounters"));
 

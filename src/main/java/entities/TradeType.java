@@ -8,7 +8,7 @@ public class TradeType implements Entity{
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty name = new SimpleStringProperty("");
 
-    TradeType(String id, String name){
+    public TradeType(String id, String name){
         setId(id);
         setName(name);
     }

@@ -10,7 +10,7 @@ public class TradeSectionPoint implements Entity{
     private final StringProperty floor = new SimpleStringProperty("");
     private final StringProperty managersName = new SimpleStringProperty("");
 
-    TradeSectionPoint(String id, String tradePoint, String floor, String managersName){
+    public TradeSectionPoint(String id, String tradePoint, String floor, String managersName){
         setId(id);
         setTradePoint(tradePoint);
         setFloor(floor);
