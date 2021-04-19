@@ -13,7 +13,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class MainController extends Controller implements Initializable {
+public class MainController extends Controller implements Initializable, RoleController {
     public final static String URL_FXML = "/main_window.fxml";
     private final DatabaseManager manager;
 
@@ -56,6 +56,13 @@ public class MainController extends Controller implements Initializable {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private Role role;
+
+    @Override
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 }

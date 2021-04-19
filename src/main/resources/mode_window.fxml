@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModeWindowController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="55.0" layoutY="61.0" prefHeight="247.0" prefWidth="172.0" spacing="40.0">
+         <children>
+            <Button onAction="#onAdminMode" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Admin" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Mode 1 " />
+            <Button layoutX="10.0" layoutY="97.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Mode 2" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

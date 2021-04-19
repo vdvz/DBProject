@@ -56,7 +56,7 @@ public class LoginController extends Controller implements Initializable {
         if (isNotEmpty()) {
             try {
                 Main.openConnection(loginText.getText(), passwordText.getText());
-                Controller controller = Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML);
+                Controller controller = Main.getNavigation().load(ModeWindowController.MODE_WINDOW_FXML);
                 controller.setStage(Main.getNavigation().createNewStage());
                 controller.show();
                 this.close();

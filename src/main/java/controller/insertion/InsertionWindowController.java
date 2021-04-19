@@ -1,5 +1,6 @@
 package controller.insertion;
 
+import controller.RoleController;
 import entities.Entity;
 import controller.Controller;
 import init.Main;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public abstract class InsertionWindowController extends Controller implements Initializable {
+public abstract class InsertionWindowController extends Controller implements Initializable, RoleController {
 
     public enum MODE{
         INSERTING,
@@ -81,4 +82,10 @@ public abstract class InsertionWindowController extends Controller implements In
 
     public abstract void initUpdating(Entity value);
 
+
+    private Role role;
+    @Override
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

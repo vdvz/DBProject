@@ -1,5 +1,6 @@
 package controller.table;
 
+import controller.RoleController;
 import entities.Entity;
 import controller.Controller;
 import controller.insertion.InsertionWindowController;
@@ -17,7 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public abstract class TableWindowController extends Controller implements Initializable {
+public abstract class TableWindowController extends Controller implements Initializable, RoleController {
 
     public static final String TABLE_WINDOW_FXML = "/table_window.fxml";
     final DatabaseManager manager;
@@ -92,5 +93,11 @@ public abstract class TableWindowController extends Controller implements Initia
     public void updateTable(){
         table.getItems().clear();
         generateTable();
+    }
+
+    private Role role;
+    @Override
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
