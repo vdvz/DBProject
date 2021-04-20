@@ -32,6 +32,7 @@ public class DeliveriesGoodsTableWindowController extends TableWindowController 
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(columnId, columnProviderId, columnGoodId, columnDeliveryName, columnPrice);
+        generateTable();
     }
 
 }

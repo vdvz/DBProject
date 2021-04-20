@@ -35,5 +35,6 @@ public class TradePointsTableWindowController extends TableWindowController {
         columnNumberOfCounters.setCellValueFactory(new PropertyValueFactory<>("numberOfCounters"));
 
         table.getColumns().addAll(columnId, columnType, columnName, columnPointSize, columnRentSize, columnCommunalPayments, columnNumberOfCounters);
+        generateTable();
     }
 }

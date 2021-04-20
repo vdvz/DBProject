@@ -25,6 +25,7 @@ public class CustomersTableWindowController extends TableWindowController {
         columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
 
         table.getColumns().addAll(columnId, columnName, columnAge);
+        generateTable();
     }
 
 }

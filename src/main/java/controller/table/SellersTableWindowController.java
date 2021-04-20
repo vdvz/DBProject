@@ -30,6 +30,7 @@ public class SellersTableWindowController extends TableWindowController {
         columnTradeRoom.setCellValueFactory(new PropertyValueFactory<>("tradeRoom"));
 
         table.getColumns().addAll(columnId, columnName, columnSalary, columnTradePoint, columnTradeRoom);
+        generateTable();
     }
 
 }

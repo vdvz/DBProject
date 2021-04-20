@@ -24,6 +24,7 @@ public class ProvidersTableWindowController extends TableWindowController {
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         table.getColumns().addAll(columnId, columnName);
+        generateTable();
     }
 
 }

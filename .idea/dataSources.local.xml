@@ -9,7 +9,11 @@
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>18208_VIZIR</user-name>
-      <schema-mapping />
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="18208_VIZIR" />
+        </introspection-scope>
+      </schema-mapping>
     </data-source>
   </component>
 </project>

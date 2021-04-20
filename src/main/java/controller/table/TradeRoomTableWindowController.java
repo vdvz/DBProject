@@ -24,5 +24,6 @@ public class TradeRoomTableWindowController extends TableWindowController {
         columnTradePointsId.setCellValueFactory(new PropertyValueFactory<>("tradePointsId"));
 
         table.getColumns().addAll(columnId, columnTradePointsId);
+        generateTable();
     }
 }

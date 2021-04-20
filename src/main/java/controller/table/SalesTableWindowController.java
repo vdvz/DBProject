@@ -28,6 +28,7 @@ public class SalesTableWindowController extends TableWindowController {
         columnPurchaseComposition.setCellValueFactory(new PropertyValueFactory<>("purchaseComposition"));
 
         table.getColumns().addAll(columnId, columnSeller, columnCustomer, columnPurchaseComposition);
+        generateTable();
     }
 
 }

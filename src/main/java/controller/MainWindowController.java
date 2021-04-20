@@ -17,7 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import utils.DatabaseManager;
 
-public class MainWindowController extends Controller implements Initializable {
+public class MainWindowController extends Controller implements Initializable, RoleController {
 
   public static final String MAIN_WINDOW_FXML = "/main_window.fxml";
   private final DatabaseManager manager;
@@ -98,4 +98,9 @@ public class MainWindowController extends Controller implements Initializable {
     Main.getDatabaseManager().initTestValues();
   }
 
+  private Role role;
+  @Override
+  public void setRole(Role role) {
+    this.role = role;
+  }
 }

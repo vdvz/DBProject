@@ -28,6 +28,7 @@ public class TradeSectionPointTableWindowController extends TableWindowControlle
         columnManagerName.setCellValueFactory(new PropertyValueFactory<>("managersName"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnFloor, columnManagerName);
+        generateTable();
     }
 
 }

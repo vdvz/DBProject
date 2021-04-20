@@ -31,6 +31,7 @@ public class DeliveriesTableWindowController extends TableWindowController {
         columnDeliverDate.setCellValueFactory(new PropertyValueFactory<>("deliverDate"));
 
         table.getColumns().addAll(columnId, columnProviderId, columnTradePointId, columnCount, columnDeliverDate);
+        generateTable();
     }
 
 }

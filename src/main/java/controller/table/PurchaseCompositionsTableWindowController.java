@@ -29,6 +29,7 @@ public class PurchaseCompositionsTableWindowController extends TableWindowContro
         columnResultPrice.setCellValueFactory(new PropertyValueFactory<>("resultPrice"));
 
         table.getColumns().addAll(columnId, columnGood, columnCount, columnResultPrice);
+        generateTable();
     }
 
 }

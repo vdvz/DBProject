@@ -26,6 +26,7 @@ public class TradeTypesTableWindowController extends TableWindowController {
 
         table.getColumns().addAll(columnId, columnName);
 
+        generateTable();
     }
 
 }

@@ -215,7 +215,7 @@ public class DatabaseManager {
 
     public void initTestValues() {
         try {
-            connection.execute(loadScriptFromFile("testValues"));
+            connection.execute(loadScriptFromFile("testData/TestValues.sql"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

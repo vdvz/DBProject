@@ -26,7 +26,7 @@ public class LoginController extends Controller implements Initializable {
     public void defaultButtonTapped() {
         try {
             Main.openConnection();
-            Controller controller = Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML);
+            Controller controller = Main.getNavigation().load(ModeWindowController.MODE_WINDOW_FXML);
             controller.setStage(Main.getNavigation().createNewStage());
             controller.show();
             this.close();

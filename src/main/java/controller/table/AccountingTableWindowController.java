@@ -30,6 +30,7 @@ public class AccountingTableWindowController extends TableWindowController {
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(columnId, columnTradePoint, columnGood, columnCount, columnPrice);
+        generateTable();
     }
 
 }

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModeWindowController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="55.0" layoutY="61.0" prefHeight="247.0" prefWidth="172.0" spacing="40.0">
+      <VBox alignment="TOP_CENTER" layoutX="64.0" layoutY="77.0" prefHeight="247.0" prefWidth="172.0" spacing="40.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="77.0">
          <children>
-            <Button onAction="#onAdminMode" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Admin" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Mode 1 " />
-            <Button layoutX="10.0" layoutY="97.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="172.0" text="Mode 2" />
+            <Button mnemonicParsing="false" onAction="#onAdminMode" prefHeight="47.0" prefWidth="172.0" text="Admin" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onManagerMode" prefHeight="47.0" prefWidth="172.0" text="Manager" />
+            <Button layoutX="10.0" layoutY="97.0" mnemonicParsing="false" onAction="#onSellerMode" prefHeight="47.0" prefWidth="172.0" text="Seller" />
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </VBox>
    </children>
 </AnchorPane>
