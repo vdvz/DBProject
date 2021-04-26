@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import utils.Connection;
 import utils.TableNames;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -24,6 +25,7 @@ public class SalesTableManager extends TableManager {
             put("seller", Integer.class);
             put("customer", Integer.class);
             put("result_price", Integer.class);
+            put("purchase_date", Date.class);
         }
     };
     @Override
@@ -42,8 +44,9 @@ public class SalesTableManager extends TableManager {
                 String seller = result.getObject("seller").toString();
                 String customer = result.getObject("customer").toString();
                 String purchaseComposition = result.getObject("purchase_composition").toString();
+                String purchase_date = result.getObject("purchase_date").toString();
 
-                resultList.add(new PurchaseComposition(id, seller, customer, purchaseComposition));
+                resultList.add(new PurchaseComposition(id, seller, customer, purchaseComposition, purchase_date));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

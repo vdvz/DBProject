@@ -45,7 +45,7 @@ public class DeliveriesTableManager extends TableManager {
                 String providerId = result.getObject("provider_id").toString();
                 String tradePointId = result.getObject("trade_point_id").toString();
                 String count = result.getObject("count").toString();
-                String deliveryDate = result.getObject("delivery_date").toString();
+                String deliveryDate = result.getDate("delivery_date").toString();
 
                 resultList.add(new Delivery(id, providerId, tradePointId, count, deliveryDate));
             }

@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -73,6 +74,7 @@ public abstract class TableManager {
             if(entry.getValue() == Date.class){
                 String val = row.get(entry.getKey());
                 if( !Objects.equals(val,null) && !Objects.equals(val.trim(), "") && !Objects.equals(val, "NULL")){
+                    System.out.println(val);
                     preparedInsertionStatement.setDate(index, Date.valueOf(val));
                 } else {
                     preparedInsertionStatement.setNull(index, Types.DATE);

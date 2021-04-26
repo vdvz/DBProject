@@ -7,11 +7,11 @@
     <top>
         <AnchorPane fx:id="paneMainContent" prefHeight="410.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button layoutX="322.0" layoutY="36.0" mnemonicParsing="false" onAction="#createTableButtonHandler" prefHeight="34.0" prefWidth="167.0" text="CreateTables" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="36.0" />
+                <Button layoutX="322.0" layoutY="36.0" mnemonicParsing="false" onAction="#createTableButtonHandler" prefHeight="34.0" prefWidth="167.0" text="Создание таблиц" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="36.0" />
                 <ListView fx:id="tableNamesView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="0.0" />
-                <Button layoutX="322.0" layoutY="83.0" mnemonicParsing="false" onAction="#dropTableButtonHandler" prefHeight="34.0" prefWidth="167.0" text="DropTables" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="83.0" />
-            <Button layoutX="322.0" layoutY="128.0" mnemonicParsing="false" onAction="#openAvailableRequestsButtonHandler" prefHeight="34.0" prefWidth="167.0" text="OpenRequests" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="128.0" />
-            <Button layoutX="322.0" layoutY="173.0" mnemonicParsing="false" onAction="#loadTestValuesButtonHandler" prefHeight="34.0" prefWidth="167.0" text="LoadTestValues" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="173.0" />
+                <Button layoutX="322.0" layoutY="83.0" mnemonicParsing="false" onAction="#dropTableButtonHandler" prefHeight="34.0" prefWidth="167.0" text="Удаление таблиц" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="83.0" />
+            <Button layoutX="322.0" layoutY="128.0" mnemonicParsing="false" onAction="#openAvailableRequestsButtonHandler" prefHeight="34.0" prefWidth="167.0" text="Запросы" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="128.0" />
+            <Button layoutX="322.0" layoutY="173.0" mnemonicParsing="false" onAction="#loadTestValuesButtonHandler" prefHeight="34.0" prefWidth="167.0" text="Загрузка тестовых данных" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="173.0" />
             </children>
         </AnchorPane>
     </top>

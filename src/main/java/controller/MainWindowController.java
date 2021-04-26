@@ -50,7 +50,7 @@ public class MainWindowController extends Controller implements Initializable, R
   public void initialize(URL location, ResourceBundle resources) {
     updateTableView();
     ContextMenu contextMenu = new ContextMenu();
-    contextMenu.getItems().add(new MenuItem("Open"));
+    contextMenu.getItems().add(new MenuItem("Открыть"));
     contextMenu.setOnAction(event -> {
       String selectedItem = tableNamesView.getSelectionModel().getSelectedItems().get(0);
       String classForName = null;
@@ -67,11 +67,11 @@ public class MainWindowController extends Controller implements Initializable, R
 
   }
 
-
   @FXML
   private void createTableButtonHandler(){
     Main.getNavigation().shutdownAllControllers(this);
     Main.getNavigation().shutdownAllStage(this.getStage());
+    manager.clearDatabase();
     manager.createDatabase();
     updateTableView();
   }
@@ -79,7 +79,11 @@ public class MainWindowController extends Controller implements Initializable, R
   private void updateTableView() {
     tableNamesView.getItems().clear();
     List<String> items = tableNamesView.getItems();
-    items.addAll(manager.getExistingTables().stream().map(String::toUpperCase).collect(Collectors.toList()));
+    Set<String> allTableNames = tableNameToController.keySet();
+    items.addAll(manager.getExistingTables().stream()
+            .map(String::toUpperCase)
+            .filter(allTableNames::contains)
+            .collect(Collectors.toList()));
   }
 
   @FXML
@@ -90,8 +94,10 @@ public class MainWindowController extends Controller implements Initializable, R
     updateTableView();
   }
 
-  public void openAvailableRequestsButtonHandler(ActionEvent actionEvent) {
-
+  public void openAvailableRequestsButtonHandler() {
+    Controller controller = Main.getNavigation().load(RequestWindowController.REQUESTS_WINDOW_FXML);
+    controller.setStage(Main.getNavigation().createNewStage());
+    controller.show();
   }
 
   public void loadTestValuesButtonHandler() {

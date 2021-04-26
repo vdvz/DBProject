@@ -9,13 +9,15 @@ public class PurchaseComposition implements Entity {
     private StringProperty good = new SimpleStringProperty("");
     private StringProperty count = new SimpleStringProperty("");
     private StringProperty resultPrice = new SimpleStringProperty("");
+    private StringProperty date = new SimpleStringProperty("");
 
 
-    public PurchaseComposition(String id, String good, String count, String resultPrice){
+    public PurchaseComposition(String id, String good, String count, String resultPrice, String date){
         setId(id);
         setGood(good);
         setCount(count);
         setResultPrice(resultPrice);
+        setDate(date);
     }
 
     public String getId() {
@@ -64,5 +66,17 @@ public class PurchaseComposition implements Entity {
 
     public void setResultPrice(String resultPrice) {
         this.resultPrice.set(resultPrice);
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public StringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
     }
 }

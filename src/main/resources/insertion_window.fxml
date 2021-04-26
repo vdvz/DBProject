@@ -10,7 +10,7 @@
          <children>
             <HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="500.0" spacing="10.0">
             </HBox>
-            <Button fx:id="button" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Insert" AnchorPane.rightAnchor="0">
+            <Button fx:id="button" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Подтверить" AnchorPane.rightAnchor="0">
                <VBox.margin>
                   <Insets right="10.0" top="10.0" />
                </VBox.margin>

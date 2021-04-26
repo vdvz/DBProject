@@ -5,10 +5,7 @@ import entities.Good;
 import entities.PurchaseComposition;
 import init.Main;
 import javafx.collections.ObservableList;
-import utils.ChoiceUnit;
-import utils.EnterItem;
-import utils.SelectItem;
-import utils.TableNames;
+import utils.*;
 import utils.table_managers.PurchaseCompositionsTableManager;
 
 import java.net.URL;
@@ -23,7 +20,7 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
     private EnterItem countItem;
     private SelectItem goodItem;
     private EnterItem resultPriceItem;
-
+    private DateItem purchaseDateItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -31,10 +28,11 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
         countItem = new EnterItem("count");
         goodItem = new SelectItem("good");
         resultPriceItem = new EnterItem("result_price");
+        purchaseDateItem = new DateItem("purchase_date");
 
-        loadAvailableGoods().stream().map(e->new ChoiceUnit(((Good)e).getId(), ((Good)e).getName())).forEach(goodItem::addItemsToSelect);
+        loadAvailableGoods().stream().map(e->new ChoiceUnit(e.getId(), ((Good)e).getName())).forEach(goodItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(countItem, goodItem, resultPriceItem);
+        hBox.getChildren().addAll(countItem, goodItem, resultPriceItem, purchaseDateItem);
 
     }
 
@@ -45,6 +43,7 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
         valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
         valuesMap.put(goodItem.getColumnName(), goodItem.getSelectedItem().getId());
         valuesMap.put(resultPriceItem.getColumnName(), resultPriceItem.getEnteredText());
+        valuesMap.put(purchaseDateItem.getColumnName(), purchaseDateItem.getDate().toString());
 
         if (getMode().equals(MODE.INSERTING)) {
             tableManager.insertRow(valuesMap);
@@ -60,6 +59,7 @@ public class PurchaseCompositionsInsertionWindowController extends InsertionWind
         countItem.setText(value.getCount());
         goodItem.setSelectItem(value.getGood());
         resultPriceItem.setText(value.getResultPrice());
+        purchaseDateItem.setDate(value.getDate());
     }
 
     private ObservableList<Entity> loadAvailableGoods(){

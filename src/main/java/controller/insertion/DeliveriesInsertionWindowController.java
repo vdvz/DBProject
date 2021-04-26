@@ -3,10 +3,7 @@ package controller.insertion;
 import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
-import utils.ChoiceUnit;
-import utils.EnterItem;
-import utils.SelectItem;
-import utils.TableNames;
+import utils.*;
 import utils.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
@@ -21,7 +18,7 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
     private SelectItem providerIdItem;
     private SelectItem tradePointIdItem;
     private EnterItem countItem;
-    private EnterItem deliverDateItem;
+    private DateItem deliverDateItem;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,7 +27,7 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
         providerIdItem = new SelectItem("provider_id");
         tradePointIdItem = new SelectItem("trade_point_id");
         countItem = new EnterItem("count");
-        deliverDateItem = new EnterItem("deliver_date");
+        deliverDateItem = new DateItem("deliver_date");
 
         loadAvailableProviders().stream().map(e->new ChoiceUnit(((Provider)e).getId(), ((Provider)e).getName())).forEach(providerIdItem::addItemsToSelect);
         loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(providerIdItem::addItemsToSelect);
@@ -46,7 +43,7 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
         valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
         valuesMap.put(tradePointIdItem.getColumnName(), tradePointIdItem.getSelectedItem().getId());
         valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
-        valuesMap.put(deliverDateItem.getColumnName(), deliverDateItem.getEnteredText());
+        valuesMap.put(deliverDateItem.getColumnName(), deliverDateItem.getDate().toString());
 
         if (getMode().equals(MODE.INSERTING)) {
             tableManager.insertRow(valuesMap);
@@ -62,7 +59,7 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
         providerIdItem.setSelectItem(value.getProviderId());
         tradePointIdItem.setSelectItem(value.getTradePointId());
         countItem.setText(value.getCount());
-        deliverDateItem.setText(value.getDeliverDate());
+        deliverDateItem.setDate(value.getDeliverDate());
     }
 
     private ObservableList<Entity> loadAvailableProviders(){

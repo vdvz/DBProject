@@ -38,8 +38,8 @@ public abstract class TableWindowController extends Controller implements Initia
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ContextMenu contextMenu = new ContextMenu();
-        MenuItem editItem = new MenuItem("Edit");
-        MenuItem deleteItem = new MenuItem("Delete");
+        MenuItem editItem = new MenuItem("Изменить");
+        MenuItem deleteItem = new MenuItem("Удалить");
         contextMenu.getItems().addAll(editItem, deleteItem);
         contextMenu.setOnAction(event -> {
             MenuItem targetItem = (MenuItem)event.getTarget();
