@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.InfoAboutCustomersController">
+    <children>
+      <HBox prefHeight="350.0" prefWidth="550.0">
+         <children>
+            <VBox prefHeight="350.0" prefWidth="181.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="200.0" text=" Выберите товар" textAlignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="200.0" text="Выберите дату или оставьте пустым" textAlignment="CENTER" wrapText="true" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="200.0" text="Выберите тип точки или оставьте пустым" textAlignment="CENTER" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </VBox>
+              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="352.0" prefWidth="397.0">
+                  <children>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="397.0">
+                     <children>
+                        <ChoiceBox fx:id="good" prefHeight="25.0" prefWidth="361.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="397.0" spacing="10.0">
+                     <children>
+                        <DatePicker fx:id="dateFrom" prefHeight="25.0" prefWidth="150.0" />
+                        <DatePicker fx:id="dateTo" prefHeight="25.0" prefWidth="150.0" />
+                        <Button onAction="#clearDate" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Очистить" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="106.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="397.0" spacing="10.0">
+                     <children>
+                        <ChoiceBox fx:id="tradePointType" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="tradePoint" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="150.0" />
+                        <Button onAction="#clearTradePoint" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Очистить" />
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="135.0" prefWidth="397.0" />
+                      <Button onAction="#query" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Подтверить" AnchorPane.rightAnchor="0">
+                          <VBox.margin>
+                              <Insets right="10.0" top="10.0" />
+                          </VBox.margin>
+                          <opaqueInsets>
+                              <Insets top="10.0" />
+                          </opaqueInsets>
+                  </Button>
+                  </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+              </VBox>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

@@ -49,20 +49,38 @@ CREATE OR REPLACE PROCEDURE getInfoAboutCustomers (
     purchase_date_to IN DATE DEFAULT NULL,
     trade_point_type_id IN NUMBER(11) DEFAULT NULL,
     trade_point_name_id IN NUMBER(11) DEFAULT NULL
-) IS
-BEGIN
-    IF purchase_date_form!=NULL AND purchase_date_to!=NULL
-    SELECT
-    FROM SALES S
-        INNER JOIN CUSTOMERS C2 on C2.ID = S.CUSTOMER
-        INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
-        INNER JOIN GOODS G on G.ID = PC.GOOD
-        INNER JOIN SELLERS S2 on S2.ID = S.SELLER
-        INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
-        INNER JOIN TRADE_TYPES TT on TP.TYPE = TT.ID
-    WHERE G.NAME='' AND (PC.PURCHASE_DATE<1 OR PC.PURCHASE_DATE>2) AND TT.NAME=''; --TP.NAME=''--
+)  IS
+    QUERY VARCHAR2(1000):= ' ';
 
-END
+        BEGIN
+
+    IF purchase_date_form!=NULL OR purchase_date_to!=NULL THEN
+        --throw exception
+    END IF;
+
+    IF trade_point_type_id!=NULL THEN
+        IF trade_point_name_id!=NULL THEN
+            --throw exception
+        END IF;
+    END IF;
+
+    IF trade_point_name_id!=NULL THEN
+
+    END IF;
+
+    QUERY = 'SELECT C2.NAME, C2.AGE
+    FROM SALES S
+             INNER JOIN CUSTOMERS C2 on C2.ID = S.CUSTOMER
+             INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
+             INNER JOIN GOODS G on G.ID = PC.GOOD
+             INNER JOIN SELLERS S2 on S2.ID = S.SELLER
+             INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
+             INNER JOIN TRADE_TYPES TT on TP.TYPE = TT.ID
+    WHERE G.NAME='':1''' + QUERY;
+
+    EXECUTE IMMEDIATE QUERY USING good_name;
+
+END getInfoAboutCustomers;
 -- Получить сведения о поставках определенного товара указанным
 -- поставщиком за все время поставок, либо за некоторый период.
 
