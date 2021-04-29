@@ -2,8 +2,9 @@ package utils;
 
 import utils.table_managers.TableManager;
 
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
@@ -55,7 +56,6 @@ public class DatabaseManager {
         this.connection = connection;
     }
 
-
     private final Map<String, TableManager> tableManagers = new HashMap<>();
 
     public TableManager getTableManager(String tableName){
@@ -72,6 +72,10 @@ public class DatabaseManager {
         }
 
         return tableManager;
+    }
+
+    public Connection getConnection(){
+        return connection;
     }
 
     public List<String> getExistingTables(){
@@ -215,8 +219,16 @@ public class DatabaseManager {
 
     public void initTestValues() {
         try {
-            connection.execute(loadScriptFromFile("testData/TestValues.sql"));
-        } catch (SQLException throwables) {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("src/main/resources/testData/TestValues.sql"), StandardCharsets.UTF_8));
+            String line = reader.readLine();
+            while(line!=null){
+                if(line.trim().length()==0) continue;
+                System.out.println(line);
+                connection.executeUpdate(line);
+                line = reader.readLine();
+            }
+        } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
         }
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import init.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -81,6 +82,9 @@ public class RequestWindowController extends Controller implements Initializable
         });
 
         infoAboutGoodCustomers.setOnAction(event -> {
+            Controller controller = Main.getNavigation().load(InfoAboutCustomersController.INFO_ABOUT_CUSTOMERS_WINDOW_FXML);
+            controller.setStage(Main.getNavigation().createNewStage());
+            controller.show();
         });
     }
 

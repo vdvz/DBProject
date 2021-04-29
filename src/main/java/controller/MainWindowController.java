@@ -11,6 +11,7 @@ import init.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -42,12 +43,16 @@ public class MainWindowController extends Controller implements Initializable, R
   @FXML
   private ListView<String> tableNamesView;
 
+  @FXML
+  private Button loadTestValueButton;
+
   public MainWindowController() {
     manager = Main.getDatabaseManager();
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    loadTestValueButton.setVisible(false);
     updateTableView();
     ContextMenu contextMenu = new ContextMenu();
     contextMenu.getItems().add(new MenuItem("Открыть"));
@@ -74,6 +79,7 @@ public class MainWindowController extends Controller implements Initializable, R
     manager.clearDatabase();
     manager.createDatabase();
     updateTableView();
+    loadTestValueButton.setVisible(true);
   }
 
   private void updateTableView() {
@@ -92,6 +98,7 @@ public class MainWindowController extends Controller implements Initializable, R
     Main.getNavigation().shutdownAllStage(this.getStage());
     manager.clearDatabase();
     updateTableView();
+    loadTestValueButton.setVisible(false);
   }
 
   public void openAvailableRequestsButtonHandler() {
@@ -102,6 +109,7 @@ public class MainWindowController extends Controller implements Initializable, R
 
   public void loadTestValuesButtonHandler() {
     Main.getDatabaseManager().initTestValues();
+    loadTestValueButton.setVisible(false);
   }
 
   private Role role;

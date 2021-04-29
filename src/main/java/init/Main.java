@@ -18,7 +18,6 @@ public class Main extends Application {
         launch(args);
     }
 
-
     public static void openConnection(String login, String password) throws SQLException, ClassNotFoundException {
         databaseManager = new DatabaseManager(new Connection(login, password));
     }
