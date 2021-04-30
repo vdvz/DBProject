@@ -156,9 +156,9 @@ public class InfoAboutCustomersController extends Controller implements Initiali
         }
 
         if(dateFrom.getValue()!=null){
-            query+= "AND PC.PURCHASE_DATE > " + dateFrom.getValue().toString() + " ";
+            query+= "AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD') ";
             if(dateTo.getValue()!=null){
-                query+= "AND PC.PURCHASE_DATE < " + dateTo.getValue().toString() + " ";
+                query+= "AND PC.PURCHASE_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD') ";
             }
         }
 

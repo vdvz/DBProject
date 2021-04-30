@@ -42,6 +42,7 @@ public class SellersInsertionWindowController extends InsertionWindowController 
     public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
+        valuesMap.put(nameItem.getColumnName(), nameItem.getEnteredText());
         valuesMap.put(salaryItem.getColumnName(), salaryItem.getEnteredText());
         valuesMap.put(tradePointItem.getColumnName(), tradePointItem.getSelectedItem().getId());
         valuesMap.put(tradeRoomItem.getColumnName(), tradeRoomItem.getSelectedItem().getId());
@@ -57,6 +58,7 @@ public class SellersInsertionWindowController extends InsertionWindowController 
     public void initUpdating(Entity entity) {
         Seller value = (Seller) entity;
         getIdItem().setText(value.getId());
+        nameItem.setText(value.getName());
         salaryItem.setText(value.getSalary());
         tradePointItem.setSelectItem(value.getTradePoint());
         tradeRoomItem.setSelectItem(value.getTradeRoom());

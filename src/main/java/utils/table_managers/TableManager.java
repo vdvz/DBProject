@@ -39,6 +39,7 @@ public abstract class TableManager {
     public String loadSelectionQuery(){
         return "SELECT * FROM " + tableName;
     }
+
     public String loadInsertionQuery(){
         System.out.println(getColumns());
         return "INSERT INTO " + tableName + " (" + String.join(", ", getColumns().keySet()) + ") VALUES (" + getColumns().keySet().stream()

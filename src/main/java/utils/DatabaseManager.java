@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.io.input.CharSequenceInputStream;
 import utils.table_managers.TableManager;
 
 import java.io.*;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DatabaseManager {
     private static final List<String> tableNames = new ArrayList<String>(){
@@ -176,13 +178,8 @@ public class DatabaseManager {
     }
 
     private String loadScriptFromFile(String relativePath) {
-        try {
-            return new String(Files.readAllBytes(Paths.get(
-                    "src/main/resources/" + relativePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(DatabaseManager.class.getResourceAsStream("/" + relativePath)));
+        return reader.lines().collect(Collectors.joining());
     }
 
     private List<String> loadSequences() {
@@ -220,7 +217,7 @@ public class DatabaseManager {
     public void initTestValues() {
         try {
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream("src/main/resources/testData/TestValues.sql"), StandardCharsets.UTF_8));
+                    new InputStreamReader(DatabaseManager.class.getResourceAsStream("/testData/TestValues.sql"), StandardCharsets.UTF_8));
             String line = reader.readLine();
             while(line!=null){
                 if(line.trim().length()==0) continue;
