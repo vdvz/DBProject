@@ -83,6 +83,10 @@ public class Connection {
         return connection.prepareStatement(query);
     }
 
+    public PreparedStatement prepareStatement(String query, String[] columnNames) throws SQLException {
+        return connection.prepareStatement(query, columnNames);
+    }
+
     public void setAutoCommit(boolean b){
         try {
             connection.setAutoCommit(b);

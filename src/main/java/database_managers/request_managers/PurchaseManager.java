@@ -1,75 +1,87 @@
 package database_managers.request_managers;
 
 import init.Main;
-import java.sql.CallableStatement;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Types;
+
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import utils.Connection;
 
 public class PurchaseManager {
 
-  private final Connection connection;
+    private final Connection connection;
 
-  public PurchaseManager() {
-    this.connection = Main.getDatabaseManager().getConnection();
-  }
-
-  public int addCustomer(Map<String, String> value) throws SQLException {
-    CallableStatement statement =
-        connection.createCallableStatement("{call ADD_CUSTOMER(?, ?, ?)}");
-
-    statement.setString(1, value.get("name"));
-    statement.setInt(2, Integer.parseInt(value.get("age")));
-    statement.registerOutParameter(3, Types.INTEGER);
-
-    statement.execute();
-
-    return statement.getInt(3);
-  }
-
-  public List<Integer> addPurchaseCompositions(List<Map<String, String>> values)
-      throws SQLException {
-    List<Integer> result = new ArrayList<>();
-    CallableStatement statement =
-        connection.createCallableStatement("{call add_purchase(?, ?, ?, ?, ?)}");
-
-    statement.registerOutParameter(5, Types.INTEGER);
-    for (Map<String, String> value: values) {
-      statement.setInt(1, Integer.parseInt(value.get("good")));
-      statement.setInt(2, Integer.parseInt(value.get("count")));
-      statement.setInt(3, Integer.parseInt(value.get("result_price")));
-      statement.setDate(4, Date.valueOf(value.get("purchase_date")));
-
-      statement.execute();
-      result.add(statement.getInt(5));
+    public PurchaseManager() {
+        this.connection = Main.getDatabaseManager().getConnection();
     }
 
-    return result;
-  }
+    public int addCustomer(Map<String, String> value) throws SQLException {
+        String query = "insert into CUSTOMERS(name, age) values (?, ?)";
 
-  public void addSales(List<Map<String, String>> values) throws SQLException {
-    for (Map<String, String> value : values) {
-      String query = "INSERT INTO SALES(seller, customer, purchase_composition) VALUES ("
-          +value.get("seller") + ", " + value.get("customer") + value.get("purchase_composition") + ")";
-      connection.execute(query);
+        PreparedStatement statement = connection.getConnection().prepareStatement(query,
+                new String[]{"id"});
+
+        statement.setString(1, value.get("name"));
+        statement.setInt(2, Integer.parseInt(value.get("age")));
+
+        statement.execute();
+
+        ResultSet result = statement.getGeneratedKeys();
+        result.next();
+        return result.getInt(1);
     }
-  }
 
-  public void startTransaction() {
-    connection.setAutoCommit(false);
-  }
+    public List<Integer> addPurchaseCompositions(List<Map<String, String>> values)
+            throws SQLException {
+        List<Integer> resultIds = new ArrayList<>();
+        String query ="insert into PURCHASE_COMPOSITIONS(good, count, result_price, purchase_date) " +
+                "values (?, ?, ?, ?)";
 
-  public void rollbackTransaction() {
-    connection.rollback();
-    connection.setAutoCommit(true);
-  }
+        PreparedStatement statement = connection.getConnection().prepareStatement(query,
+                new String[]{"id"});
 
-  public void commitTransaction() {
-    connection.commit();
-    connection.setAutoCommit(true);
-  }
+        for (Map<String, String> value : values) {
+            statement.setInt(1, Integer.parseInt(value.get("good")));
+            statement.setInt(2, Integer.parseInt(value.get("count")));
+            statement.setInt(3, Integer.parseInt(value.get("result_price")));
+            statement.setDate(4, Date.valueOf(value.get("purchase_date")));
+
+            statement.execute();
+
+            ResultSet result = statement.getGeneratedKeys();
+            result.next();
+            resultIds.add(result.getInt(1));
+        }
+
+        return resultIds;
+    }
+
+    public void addSales(List<Map<String, String>> values) throws SQLException {
+        String query = "INSERT INTO SALES(seller, customer, purchase_composition) VALUES (?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        for (Map<String, String> value : values) {
+            statement.setInt(1, Integer.parseInt(value.get("seller")));
+            statement.setInt(2, Integer.parseInt(value.get("customer")));
+            statement.setInt(3, Integer.parseInt(value.get("purchase_composition")));
+
+            statement.execute();
+        }
+    }
+
+    public void startTransaction() {
+        connection.setAutoCommit(false);
+    }
+
+    public void rollbackTransaction() {
+        connection.rollback();
+        connection.setAutoCommit(true);
+    }
+
+    public void commitTransaction() {
+        connection.commit();
+        connection.setAutoCommit(true);
+    }
 }
