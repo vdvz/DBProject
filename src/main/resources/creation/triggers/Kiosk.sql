@@ -1,0 +1,1 @@
+CREATE OR REPLACE TRIGGER tr_ai_kiosk before INSERT ON Kiosk FOR each row BEGIN if :new.id is null then SELECT sq_kiosk.nextval INTO :new.id FROM dual; end if; END;

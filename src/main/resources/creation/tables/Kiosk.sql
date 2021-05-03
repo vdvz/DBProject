@@ -1,0 +1,5 @@
+CREATE TABLE Kiosk (
+    id NUMBER(11) PRIMARY KEY,
+    name VARCHAR2(30),
+    trade_point REFERENCES TRADE_POINTS(id)
+)
