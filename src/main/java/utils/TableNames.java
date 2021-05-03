@@ -15,4 +15,6 @@ public class TableNames {
     public static final String TRADE_ROOM = "TRADE_ROOM";
     public static final String TRADE_SECTION_POINT = "TRADE_SECTION_POINT";
     public static final String TRADE_TYPE = "TRADE_TYPES";
+    public static final String STORES = "STORES";
+    public static final String KIOSK = "KIOSK";
 }

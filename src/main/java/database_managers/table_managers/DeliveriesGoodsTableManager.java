@@ -42,9 +42,10 @@ public class DeliveriesGoodsTableManager extends TableManager {
                 String providerId = result.getObject("provider_id").toString();
                 String goodId = result.getObject("good_id").toString();
                 String deliveryId = result.getObject("delivery_id").toString();
+                String count = result.getObject("count").toString();
                 String price = result.getObject("price").toString();
 
-                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
+                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId,count, price));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

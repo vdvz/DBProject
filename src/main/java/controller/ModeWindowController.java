@@ -2,6 +2,7 @@ package controller;
 
 
 import init.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -37,5 +38,13 @@ public class ModeWindowController extends Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void onProviderMode() {
+        MainWindowController controller = (MainWindowController) Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML);
+        controller.setStage(Main.getNavigation().createNewStage());
+        controller.setRole(RoleController.Role.PROVIDER);
+        controller.show();
+        this.close();
     }
 }

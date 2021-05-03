@@ -6,13 +6,13 @@ import javafx.beans.property.StringProperty;
 public class TradeSectionPoint implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
-    private final StringProperty tradePoint = new SimpleStringProperty("");
+    private final StringProperty store = new SimpleStringProperty("");
     private final StringProperty floor = new SimpleStringProperty("");
     private final StringProperty managersName = new SimpleStringProperty("");
 
     public TradeSectionPoint(String id, String tradePoint, String floor, String managersName){
         setId(id);
-        setTradePoint(tradePoint);
+        setStore(tradePoint);
         setFloor(floor);
         setManagersName(managersName);
     }
@@ -29,16 +29,16 @@ public class TradeSectionPoint implements Entity{
         this.id.set(id);
     }
 
-    public String getTradePoint() {
-        return tradePoint.get();
+    public String getStore() {
+        return store.get();
     }
 
-    public StringProperty tradePointProperty() {
-        return tradePoint;
+    public StringProperty storeProperty() {
+        return store;
     }
 
-    public void setTradePoint(String tradePoint) {
-        this.tradePoint.set(tradePoint);
+    public void setStore(String tradePoint) {
+        this.store.set(tradePoint);
     }
 
     public String getFloor() {

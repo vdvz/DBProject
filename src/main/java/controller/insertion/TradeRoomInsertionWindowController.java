@@ -3,6 +3,7 @@ package controller.insertion;
 import entities.Entity;
 import entities.TradePoint;
 import entities.TradeRoom;
+import entities.TradeSectionPoint;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
@@ -19,23 +20,23 @@ import java.util.ResourceBundle;
 public class TradeRoomInsertionWindowController extends InsertionWindowController {
 
     private TradeRoomTableManager tableManager = (TradeRoomTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_ROOM);
-    private SelectItem tradePointsId;
+    private SelectItem tradeSectionPointId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        tradePointsId = new SelectItem("trade_points_id");
+        tradeSectionPointId = new SelectItem("trade_section_point_id");
 
-        loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(tradePointsId::addItemsToSelect);
+        loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradeSectionPoint)e).getId(), ((TradeSectionPoint)e).getId())).forEach(tradeSectionPointId::addItemsToSelect);
 
-        hBox.getChildren().addAll(tradePointsId);
+        hBox.getChildren().addAll(tradeSectionPointId);
     }
 
     @Override
     public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
-        valuesMap.put(tradePointsId.getColumnName(), tradePointsId.getSelectedItem().getId());
+        valuesMap.put(tradeSectionPointId.getColumnName(), tradeSectionPointId.getSelectedItem().getId());
 
         if (getMode().equals(MODE.INSERTING)) {
             tableManager.insertRow(valuesMap);
@@ -48,11 +49,11 @@ public class TradeRoomInsertionWindowController extends InsertionWindowControlle
     public void initUpdating(Entity entity) {
         TradeRoom value = (TradeRoom) entity;
         getIdItem().setText(value.getId());
-        tradePointsId.setSelectItem(value.getTradePointId());
+        tradeSectionPointId.setSelectItem(value.getTradeSectionPointId());
     }
 
     private ObservableList<Entity> loadAvailableTradePoints(){
-        return Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS).getTableRows();
+        return Main.getDatabaseManager().getTableManager(TableNames.TRADE_SECTION_POINT).getTableRows();
     }
 
 }

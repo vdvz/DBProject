@@ -74,4 +74,13 @@ public class Connection {
     public PreparedStatement prepareStatement(String query) throws SQLException {
         return connection.prepareStatement(query);
     }
+
+    public void setAutoCommit(boolean b){
+        try {
+            connection.setAutoCommit(b);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 }

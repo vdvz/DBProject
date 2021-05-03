@@ -17,7 +17,6 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
     private final DeliveriesTableManager tableManager = (DeliveriesTableManager) Main.getDatabaseManager().getTableManager(TableNames.DELIVERIES);
     private SelectItem providerIdItem;
     private SelectItem tradePointIdItem;
-    private EnterItem countItem;
     private DateItem deliverDateItem;
 
     @Override
@@ -26,13 +25,12 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
 
         providerIdItem = new SelectItem("provider_id");
         tradePointIdItem = new SelectItem("trade_point_id");
-        countItem = new EnterItem("count");
         deliverDateItem = new DateItem("deliver_date");
 
         loadAvailableProviders().stream().map(e->new ChoiceUnit(((Provider)e).getId(), ((Provider)e).getName())).forEach(providerIdItem::addItemsToSelect);
         loadAvailableTradePoints().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(providerIdItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(providerIdItem, tradePointIdItem, countItem, deliverDateItem);
+        hBox.getChildren().addAll(providerIdItem, tradePointIdItem, deliverDateItem);
 
     }
 
@@ -42,7 +40,6 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
         valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
         valuesMap.put(tradePointIdItem.getColumnName(), tradePointIdItem.getSelectedItem().getId());
-        valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
         valuesMap.put(deliverDateItem.getColumnName(), deliverDateItem.getDate().toString());
 
         if (getMode().equals(MODE.INSERTING)) {
@@ -58,7 +55,6 @@ public class DeliveriesInsertionWindowController extends InsertionWindowControll
         getIdItem().setText(value.getId());
         providerIdItem.setSelectItem(value.getProviderId());
         tradePointIdItem.setSelectItem(value.getTradePointId());
-        countItem.setText(value.getCount());
         deliverDateItem.setDate(value.getDeliverDate());
     }
 

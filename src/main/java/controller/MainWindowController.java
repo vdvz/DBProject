@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import controller.insertion.InsertionWindowController;
 import controller.table.TableWindowController;
 import init.Main;
 import javafx.fxml.FXML;
@@ -12,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 import utils.DatabaseManager;
+import utils.TableNames;
 
 public class MainWindowController extends Controller implements Initializable, RoleController {
 
@@ -30,25 +33,58 @@ public class MainWindowController extends Controller implements Initializable, R
     put("SALES","controller.table.SalesTableWindowController");
     put("SELLERS","controller.table.SellersTableWindowController");
     put("TRADE_POINTS","controller.table.TradePointsTableWindowController");
-    put("TRADE_ROOM","controller.table.TradeRoomTableWindowController");
     put("TRADE_SECTION_POINT","controller.table.TradeSectionPointTableWindowController");
+    put("TRADE_ROOM","controller.table.TradeRoomTableWindowController");
     put("TRADE_TYPES","controller.table.TradeTypesTableWindowController");
+    put("STORES","controller.table.StoresTableWindowController");
+    put("KIOSK","controller.table.KioskTableWindowController");
   }
   };
 
-  @FXML
-  private ListView<String> tableNamesView;
+  public Button createTableButton;
+  public Button dropTableButton;
+  public Button loadTestValuesButton;
+  public Button addAccountingButton;
+  public Button addPurchaseButton;
+  public Button addDeliveryButton;
+  public Button addGoodButton;
+  public Button addProviderButton;
+  public Button removeProviderButton;
+
 
   @FXML
-  private Button loadTestValueButton;
+  private ListView<String> tableNamesView;
 
   public MainWindowController() {
     manager = Main.getDatabaseManager();
   }
 
+  private Role role;
+  @Override
+  public void setRole(Role role) {
+    if(role.equals(Role.ADMIN)){
+      createTableButton.setVisible(true);
+      dropTableButton.setVisible(true);
+    }
+    if(role.equals(Role.SELLER)){
+      addAccountingButton.setVisible(true);
+      addPurchaseButton.setVisible(true);
+    }
+    if(role.equals(Role.MANAGER)){
+      addProviderButton.setVisible(true);
+      removeProviderButton.setVisible(true);
+    }
+    if(role.equals(Role.PROVIDER)){
+      addGoodButton.setVisible(true);
+      addDeliveryButton.setVisible(true);
+    }
+
+    this.role = role;
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    loadTestValueButton.setVisible(false);
+    loadTestValuesButton.setVisible(false);
     updateTableView();
     ContextMenu contextMenu = new ContextMenu();
     contextMenu.getItems().add(new MenuItem("Открыть"));
@@ -69,13 +105,13 @@ public class MainWindowController extends Controller implements Initializable, R
   }
 
   @FXML
-  private void createTableButtonHandler(){
+  private void createTable(){
     Main.getNavigation().shutdownAllControllers(this);
     Main.getNavigation().shutdownAllStage(this.getStage());
     manager.clearDatabase();
     manager.createDatabase();
     updateTableView();
-    loadTestValueButton.setVisible(true);
+    loadTestValuesButton.setVisible(true);
   }
 
   private void updateTableView() {
@@ -89,28 +125,62 @@ public class MainWindowController extends Controller implements Initializable, R
   }
 
   @FXML
-  public void dropTableButtonHandler() {
+  public void dropTable() {
     Main.getNavigation().shutdownAllControllers(this);
     Main.getNavigation().shutdownAllStage(this.getStage());
     manager.clearDatabase();
     updateTableView();
-    loadTestValueButton.setVisible(false);
+    loadTestValuesButton.setVisible(false);
   }
 
-  public void openAvailableRequestsButtonHandler() {
+  public void openAvailableRequests() {
     Controller controller = Main.getNavigation().load(RequestWindowController.REQUESTS_WINDOW_FXML);
     controller.setStage(Main.getNavigation().createNewStage());
     controller.show();
   }
 
-  public void loadTestValuesButtonHandler() {
+  public void loadTestValues() {
     Main.getDatabaseManager().initTestValues();
-    loadTestValueButton.setVisible(false);
+    loadTestValuesButton.setVisible(false);
   }
 
-  private Role role;
-  @Override
-  public void setRole(Role role) {
-    this.role = role;
+  public void addAccounting() {
+    InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
+            .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(TableNames.ACCOUNTING));
+    Stage newStage = Main.getNavigation().createNewStage();
+    controller.setMode(InsertionWindowController.MODE.INSERTING);
+    controller.setStage(newStage);
+    controller.show();
   }
+
+  public void addPurchase() {
+
+  }
+
+  public void addDelivery() {
+
+  }
+
+  public void addGood() {
+    InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
+            .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(TableNames.GOODS));
+    Stage newStage = Main.getNavigation().createNewStage();
+    controller.setMode(InsertionWindowController.MODE.INSERTING);
+    controller.setStage(newStage);
+    controller.show();
+  }
+
+  public void addProvider() {
+    InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
+            .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(TableNames.PROVIDERS));
+    Stage newStage = Main.getNavigation().createNewStage();
+    controller.setMode(InsertionWindowController.MODE.INSERTING);
+    controller.setStage(newStage);
+    controller.show();
+  }
+
+  public void removeProvider() {
+
+  }
+
 }

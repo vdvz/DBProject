@@ -8,15 +8,14 @@ public class Delivery implements Entity {
     private final StringProperty id = new SimpleStringProperty("");
     private final StringProperty providerId = new SimpleStringProperty("");;
     private final StringProperty tradePointId = new SimpleStringProperty("");;
-    private final StringProperty count = new SimpleStringProperty("");;
+
     private final StringProperty deliverDate = new SimpleStringProperty("");;
 
 
-    public Delivery(String id, String providerId, String tradePointId, String count, String deliverDate){
+    public Delivery(String id, String providerId, String tradePointId, String deliverDate){
         setId(id);
         setProviderId(providerId);
         setTradePointId(tradePointId);
-        setCount(count);
         setDeliverDate(deliverDate);
     }
 
@@ -55,18 +54,6 @@ public class Delivery implements Entity {
 
     public void setTradePointId(String tradePointId) {
         this.tradePointId.set(tradePointId);
-    }
-
-    public String getCount() {
-        return count.get();
-    }
-
-    public StringProperty countProperty() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count.set(count);
     }
 
     public String getDeliverDate() {

@@ -9,14 +9,16 @@ public class DeliveriesGood implements Entity {
     private final StringProperty providerId = new SimpleStringProperty("");
     private final StringProperty goodId = new SimpleStringProperty("");
     private final StringProperty deliveryId = new SimpleStringProperty("");
+    private final StringProperty count = new SimpleStringProperty("");;
     private final StringProperty price = new SimpleStringProperty("");
 
 
-    public DeliveriesGood(String id, String providerId, String goodId, String deliveryId, String price){
+    public DeliveriesGood(String id, String providerId, String goodId, String deliveryId, String count, String price){
         setId(id);
         setProviderId(providerId);
         setGoodId(goodId);
         setDeliveryId(deliveryId);
+        setCount(count);
         setPrice(price);
     }
 
@@ -62,6 +64,18 @@ public class DeliveriesGood implements Entity {
 
     public StringProperty deliveryIdProperty() {
         return deliveryId;
+    }
+
+    public String getCount() {
+        return count.get();
+    }
+
+    public StringProperty countProperty() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count.set(count);
     }
 
     public void setDeliveryId(String deliveryId) {

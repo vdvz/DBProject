@@ -6,11 +6,11 @@ import javafx.beans.property.StringProperty;
 public class TradeRoom implements Entity{
 
     private final StringProperty id = new SimpleStringProperty("");
-    private final StringProperty tradePointId = new SimpleStringProperty("");
+    private final StringProperty tradeSectionPointId = new SimpleStringProperty("");
 
-    public TradeRoom(String id, String tradePointId){
+    public TradeRoom(String id, String tradeSectionPointId){
         setId(id);
-        setTradePointId(tradePointId);
+        setTradeSectionPointId(tradeSectionPointId);
     }
 
     public String getId() {
@@ -25,15 +25,15 @@ public class TradeRoom implements Entity{
         this.id.set(id);
     }
 
-    public String getTradePointId() {
-        return tradePointId.get();
+    public String getTradeSectionPointId() {
+        return tradeSectionPointId.get();
     }
 
-    public StringProperty tradePointIdProperty() {
-        return tradePointId;
+    public StringProperty tradeSectionPointIdProperty() {
+        return tradeSectionPointId;
     }
 
-    public void setTradePointId(String tradePointId) {
-        this.tradePointId.set(tradePointId);
+    public void setTradeSectionPointId(String tradePointId) {
+        this.tradeSectionPointId.set(tradePointId);
     }
 }

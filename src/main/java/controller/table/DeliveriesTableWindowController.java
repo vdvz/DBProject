@@ -21,16 +21,14 @@ public class DeliveriesTableWindowController extends TableWindowController {
         TableColumn<Delivery, String> columnId = new TableColumn<>("id");
         TableColumn<Delivery, String> columnProviderId = new TableColumn<>("provider_id");
         TableColumn<Delivery, String> columnTradePointId = new TableColumn<>("trade_point_id");
-        TableColumn<Delivery, String> columnCount = new TableColumn<>("count");
         TableColumn<Delivery, String> columnDeliverDate = new TableColumn<>("deliver_date");
 
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnProviderId.setCellValueFactory(new PropertyValueFactory<>("providerId"));
         columnTradePointId.setCellValueFactory(new PropertyValueFactory<>("tradePointId"));
-        columnCount.setCellValueFactory(new PropertyValueFactory<>("count"));
         columnDeliverDate.setCellValueFactory(new PropertyValueFactory<>("deliverDate"));
 
-        table.getColumns().addAll(columnId, columnProviderId, columnTradePointId, columnCount, columnDeliverDate);
+        table.getColumns().addAll(columnId, columnProviderId, columnTradePointId, columnDeliverDate);
         generateTable();
     }
 

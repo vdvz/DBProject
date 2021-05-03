@@ -18,16 +18,16 @@ public class TradeSectionPointTableWindowController extends TableWindowControlle
         super.initialize(location, resources);
 
         TableColumn<TradeSectionPoint, String> columnId = new TableColumn<>("id");
-        TableColumn<TradeSectionPoint, String> columnTradePoint = new TableColumn<>("trade_point");
+        TableColumn<TradeSectionPoint, String> columnStore = new TableColumn<>("store");
         TableColumn<TradeSectionPoint, String> columnFloor = new TableColumn<>("floor");
         TableColumn<TradeSectionPoint, String> columnManagerName = new TableColumn<>("managers_name");
 
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnTradePoint.setCellValueFactory(new PropertyValueFactory<>("tradePoint"));
+        columnStore.setCellValueFactory(new PropertyValueFactory<>("store"));
         columnFloor.setCellValueFactory(new PropertyValueFactory<>("floor"));
         columnManagerName.setCellValueFactory(new PropertyValueFactory<>("managersName"));
 
-        table.getColumns().addAll(columnId, columnTradePoint, columnFloor, columnManagerName);
+        table.getColumns().addAll(columnId, columnStore, columnFloor, columnManagerName);
         generateTable();
     }
 

@@ -16,6 +16,8 @@ public class DatabaseManager {
             add("TradeTypes.sql");
             add("TradePoints.sql");
             add("Goods.sql");
+            add("Stores.sql");
+            add("TradeSectionPoint.sql");
             add("TradeRoom.sql");
             add("Seller.sql");
             add("Accounting.sql");
@@ -25,7 +27,7 @@ public class DatabaseManager {
             add("DeliveriesGoods.sql");
             add("Customers.sql");
             add("Sales.sql");
-            add("TradeSectionPoint.sql");
+            add("Kiosk.sql");
     }
     };
     private static final Map<String, String> classForTableManagers = new HashMap<String, String>(){{

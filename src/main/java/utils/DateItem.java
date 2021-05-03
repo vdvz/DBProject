@@ -2,6 +2,7 @@ package utils;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -17,8 +18,10 @@ public class DateItem extends AnchorPane {
 
     public DateItem(String columnName){
         super();
-        setPrefHeight(35.0);
-        columnNameLabel.setAlignment(Pos.CENTER);
+        //setPrefHeight(35.0);
+        columnNameLabel.setAlignment(Pos.BASELINE_CENTER);
+        //columnNameLabel.setAlignment(Pos.CENTER);
+        columnNameLabel.setContentDisplay(ContentDisplay.CENTER);
         columnNameLabel.setTextAlignment(TextAlignment.CENTER);
         columnNameLabel.setText(columnName);
         setBottomAnchor(datePicker,0.0);

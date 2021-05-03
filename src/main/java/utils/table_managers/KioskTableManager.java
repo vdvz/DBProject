@@ -1,5 +1,6 @@
 package utils.table_managers;
 
+import database_managers.table_managers.TableManager;
 import entities.Entity;
 import entities.Kiosk;
 import javafx.collections.FXCollections;

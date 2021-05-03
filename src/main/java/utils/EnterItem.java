@@ -1,6 +1,7 @@
 package utils;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -15,10 +16,10 @@ public class EnterItem extends AnchorPane {
 
     public EnterItem(String columnName){
         super();
-        setPrefHeight(35.0);
-        columnNameLabel.setAlignment(Pos.CENTER);
-        columnNameLabel.setTextAlignment(TextAlignment.CENTER);
         columnNameLabel.setText(columnName);
+        columnNameLabel.setAlignment(Pos.BASELINE_CENTER);
+        columnNameLabel.setContentDisplay(ContentDisplay.CENTER);
+        columnNameLabel.setTextAlignment(TextAlignment.CENTER);
         setBottomAnchor(textField,0.0);
         setLeftAnchor(textField,0.0);
         setRightAnchor(textField,0.0);
