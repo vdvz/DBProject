@@ -12,7 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import utils.DatabaseManager;
-import utils.table_managers.TableManager;
+import database_managers.table_managers.TableManager;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 public abstract class TableWindowController extends Controller implements Initializable, RoleController {
 
-    public static final String TABLE_WINDOW_FXML = "/table_window.fxml";
+    public static final String TABLE_WINDOW_FXML = "/window/table.fxml";
     final DatabaseManager manager;
 
     public Button createNewRowButton;
@@ -74,7 +74,7 @@ public abstract class TableWindowController extends Controller implements Initia
 
     public void createNewRow(){
         InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
-                .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(tableName));
+                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName));
         Stage newStage = Main.getNavigation().createNewStage();
         controller.setMode(InsertionWindowController.MODE.INSERTING);
         controller.setStage(newStage);
@@ -83,7 +83,7 @@ public abstract class TableWindowController extends Controller implements Initia
 
     public void updateRow(Entity entity){
         InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
-                .loadTable("/insertion_window.fxml", InsertionWindowController.getNameOfController(tableName));
+                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName));
         controller.setStage(Main.getNavigation().createNewStage());
         controller.setMode(InsertionWindowController.MODE.UPDATING);
         controller.initUpdating(entity);

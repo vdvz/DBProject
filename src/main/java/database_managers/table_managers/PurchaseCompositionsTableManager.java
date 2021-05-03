@@ -1,4 +1,4 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
 import entities.Entity;
 import entities.PurchaseComposition;

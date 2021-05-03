@@ -2,54 +2,54 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/AllTables.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropSequences/Goods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropSequences/TradePoints.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropSequences/TradeTypes.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropTables/Goods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropTables/TradePoints.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/dropTables/TradeTypes.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Accounting.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Customers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Deliveries.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Goods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Sales.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/Seller.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/TradePoints.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/TradeRoom.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sequences/TradeTypes.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Accounting.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Customers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Deliveries.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Goods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Sales.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/Seller.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/TradePoints.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/TradeRoom.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/tablesCreation/TradeTypes.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Accounting.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Customers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Deliveries.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Goods.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Providers.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Sales.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Seller.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradePoints.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradeRoom.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/TradeTypes.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Accounting.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Customers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Deliveries.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Goods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Providers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Sales.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/Seller.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/TradePoints.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/TradeRoom.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/sequences/TradeTypes.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Accounting.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Customers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Deliveries.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Goods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Providers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Sales.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/Seller.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/TradePoints.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/TradeRoom.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/tables/TradeTypes.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Accounting.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Customers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Deliveries.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/DeliveriesGoods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Goods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Providers.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/PurchaseCompositions.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Sales.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Seller.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/TradePoints.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/TradeRoom.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/TradeSectionPoint.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/TradeTypes.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/sequences/Goods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/sequences/TradePoints.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/sequences/TradeTypes.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/tables/Goods.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/tables/TradePoints.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/drop/tables/TradeTypes.sql" dialect="OracleSqlPlus" />
     <file url="PROJECT" dialect="OracleSqlPlus" />
   </component>
   <component name="SqlResolveMappings">
-    <file url="file://$PROJECT_DIR$/src/main/resources/triggers/Goods.sql" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;2cc04664-b045-4d4b-88d6-397575ac0da1&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;18208_VIZIR&quot;      }     }    }   }  } }}" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/creation/triggers/Goods.sql" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;2cc04664-b045-4d4b-88d6-397575ac0da1&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;18208_VIZIR&quot;      }     }    }   }  } }}" />
   </component>
 </project>

@@ -1,13 +1,10 @@
 package utils;
 
-import org.apache.commons.io.input.CharSequenceInputStream;
-import utils.table_managers.TableManager;
+import database_managers.table_managers.TableManager;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -32,19 +29,19 @@ public class DatabaseManager {
     }
     };
     private static final Map<String, String> classForTableManagers = new HashMap<String, String>(){{
-        put("GOODS","utils.table_managers.GoodsTableManager");
-        put("ACCOUNTING","utils.table_managers.AccountingTableManager");
-        put("CUSTOMERS","utils.table_managers.CustomersTableManager");
-        put("DELIVERIES","utils.table_managers.DeliveriesTableManager");
-        put("DELIVERIES_GOODS","utils.table_managers.DeliveriesGoodsTableManager");
-        put("PROVIDERS","utils.table_managers.ProvidersTableManager");
-        put("PURCHASE_COMPOSITIONS","utils.table_managers.PurchaseCompositionsTableManager");
-        put("SALES","utils.table_managers.SalesTableManager");
-        put("SELLERS","utils.table_managers.SellersTableManager");
-        put("TRADE_SECTION_POINT","utils.table_managers.TradeSectionPointTableManager");
-        put("TRADE_POINTS","utils.table_managers.TradePointsTableManager");
-        put("TRADE_TYPES","utils.table_managers.TradeTypesTableManager");
-        put("TRADE_ROOM","utils.table_managers.TradeRoomTableManager");
+        put("GOODS","database_managers.table_managers.GoodsTableManager");
+        put("ACCOUNTING","database_managers.table_managers.AccountingTableManager");
+        put("CUSTOMERS","database_managers.table_managers.CustomersTableManager");
+        put("DELIVERIES","database_managers.table_managers.DeliveriesTableManager");
+        put("DELIVERIES_GOODS","database_managers.table_managers.DeliveriesGoodsTableManager");
+        put("PROVIDERS","database_managers.table_managers.ProvidersTableManager");
+        put("PURCHASE_COMPOSITIONS","database_managers.table_managers.PurchaseCompositionsTableManager");
+        put("SALES","database_managers.table_managers.SalesTableManager");
+        put("SELLERS","database_managers.table_managers.SellersTableManager");
+        put("TRADE_SECTION_POINT","database_managers.table_managers.TradeSectionPointTableManager");
+        put("TRADE_POINTS","database_managers.table_managers.TradePointsTableManager");
+        put("TRADE_TYPES","database_managers.table_managers.TradeTypesTableManager");
+        put("TRADE_ROOM","database_managers.table_managers.TradeRoomTableManager");
     }};
 
 
@@ -172,7 +169,7 @@ public class DatabaseManager {
     private List<String> loadCreationTables(){
         List<String> sequences = new ArrayList<>();
         for(String name: tableNames) {
-            sequences.add(loadScriptFromFile("tablesCreation/" + name));
+            sequences.add(loadScriptFromFile("creation/tables/" + name));
         }
         return sequences;
     }
@@ -185,7 +182,7 @@ public class DatabaseManager {
     private List<String> loadSequences() {
         List<String> sequences = new ArrayList<>();
         for(String name: tableNames) {
-            sequences.add(loadScriptFromFile("sequences/" + name));
+            sequences.add(loadScriptFromFile("creation/sequences/" + name));
         }
         return sequences;
     }
@@ -193,7 +190,7 @@ public class DatabaseManager {
     private List<String> loadAutoincrement() {
         List<String> autoIncrements = new ArrayList<>();
         for(String name: tableNames) {
-            autoIncrements.add(loadScriptFromFile("triggers/" + name));
+            autoIncrements.add(loadScriptFromFile("creation/triggers/" + name));
         }
         return autoIncrements;
     }
@@ -201,7 +198,7 @@ public class DatabaseManager {
     private List<String> loadSequencesDrops() {
         List<String> sequencesDrops = new ArrayList<>();
         for(String tableName: tableNames) {
-            sequencesDrops.add(loadScriptFromFile("dropSequences/" + tableName));
+            sequencesDrops.add(loadScriptFromFile("drop/sequences/" + tableName));
         }
         return sequencesDrops;
     }
@@ -209,7 +206,7 @@ public class DatabaseManager {
     private List<String> loadTableDrops() {
         List<String> tableDrops = new ArrayList<>();
         for(String tableName: tableNames) {
-            tableDrops.add(loadScriptFromFile("dropTables/" + tableName));
+            tableDrops.add(loadScriptFromFile("drop/tables/" + tableName));
         }
         return tableDrops;
     }

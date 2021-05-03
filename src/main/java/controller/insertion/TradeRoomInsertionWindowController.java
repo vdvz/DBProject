@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.table_managers.TradeRoomTableManager;
+import database_managers.table_managers.TradeRoomTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

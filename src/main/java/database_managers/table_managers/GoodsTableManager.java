@@ -1,7 +1,7 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
 import entities.Entity;
-import entities.Provider;
+import entities.Good;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -12,18 +12,18 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ProvidersTableManager extends TableManager {
+public class GoodsTableManager extends TableManager {
 
 
-    public ProvidersTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.PROVIDERS);
-    }
-
-    private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
+    private final static Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
             put("name", String.class);
         }
     };
+
+    public GoodsTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.GOODS);
+    }
 
     @Override
     public Map<String, Class> getColumns() {
@@ -39,7 +39,7 @@ public class ProvidersTableManager extends TableManager {
             while(result.next()){
                 String id = result.getObject("id").toString();
                 String name = result.getObject("name").toString();
-                resultList.add(new Provider(id, name));
+                resultList.add(new Good(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainController extends Controller implements Initializable, RoleController {
-    public final static String URL_FXML = "/main_window.fxml";
+    public final static String URL_FXML = "/window/main.fxml";
     private final DatabaseManager manager;
 
     public MainController() {
@@ -50,7 +50,7 @@ public class MainController extends Controller implements Initializable, RoleCon
         });
     }
 
-    private void showAlert(String header, String content) {
+    public static void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(header);

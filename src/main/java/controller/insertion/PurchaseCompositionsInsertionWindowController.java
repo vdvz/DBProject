@@ -6,7 +6,7 @@ import entities.PurchaseComposition;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.*;
-import utils.table_managers.PurchaseCompositionsTableManager;
+import database_managers.table_managers.PurchaseCompositionsTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

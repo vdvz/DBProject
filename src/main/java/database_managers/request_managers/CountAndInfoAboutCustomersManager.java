@@ -1,8 +1,7 @@
-package utils.table_managers;
+package database_managers.request_managers;
 
 import entities.Customer;
 import entities.Entity;
-import entities.Good;
 import init.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +10,10 @@ import utils.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class InfoAboutCustomersManager {
+public class CountAndInfoAboutCustomersManager {
 
     private final Connection connection;
-    public InfoAboutCustomersManager(){
+    public CountAndInfoAboutCustomersManager(){
         this.connection = Main.getDatabaseManager().getConnection();
     }
 
@@ -35,6 +34,4 @@ public class InfoAboutCustomersManager {
         }
         return resultList;
     }
-
-
 }

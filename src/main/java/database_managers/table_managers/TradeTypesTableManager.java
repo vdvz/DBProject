@@ -1,7 +1,7 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
 import entities.Entity;
-import entities.TradeRoom;
+import entities.TradeType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -12,15 +12,15 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TradeRoomTableManager extends TableManager {
+public class TradeTypesTableManager extends TableManager {
 
-    public TradeRoomTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.TRADE_ROOM);
+    public TradeTypesTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.TRADE_TYPE);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("trade_points_id", Integer.class);
+            put("name", String.class);
         }
     };
     @Override
@@ -36,8 +36,8 @@ public class TradeRoomTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String tradePointsId = result.getObject("trade_points_id").toString();
-                resultList.add(new TradeRoom(id, tradePointsId));
+                String name = result.getObject("name").toString();
+                resultList.add(new TradeType(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

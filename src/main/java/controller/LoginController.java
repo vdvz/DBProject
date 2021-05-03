@@ -3,18 +3,15 @@ package controller;
 import init.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import utils.Connection;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController extends Controller implements Initializable {
-    public final static String ENTRANCE_WINDOW_FXML = "/entrance_window.fxml";
-    public final static String LOGIN_WINDOW_FXML = "/login_window.fxml";
+    public final static String ENTRANCE_WINDOW_FXML = "/window/entrance.fxml";
+    public final static String LOGIN_WINDOW_FXML = "/window/login.fxml";
 
     @FXML
     private TextArea loginText;

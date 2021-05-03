@@ -5,7 +5,7 @@ import entities.Provider;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;
-import utils.table_managers.ProvidersTableManager;
+import database_managers.table_managers.ProvidersTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

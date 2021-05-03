@@ -5,7 +5,7 @@ import entities.Entity;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;
-import utils.table_managers.CustomersTableManager;
+import database_managers.table_managers.CustomersTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

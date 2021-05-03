@@ -1,5 +1,7 @@
 package controller;
 
+import controller.request.CountAndInfoAboutCustomersController;
+import controller.request.InfoAboutCustomersController;
 import init.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class RequestWindowController extends Controller implements Initializable, RoleController{
 
-    public static final String REQUESTS_WINDOW_FXML = "/requests_window.fxml";
+    public static final String REQUESTS_WINDOW_FXML = "/window/requests.fxml";
 
     @FXML
     public Button allCustomers;
@@ -55,6 +57,10 @@ public class RequestWindowController extends Controller implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         allCustomers.setOnAction(event -> {
+            Controller controller = Main.getNavigation()
+                    .load(CountAndInfoAboutCustomersController.COUNT_AND_INFO_ABOUT_CUSTOMERS_WINDOW_FXML);
+            controller.setStage(Main.getNavigation().createNewStage());
+            controller.show();
         });
 
         allProviders.setOnAction(event -> {

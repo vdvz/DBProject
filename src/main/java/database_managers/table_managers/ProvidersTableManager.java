@@ -1,8 +1,7 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
 import entities.Entity;
-import entities.TradeRoom;
-import entities.TradeSectionPoint;
+import entities.Provider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -13,19 +12,19 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TradeSectionPointTableManager extends TableManager {
+public class ProvidersTableManager extends TableManager {
 
-    public TradeSectionPointTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.TRADE_SECTION_POINT);
+
+    public ProvidersTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.PROVIDERS);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("trade_point", Integer.class);
-            put("floor", String.class);
-            put("manager_name", Integer.class);
+            put("name", String.class);
         }
     };
+
     @Override
     public Map<String, Class> getColumns() {
         return columns;
@@ -39,10 +38,8 @@ public class TradeSectionPointTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String trade_point = result.getObject("trade_point").toString();
-                String floor = result.getObject("floor").toString();
-                String manager_name = result.getObject("floor").toString();
-                resultList.add(new TradeSectionPoint(id, trade_point, floor, manager_name));
+                String name = result.getObject("name").toString();
+                resultList.add(new Provider(id, name));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

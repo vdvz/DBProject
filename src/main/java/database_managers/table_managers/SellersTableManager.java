@@ -1,7 +1,7 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
-import entities.DeliveriesGood;
 import entities.Entity;
+import entities.Seller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -12,18 +12,19 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DeliveriesGoodsTableManager extends TableManager {
+public class SellersTableManager extends TableManager {
 
-    public DeliveriesGoodsTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.DELIVERIES_GOODS);
+
+    public SellersTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.SELLERS);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("provider_id", Integer.class);
-            put("good_id", Integer.class);
-            put("delivery_id", Integer.class);
-            put("price", Integer.class);
+            put("name", String.class);
+            put("salary", Integer.class);
+            put("trade_point", Integer.class);
+            put("trade_room", Integer.class);
         }
     };
     @Override
@@ -32,24 +33,23 @@ public class DeliveriesGoodsTableManager extends TableManager {
     }
 
     @Override
-    public ObservableList<Entity> getTableRows() {
+    public ObservableList<Entity> getTableRows(){
         ObservableList<Entity> resultList = FXCollections.observableArrayList();
         ResultSet result;
         try {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String providerId = result.getObject("provider_id").toString();
-                String goodId = result.getObject("good_id").toString();
-                String deliveryId = result.getObject("delivery_id").toString();
-                String price = result.getObject("price").toString();
+                String name = result.getObject("name").toString();
+                String salary = result.getObject("salary").toString();
+                String tradePoint = result.getObject("trade_point").toString();
+                String tradeRoom = result.getObject("trade_room").toString();
 
-                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
+                resultList.add(new Seller(id, name, salary, tradePoint, tradeRoom));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
-
     }
 }

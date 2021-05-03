@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ModeWindowController extends Controller implements Initializable{
-  public static final String MODE_WINDOW_FXML = "/mode_window.fxml";
+  public static final String MODE_WINDOW_FXML = "/window/mode.fxml";
 
     public void onAdminMode(){
         MainWindowController controller = (MainWindowController) Main.getNavigation().load(MainWindowController.MAIN_WINDOW_FXML);

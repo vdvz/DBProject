@@ -9,7 +9,7 @@ import utils.ChoiceUnit;
 import utils.EnterItem;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.table_managers.TradeSectionPointTableManager;
+import database_managers.table_managers.TradeSectionPointTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

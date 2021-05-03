@@ -1,6 +1,6 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
-import entities.Customer;
+import entities.DeliveriesGood;
 import entities.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,26 +9,23 @@ import utils.TableNames;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class CustomersTableManager extends TableManager {
+public class DeliveriesGoodsTableManager extends TableManager {
 
-    public List<String> columnNames = new ArrayList<String>(){{
-        add("id");
-        add("name");
-    }};
-
-    public CustomersTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.CUSTOMERS);
+    public DeliveriesGoodsTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.DELIVERIES_GOODS);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("name", String.class);
-            put("age", Integer.class);
+            put("provider_id", Integer.class);
+            put("good_id", Integer.class);
+            put("delivery_id", Integer.class);
+            put("price", Integer.class);
         }
     };
-
     @Override
     public Map<String, Class> getColumns() {
         return columns;
@@ -42,19 +39,17 @@ public class CustomersTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String name = result.getObject("name").toString();
-                String age;
-                try{
-                    age = Objects.requireNonNull(result.getObject("age")).toString();
-                } catch (NullPointerException e){
-                    age = "NULL";
-                }
-                resultList.add(new Customer(id, name,age));
+                String providerId = result.getObject("provider_id").toString();
+                String goodId = result.getObject("good_id").toString();
+                String deliveryId = result.getObject("delivery_id").toString();
+                String price = result.getObject("price").toString();
+
+                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId, price));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return resultList;
-    }
 
+    }
 }

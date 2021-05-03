@@ -5,7 +5,7 @@ import entities.TradeType;
 import init.Main;
 import utils.EnterItem;
 import utils.TableNames;
-import utils.table_managers.TradeTypesTableManager;
+import database_managers.table_managers.TradeTypesTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

@@ -1,29 +1,34 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
+import entities.Delivery;
 import entities.Entity;
-import entities.TradeRoom;
-import entities.TradeType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 import utils.TableNames;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TradeTypesTableManager extends TableManager {
+public class DeliveriesTableManager extends TableManager {
 
-    public TradeTypesTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.TRADE_TYPE);
+
+    public DeliveriesTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.DELIVERIES);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("name", String.class);
+            put("provider_id", Integer.class);
+            put("trade_point_id", Integer.class);
+            put("count", Integer.class);
+            put("deliver_date", Date.class);
         }
     };
+
     @Override
     public Map<String, Class> getColumns() {
         return columns;
@@ -37,8 +42,12 @@ public class TradeTypesTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String name = result.getObject("name").toString();
-                resultList.add(new TradeType(id, name));
+                String providerId = result.getObject("provider_id").toString();
+                String tradePointId = result.getObject("trade_point_id").toString();
+                String count = result.getObject("count").toString();
+                String deliveryDate = result.getDate("delivery_date").toString();
+
+                resultList.add(new Delivery(id, providerId, tradePointId, count, deliveryDate));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

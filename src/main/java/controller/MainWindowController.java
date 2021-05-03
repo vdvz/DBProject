@@ -1,26 +1,22 @@
 package controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import controller.table.TableWindowController;
 import init.Main;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import utils.DatabaseManager;
 
 public class MainWindowController extends Controller implements Initializable, RoleController {
 
-  public static final String MAIN_WINDOW_FXML = "/main_window.fxml";
+  public static final String MAIN_WINDOW_FXML = "/window/main.fxml";
   private final DatabaseManager manager;
 
   private final Map<String, String> tableNameToController = new HashMap<String, String>(){{

@@ -4,7 +4,7 @@ import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
 import utils.*;
-import utils.table_managers.DeliveriesTableManager;
+import database_managers.table_managers.DeliveriesTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

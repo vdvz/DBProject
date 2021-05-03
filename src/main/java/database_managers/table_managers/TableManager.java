@@ -1,4 +1,4 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
 import entities.Entity;
 import javafx.collections.ObservableList;
@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;

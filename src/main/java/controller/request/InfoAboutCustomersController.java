@@ -1,5 +1,6 @@
-package controller;
+package controller.request;
 
+import controller.Controller;
 import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
@@ -13,15 +14,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import utils.ChoiceUnit;
 import utils.TableNames;
-import utils.table_managers.InfoAboutCustomersManager;
+import database_managers.request_managers.InfoAboutCustomersManager;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class InfoAboutCustomersController extends Controller implements Initializable {
-    public static final String INFO_ABOUT_CUSTOMERS_WINDOW_FXML = "/InfoAboutCustomers_window.fxml";
+    public static final String INFO_ABOUT_CUSTOMERS_WINDOW_FXML = "/window/request/InfoAboutCustomers.fxml";
 
     @FXML
     private ChoiceBox<ChoiceUnit> good;

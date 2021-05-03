@@ -1,7 +1,7 @@
 -- Получить перечень и общее число поставщиков, поставляющих указанный
 -- вид товара, либо некоторый товар в объеме, не менее заданного за
 -- весь период сотрудничества, либо за указанный период.
-SELECT COUNT(*), P.NAME
+SELECT P.NAME
 FROM DELIVERIES_GOODS DG
          INNER JOIN DELIVERIES D on D.ID = DG.DELIVERY_ID
          INNER JOIN GOODS G on G.ID = DG.GOOD_ID
@@ -11,7 +11,7 @@ WHERE G.NAME='' OR DELIVER_DATE>3;
 -- Получить перечень и общее число покупателей, купивших указанный вид
 -- товара за некоторый период, либо сделавших покупку товара в объеме,
 -- не менее заданного.
-SELECT COUNT(*)
+SELECT C.ID, C.NAME, C.AGE
 FROM SALES S
          INNER JOIN CUSTOMERS C on C.ID = S.CUSTOMER
          INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION

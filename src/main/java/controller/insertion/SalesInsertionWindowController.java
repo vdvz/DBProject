@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import utils.ChoiceUnit;
 import utils.SelectItem;
 import utils.TableNames;
-import utils.table_managers.SalesTableManager;
+import database_managers.table_managers.SalesTableManager;
 
 import java.net.URL;
 import java.sql.SQLException;

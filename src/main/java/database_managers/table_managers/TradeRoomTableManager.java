@@ -1,7 +1,7 @@
-package utils.table_managers;
+package database_managers.table_managers;
 
-import entities.Account;
 import entities.Entity;
+import entities.TradeRoom;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
@@ -12,25 +12,21 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class AccountingTableManager extends TableManager {
+public class TradeRoomTableManager extends TableManager {
 
-    public AccountingTableManager(Connection connection) throws SQLException {
-        super(connection, TableNames.ACCOUNTING);
-    }
-
-    @Override
-    public Map<String, Class> getColumns() {
-        return columns;
+    public TradeRoomTableManager(Connection connection) throws SQLException {
+        super(connection, TableNames.TRADE_ROOM);
     }
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("trade_point", Integer.class);
-            put("good", Integer.class);
-            put("count", Integer.class);
-            put("price", Integer.class);
+            put("trade_points_id", Integer.class);
         }
     };
+    @Override
+    public Map<String, Class> getColumns() {
+        return columns;
+    }
 
     @Override
     public ObservableList<Entity> getTableRows() {
@@ -40,12 +36,8 @@ public class AccountingTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String tradePoint = result.getObject("trade_point").toString();
-                String good = result.getObject("good").toString();
-                String count = result.getObject("count").toString();
-                String price = result.getObject("price").toString();
-
-                resultList.add(new Account(id, tradePoint, good, count, price));
+                String tradePointsId = result.getObject("trade_points_id").toString();
+                resultList.add(new TradeRoom(id, tradePointsId));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
