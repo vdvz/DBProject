@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PurchaseController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="430.0" prefWidth="680.0" spacing="10.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="680.0" text="Выберите из предложенных, либо доавьте нового покупателя, добавьте товары, а так же укажите дату покупки" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="53.0" prefWidth="680.0" spacing="25.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="150.0" text="Продавец" textAlignment="CENTER" />
+                  <ChoiceBox fx:id="seller" prefHeight="25.0" prefWidth="481.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="680.0">
+               <children>
+                  <ChoiceBox fx:id="customer" prefHeight="25.0" prefWidth="481.0" />
+                  <Button fx:id="addNewCustomerButton" mnemonicParsing="false" onAction="#addCustomer" prefHeight="25.0" prefWidth="120.0" text="Новый покупатель">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children></HBox>
+            <HBox layoutX="10.0" layoutY="49.0" prefHeight="40.0" prefWidth="680.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="355.0" promptText="Имя" visible="false">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="age" prefHeight="25.0" prefWidth="103.0" promptText="Возраст" visible="false" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="680.0" spacing="15.0">
+               <children>
+                  <ChoiceBox fx:id="good" prefHeight="25.0" prefWidth="359.0" />
+                  <TextField fx:id="pricePerOne" prefHeight="25.0" prefWidth="75.0" promptText="Цена" />
+                  <Spinner fx:id="countGoods" prefHeight="25.0" prefWidth="66.0" />
+                  <Button mnemonicParsing="false" onAction="#addGood" prefHeight="25.0" prefWidth="104.0" text="Добавить товар">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="263.0" prefWidth="680.0">
+               <children>
+                  <ListView fx:id="goodList" prefHeight="263.0" prefWidth="492.0" />
+                  <VBox alignment="TOP_CENTER" prefHeight="263.0" prefWidth="187.0" spacing="30.0">
+                     <children>
+                        <DatePicker fx:id="date" />
+                        <Button mnemonicParsing="false" onAction="#addPurchase" prefHeight="46.0" prefWidth="155.0" text="Добавить покупку" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

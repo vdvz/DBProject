@@ -1,4 +1,4 @@
 CREATE TABLE Trade_room (
 id NUMBER(11) PRIMARY KEY,
-trade_points_id REFERENCES Trade_points(id) NOT NULL
+trade_section_point_id REFERENCES TRADE_SECTION_POINT(id) NOT NULL
 )

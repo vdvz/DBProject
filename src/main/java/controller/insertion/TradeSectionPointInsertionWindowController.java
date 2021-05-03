@@ -1,7 +1,6 @@
 package controller.insertion;
 
 import entities.Entity;
-import entities.Store;
 import entities.TradePoint;
 import entities.TradeSectionPoint;
 import init.Main;
@@ -21,20 +20,21 @@ import java.util.ResourceBundle;
 public class TradeSectionPointInsertionWindowController extends InsertionWindowController {
 
     private TradeSectionPointTableManager tableManager = (TradeSectionPointTableManager) Main.getDatabaseManager().getTableManager(TableNames.TRADE_SECTION_POINT);
-    private SelectItem storeItem;
+    private SelectItem tradePointItem;
     private EnterItem floorItem;
     private EnterItem managersNameItem;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        storeItem = new SelectItem("store");
+        tradePointItem = new SelectItem("trade_point");
         floorItem = new EnterItem("floor");
         managersNameItem = new EnterItem("managers_name");
 
-        loadAvailableStores().stream().map(e->new ChoiceUnit(((Store)e).getId(), ((Store)e).getName())).forEach(storeItem::addItemsToSelect);
+        loadAvailableStores().stream().map(e->new ChoiceUnit(((TradePoint)e).getId(), ((TradePoint)e).getName())).forEach(
+            tradePointItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(storeItem, floorItem, managersNameItem);
+        hBox.getChildren().addAll(tradePointItem, floorItem, managersNameItem);
 
     }
 
@@ -42,7 +42,7 @@ public class TradeSectionPointInsertionWindowController extends InsertionWindowC
     public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
-        valuesMap.put(storeItem.getColumnName(), storeItem.getSelectedItem().getId());
+        valuesMap.put(tradePointItem.getColumnName(), tradePointItem.getSelectedItem().getId());
         valuesMap.put(floorItem.getColumnName(), floorItem.getEnteredText());
         valuesMap.put(managersNameItem.getColumnName(), managersNameItem.getEnteredText());
 
@@ -58,7 +58,7 @@ public class TradeSectionPointInsertionWindowController extends InsertionWindowC
     public void initUpdating(Entity entity) {
         TradeSectionPoint value = (TradeSectionPoint) entity;
         getIdItem().setText(value.getId());
-        storeItem.setSelectItem(value.getStore());
+        tradePointItem.setSelectItem(value.getStore());
         floorItem.setText(value.getFloor());
         managersNameItem.setText(value.getManagersName());
     }

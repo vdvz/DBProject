@@ -56,6 +56,14 @@ public class Connection {
         }
     }
 
+    public CallableStatement createCallableStatement(String query) throws SQLException {
+        return connection.prepareCall(query);
+    }
+
+    public java.sql.Connection getConnection() {
+        return connection;
+    }
+
     public void execute(String sql) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.execute(sql);
@@ -83,4 +91,20 @@ public class Connection {
         }
     }
 
+    public void rollback(){
+        try {
+            connection.rollback();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void commit() {
+        try {
+            connection.commit();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

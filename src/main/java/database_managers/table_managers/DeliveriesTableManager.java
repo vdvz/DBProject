@@ -24,7 +24,6 @@ public class DeliveriesTableManager extends TableManager {
         {
             put("provider_id", Integer.class);
             put("trade_point_id", Integer.class);
-            put("count", Integer.class);
             put("deliver_date", Date.class);
         }
     };
@@ -44,7 +43,7 @@ public class DeliveriesTableManager extends TableManager {
                 String id = result.getObject("id").toString();
                 String providerId = result.getObject("provider_id").toString();
                 String tradePointId = result.getObject("trade_point_id").toString();
-                String deliveryDate = result.getDate("delivery_date").toString();
+                String deliveryDate = result.getDate("deliver_date").toString();
 
                 resultList.add(new Delivery(id, providerId, tradePointId, deliveryDate));
             }

@@ -23,6 +23,7 @@ public class DeliveriesGoodsTableManager extends TableManager {
             put("provider_id", Integer.class);
             put("good_id", Integer.class);
             put("delivery_id", Integer.class);
+            put("count", Integer.class);
             put("price", Integer.class);
         }
     };

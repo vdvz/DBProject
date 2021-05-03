@@ -3,6 +3,7 @@ package utils;
 import database_managers.table_managers.TableManager;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
@@ -48,6 +49,7 @@ public class DatabaseManager {
 
 
     private final Connection connection;
+
 
     public void closeConnection() throws SQLException {
         connection.close();
@@ -102,6 +104,7 @@ public class DatabaseManager {
         createTables();
         createSequences();
         createAutoincrement();
+        createProcedures();
     }
 
     public void clearDatabase(){
@@ -124,6 +127,17 @@ public class DatabaseManager {
 
     private void createTables(){
         for (String query : loadCreationTables()) {
+            try {
+                System.out.println(query);
+                connection.execute(query);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    private void createProcedures() {
+        for (String query : loadProcedures()) {
             try {
                 System.out.println(query);
                 connection.execute(query);
@@ -195,6 +209,20 @@ public class DatabaseManager {
             autoIncrements.add(loadScriptFromFile("creation/triggers/" + name));
         }
         return autoIncrements;
+    }
+
+    private List<String> loadProcedures(){
+        List<String> procedures = new ArrayList<>();
+        List<String> procedureNames = new ArrayList<String>(){
+            {
+                add("add_customer.sql");
+                add("add_purchase.sql");
+            }
+        };
+        for(String procedureName: procedureNames) {
+            procedures.add(loadScriptFromFile("creation/procedures/" + procedureName));
+        }
+        return procedures;
     }
 
     private List<String> loadSequencesDrops() {
