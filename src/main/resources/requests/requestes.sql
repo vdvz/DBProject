@@ -23,6 +23,12 @@ WHERE COUNT>=1 OR (PURCHASE_DATE>1 AND PURCHASE_DATE<2);
 -- Получить сведения об объеме и ценах на указанный товар по всем
 -- торговым точкам, по торговым точкам заданного типа, по конкретной
 -- торговой точке.
+SELECT * FROM ACCOUNTING A
+INNER JOIN GOODS G on G.ID = A.GOOD
+INNER JOIN TRADE_POINTS TP on TP.ID = A.TRADE_POINT
+INNER JOIN TRADE_TYPES TT on TT.ID = TP.TYPE
+WHERE 1=1
+
 
 -- Получить данные о выработке на одного продавца за указанный период
 -- по всем торговым точкам, по торговым точкам заданного типа./PROCESS/
@@ -92,6 +98,18 @@ WHERE G.NAME=''
 -- платежи за аренду, коммунальные услуги) за указанный период.
 
 -- Получить сведения о поставках товаров по указанному номеру заказа.
+SELECT G.NAME, TP.NAME, P.NAME, D.DELIVER_DATE FROM DELIVERIES_GOODS DG
+INNER JOIN PROVIDERS P on P.ID = DG.PROVIDER_ID
+INNER JOIN DELIVERIES D on D.ID = DG.DELIVERY_ID
+INNER JOIN GOODS G on G.ID = DG.GOOD_ID
+INNER JOIN TRADE_POINTS TP on G.NAME = TP.NAME
+WHERE D.ID =
 
 -- Получить данные о товарообороте торговой точки, либо всех торговых
 -- определенной группы за указанный период.
+SELECT * FROM SALES S
+INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
+INNER JOIN SELLERS S2 on S2.ID = S.SELLER
+INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
+INNER JOIN TRADE_TYPES TT on TT.ID = TP.TYPE
+WHERE
