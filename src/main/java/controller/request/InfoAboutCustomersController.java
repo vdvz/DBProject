@@ -44,9 +44,9 @@ public class InfoAboutCustomersController extends Controller implements Initiali
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadGood().stream().map(e->new ChoiceUnit(e.getId(), ((Good)e).getName())).forEach(this::addItemsToGood);
-        loadTradePoint().stream().map(e->new ChoiceUnit(e.getId(), ((TradePoint)e).getName())).forEach(this::addItemsToTradePoints);
-        loadTradePointType().stream().map(e->new ChoiceUnit(e.getId(), ((TradeType)e).getName())).forEach(this::addItemsToTradePointType);
+        loadGood().stream().map(e->new ChoiceUnit(e.getId(), ((Good)e).getName())).forEach(good.getItems()::addAll);
+        loadTradePoint().stream().map(e->new ChoiceUnit(e.getId(), ((TradePoint)e).getName())).forEach(tradePoint.getItems()::addAll);
+        loadTradePointType().stream().map(e->new ChoiceUnit(e.getId(), ((TradeType)e).getName())).forEach(tradePointType.getItems()::addAll);
 
         TableColumn<Customer, String> columnId = new TableColumn<>("id");
         TableColumn<Customer, String> columnName = new TableColumn<>("name");
@@ -105,18 +105,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
 
     private ObservableList<Entity> loadTradePoint(){
         return Main.getDatabaseManager().getTableManager(TableNames.TRADE_POINTS).getTableRows();
-    }
-
-    public void addItemsToGood(ChoiceUnit ... items) {
-        good.getItems().addAll(items);
-    }
-
-    public void addItemsToTradePoints(ChoiceUnit ... items) {
-        tradePoint.getItems().addAll(items);
-    }
-
-    public void addItemsToTradePointType(ChoiceUnit ... items) {
-        tradePointType.getItems().addAll(items);
     }
 
     @FXML

@@ -2,24 +2,32 @@ package controller.request;
 
 import controller.Controller;
 import controller.MainController;
-import entities.*;
+import database_managers.request_managers.CountAndInfoAboutCustomersManager;
+import database_managers.request_managers.CountAndInfoAboutProvidersManager;
+import entities.Customer;
+import entities.Entity;
+import entities.Good;
+import entities.Provider;
 import init.Main;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import utils.ChoiceUnit;
 import utils.TableNames;
-import database_managers.request_managers.CountAndInfoAboutCustomersManager;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class CountAndInfoAboutProvidersController extends Controller implements Initializable {
 
-public class CountAndInfoAboutCustomersController extends Controller implements Initializable {
-
-    public static final String COUNT_AND_INFO_ABOUT_CUSTOMERS_WINDOW_FXML = "/window/request/CountAndInfoAboutCustomers.fxml";
+    public static final String COUNT_AND_INFO_ABOUT_PROVIDERS_WINDOW_FXML = "/window/request/CountAndInfoAboutProviders.fxml";
 
     @FXML
     private ChoiceBox<ChoiceUnit> good;
@@ -39,21 +47,19 @@ public class CountAndInfoAboutCustomersController extends Controller implements 
     @FXML
     private TextField requestCount;
 
-    private final CountAndInfoAboutCustomersManager manager = new CountAndInfoAboutCustomersManager();
+    private final CountAndInfoAboutProvidersManager manager = new CountAndInfoAboutProvidersManager();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadGood().stream().map(e->new ChoiceUnit(e.getId(), ((Good)e).getName())).forEach(good.getItems()::addAll);
 
-        TableColumn<Customer, String> columnId = new TableColumn<>("id");
-        TableColumn<Customer, String> columnName = new TableColumn<>("name");
-        TableColumn<Customer, String> columnAge = new TableColumn<>("age");
+        TableColumn<Provider, String> columnId = new TableColumn<>("id");
+        TableColumn<Provider, String> columnName = new TableColumn<>("name");
 
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        columnAge.setCellValueFactory(new PropertyValueFactory<>("age") );
 
-        resultTable.getColumns().addAll(columnId, columnName, columnAge);
+        resultTable.getColumns().addAll(columnId, columnName);
 
         good.setConverter(new StringConverter<ChoiceUnit>() {
             @Override
@@ -85,28 +91,25 @@ public class CountAndInfoAboutCustomersController extends Controller implements 
 
     @FXML
     public void query(){
-        String query = "SELECT C.ID, C.NAME, C.AGE " +
-                " FROM SALES S " +
-                " INNER JOIN CUSTOMERS C on C.ID=S.CUSTOMER " +
-                " INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID=S.PURCHASE_COMPOSITION " +
-                " INNER JOIN GOODS G on G.ID=PC.GOOD " +
-                " WHERE G.NAME='";
-        if(good.getValue()==null){
-            MainController.showAlert("Ввод невалидных данных", "Выберите товар");
-            return;
-        }
-        if(dateTo.getValue()==null && dateFrom.getValue()==null && requestCount.getText().equals("")){
-            MainController.showAlert("Ввод невалидных данных", "Введите дату, либо количество.");
+        String query = "SELECT * FROM PROVIDERS P "
+            + " INNER JOIN DELIVERIES D on D.PROVIDER_ID = P.ID"
+            + " INNER JOIN DELIVERIES_GOODS DG on D.ID = DG.DELIVERY_ID"
+            + " INNER JOIN GOODS G on G.ID = DG.GOOD_ID"
+            + " WHERE 1=1 ";
+
+        try {
+            checkCorrectness();
+        } catch (Exception e) {
             return;
         }
 
-        query+= good.getValue().getDisplayedName() + "' ";
+        query+= " AND G.ID=" + good.getValue().getId() + " ";
 
         if(dateFrom.getValue()!=null){
-            query+= "AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= "AND D.DELIVER_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD') ";
         }
         if(dateTo.getValue()!=null){
-            query+= "AND PC.PURCHASE_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= "AND D.DELIVER_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD') ";
         }
         if(dateTo.getValue()==null && dateFrom.getValue()==null){
             query+=" AND COUNT >= " + Integer.valueOf(requestCount.getText());
@@ -114,6 +117,17 @@ public class CountAndInfoAboutCustomersController extends Controller implements 
         System.out.println("Query: " + query);
 
         updateResultTable(manager.executeQuery(query));
+    }
+
+    private void checkCorrectness() throws Exception {
+        if(good.getValue()==null){
+            MainController.showAlert("Ввод невалидных данных", "Выберите товар");
+            throw new Exception();
+        }
+        if(dateTo.getValue()==null && dateFrom.getValue()==null && requestCount.getText().equals("")){
+            MainController.showAlert("Ввод невалидных данных", "Введите дату, либо количество.");
+            throw new Exception();
+        }
     }
 
     private void clearResultTable(){

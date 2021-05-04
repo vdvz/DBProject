@@ -1,16 +1,16 @@
 -- Получить перечень и общее число поставщиков, поставляющих указанный
 -- вид товара, либо некоторый товар в объеме, не менее заданного за
--- весь период сотрудничества, либо за указанный период.
-SELECT P.NAME
-FROM DELIVERIES_GOODS DG
-         INNER JOIN DELIVERIES D on D.ID = DG.DELIVERY_ID
-         INNER JOIN GOODS G on G.ID = DG.GOOD_ID
-         INNER JOIN PROVIDERS P on P.ID = D.PROVIDER_ID
+-- весь период сотрудничества, либо за указанный период./*DONE*/
+SELECT *
+FROM PROVIDERS P
+        INNER JOIN DELIVERIES_GOODS DG on P.ID = DG.PROVIDER_ID
+        INNER JOIN DELIVERIES D on D.ID = DG.DELIVERY_ID
+        INNER JOIN GOODS G on G.ID = DG.GOOD_ID
 WHERE G.NAME='' OR DELIVER_DATE>3;
 
 -- Получить перечень и общее число покупателей, купивших указанный вид
 -- товара за некоторый период, либо сделавших покупку товара в объеме,
--- не менее заданного.
+-- не менее заданного./*DONE*/
 SELECT C.ID, C.NAME, C.AGE
 FROM SALES S
          INNER JOIN CUSTOMERS C on C.ID = S.CUSTOMER
@@ -25,21 +25,34 @@ WHERE COUNT>=1 OR (PURCHASE_DATE>1 AND PURCHASE_DATE<2);
 -- торговой точке.
 
 -- Получить данные о выработке на одного продавца за указанный период
--- по всем торговым точкам, по торговым точкам заданного типа.
+-- по всем торговым точкам, по торговым точкам заданного типа./PROCESS/
+SELECT * FROM SALES S
+INNER JOIN SELLERS S2 on S2.ID = S.SELLER
+INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
+INNER JOIN TRADE_TYPES TT on TT.ID = TP.TYPE
+WHERE 1=1
+
+
 
 -- Получить данные о заработной плате продавцов по всем торговым
--- точкам, по торговым точкам заданного типа, по конкретной торговой точке.
-
-SELECT C2.NAME, C2.AGE
+-- точкам, по торговым точкам заданного типа, по конкретной торговой точке./DONE/
+SELECT S.ID, S.NAME, S.SALARY, S.TRADE_POINT, S.TRADE_ROOM
     FROM TRADE_POINTS TP
-             INNER JOIN SELLERS S ON S.ID=TP.
-             INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
-             INNER JOIN GOODS G on G.ID = PC.GOOD
-             INNER JOIN SELLERS S2 on S2.ID = S.SELLER
-             INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
+             INNER JOIN SELLERS S ON S.TRADE_POINT=TP.ID
              INNER JOIN TRADE_TYPES TT on TP.TYPE = TT.ID
+WHERE 1=1
+
 -- Получить сведения о наиболее активных покупателях по всем торговым
 -- точкам, по торговым точкам указанного типа, по данной торговой точке.
+SELECT C2.ID as id, C2.NAME as name, C2.AGE as age, COUNT(id) as count
+FROM SALES S
+        INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
+        INNER JOIN CUSTOMERS C2 on C2.ID = S.CUSTOMER
+        INNER JOIN SELLERS S2 on S2.ID = S.SELLER
+        INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
+WHERE 1=1 /*TODO*/
+GROUP BY C2.ID
+ORDER BY COUNT(ID) DESC
 
 -- Получить данные об объеме продаж указанного товара за некоторый
 -- период по всем торговым точкам, по торговым точкам заданного типа,
@@ -50,33 +63,8 @@ SELECT C2.NAME, C2.AGE
 
 -- Получить сведения о покупателях указанного товара за обозначенный,
 -- либо за весь период, по всем торговым точкам, по торговым точкам
--- указанного типа, по данной торговой точке.
-CREATE OR REPLACE PROCEDURE getInfoAboutCustomers (
-    good_name IN varchar(30),
-    purchase_date_form IN DATE DEFAULT NULL,
-    purchase_date_to IN DATE DEFAULT NULL,
-    trade_point_type_id IN NUMBER(11) DEFAULT NULL,
-    trade_point_name_id IN NUMBER(11) DEFAULT NULL
-)  IS
-    QUERY VARCHAR2(1000):= ' ';
-
-        BEGIN
-
-    IF purchase_date_form!=NULL OR purchase_date_to!=NULL THEN
-        --throw exception
-    END IF;
-
-    IF trade_point_type_id!=NULL THEN
-        IF trade_point_name_id!=NULL THEN
-            --throw exception
-        END IF;
-    END IF;
-
-    IF trade_point_name_id!=NULL THEN
-
-    END IF;
-
-    QUERY = 'SELECT C2.NAME, C2.AGE
+-- указанного типа, по данной торговой точке./DONE/
+ SELECT C2.NAME, C2.AGE
     FROM SALES S
              INNER JOIN CUSTOMERS C2 on C2.ID = S.CUSTOMER
              INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID = S.PURCHASE_COMPOSITION
@@ -84,13 +72,15 @@ CREATE OR REPLACE PROCEDURE getInfoAboutCustomers (
              INNER JOIN SELLERS S2 on S2.ID = S.SELLER
              INNER JOIN TRADE_POINTS TP on TP.ID = S2.TRADE_POINT
              INNER JOIN TRADE_TYPES TT on TP.TYPE = TT.ID
-    WHERE G.NAME='':1''' + QUERY;
+    WHERE G.NAME
 
-    EXECUTE IMMEDIATE QUERY USING good_name;
-
-END getInfoAboutCustomers;
 -- Получить сведения о поставках определенного товара указанным
--- поставщиком за все время поставок, либо за некоторый период.
+-- поставщиком за все время поставок, либо за некоторый период./*ALMOST DONE - MAKE QUERY*/
+SELECT * FROM DELIVERIES_GOODS
+INNER JOIN DELIVERIES D on D.ID = DELIVERIES_GOODS.DELIVERY_ID
+INNER JOIN PROVIDERS P on P.ID = D.PROVIDER_ID
+INNER JOIN GOODS G on G.ID = DELIVERIES_GOODS.GOOD_ID
+WHERE G.NAME=''
 
 -- Получить данные об отношении объема продаж к объему торговых
 -- площадей, либо к числу торговых залов, либо к числу прилавков по

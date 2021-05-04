@@ -1,7 +1,10 @@
 package controller;
 
 import controller.request.CountAndInfoAboutCustomersController;
+import controller.request.CountAndInfoAboutProvidersController;
 import controller.request.InfoAboutCustomersController;
+import controller.request.InfoAboutDeliveriesGoodController;
+import controller.request.InfoAboutSellerSalaryController;
 import init.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,12 +67,20 @@ public class RequestWindowController extends Controller implements Initializable
         });
 
         allProviders.setOnAction(event -> {
+            Controller controller = Main.getNavigation()
+                .load(CountAndInfoAboutProvidersController.COUNT_AND_INFO_ABOUT_PROVIDERS_WINDOW_FXML);
+            controller.setStage(Main.getNavigation().createNewStage());
+            controller.show();
         });
 
         infoAboutActiveCustomers.setOnAction(event -> {
         });
 
         infoAboutDeliveriesGood.setOnAction(event -> {
+            Controller controller = Main.getNavigation()
+                .load(InfoAboutDeliveriesGoodController.INFO_ABOUT_DELIVERIES_GOOD_WINDOW_FXML);
+            controller.setStage(Main.getNavigation().createNewStage());
+            controller.show();
         });
 
         infoAboutDeliveriesGoodByNumber.setOnAction(event -> {
@@ -85,6 +96,9 @@ public class RequestWindowController extends Controller implements Initializable
         });
 
         infoAboutSellerSalary.setOnAction(event -> {
+            Controller controller = Main.getNavigation().load(InfoAboutSellerSalaryController.INFO_ABOUT_SELLER_SALARY_WINDOW_FXML);
+            controller.setStage(Main.getNavigation().createNewStage());
+            controller.show();
         });
 
         infoAboutGoodCustomers.setOnAction(event -> {
