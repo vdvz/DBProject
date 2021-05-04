@@ -17,8 +17,6 @@ import java.util.ResourceBundle;
 
 public class DeliveriesGoodsInsertionWindowController extends InsertionWindowController {
 
-
-    private SelectItem providerIdItem;
     private SelectItem goodIdItem;
     private SelectItem deliveryIdItem;
     private EnterItem priceItem;
@@ -29,24 +27,22 @@ public class DeliveriesGoodsInsertionWindowController extends InsertionWindowCon
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        providerIdItem = new SelectItem("provider_id");
         goodIdItem = new SelectItem("good_id");
         deliveryIdItem = new SelectItem("delivery_id");
         countItem = new EnterItem("count");
         priceItem = new EnterItem("price");
 
-        loadAvailableProviders().stream().map(e->new ChoiceUnit(((Provider)e).getId(), ((Provider)e).getName())).forEach(providerIdItem::addItemsToSelect);
+        //loadAvailableProviders().stream().map(e->new ChoiceUnit(((Provider)e).getId(), ((Provider)e).getName())).forEach(providerIdItem::addItemsToSelect);
         loadAvailableGoods().stream().map(e->new ChoiceUnit(((Good)e).getId(), ((Good)e).getName())).forEach(goodIdItem::addItemsToSelect);
         loadAvailableDeliveries().stream().map(e->new ChoiceUnit(((Delivery)e).getId(), ((Delivery)e).getId())).forEach(deliveryIdItem::addItemsToSelect);
 
-        hBox.getChildren().addAll(providerIdItem, goodIdItem, deliveryIdItem, countItem, priceItem);
+        hBox.getChildren().addAll(goodIdItem, deliveryIdItem, countItem, priceItem);
     }
 
     @Override
     public void insertRow() throws SQLException {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(getIdItem().getColumnName(), getIdItem().getEnteredText());
-        valuesMap.put(providerIdItem.getColumnName(), providerIdItem.getSelectedItem().getId());
         valuesMap.put(goodIdItem.getColumnName(), goodIdItem.getSelectedItem().getId());
         valuesMap.put(deliveryIdItem.getColumnName(), deliveryIdItem.getSelectedItem().getId());
         valuesMap.put(countItem.getColumnName(), countItem.getEnteredText());
@@ -63,7 +59,7 @@ public class DeliveriesGoodsInsertionWindowController extends InsertionWindowCon
     public void initUpdating(Entity entity) {
         DeliveriesGood value = (DeliveriesGood) entity;
         getIdItem().setText(value.getId());
-        providerIdItem.setSelectItem(value.getProviderId());
+        //providerIdItem.setSelectItem(value.getProviderId());
         goodIdItem.setSelectItem(value.getGoodId());
         deliveryIdItem.setSelectItem(value.getDeliveryId());
         countItem.setText(value.getCount());

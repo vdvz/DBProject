@@ -13,9 +13,9 @@ public class DeliveriesGood implements Entity {
     private final StringProperty price = new SimpleStringProperty("");
 
 
-    public DeliveriesGood(String id, String providerId, String goodId, String deliveryId, String count, String price){
+    public DeliveriesGood(String id/*, String providerId*/, String goodId, String deliveryId, String count, String price){
         setId(id);
-        setProviderId(providerId);
+        //setProviderId(providerId);
         setGoodId(goodId);
         setDeliveryId(deliveryId);
         setCount(count);

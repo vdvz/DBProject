@@ -35,8 +35,6 @@ public class PurchaseController extends Controller implements Initializable {
     private final Map<Good, Integer> goodInCart = new HashMap<>();
     private final Map<Good, Integer> priceGoodInCart = new HashMap<>();
     private final PurchaseManager manager = new PurchaseManager();
-    private final CustomersTableManager customerTableManager =
-            (CustomersTableManager) Main.getDatabaseManager().getTableManager(TableNames.CUSTOMERS);
     public ChoiceBox<ChoiceUnit> customer;
     public DatePicker date;
     public ChoiceBox<ChoiceUnit> good;
@@ -47,7 +45,6 @@ public class PurchaseController extends Controller implements Initializable {
     public Button addNewCustomerButton;
     public Spinner<Integer> countGoods;
     public TextField pricePerOne;
-    private Map<Integer, Customer> allCustomers;
     private Map<Integer, Good> allGoods;
     private boolean withAddNewCustomer = false;
 
@@ -141,11 +138,7 @@ public class PurchaseController extends Controller implements Initializable {
     }
 
     private ObservableList<Entity> loadCustomers() {
-        allCustomers = new HashMap<>();
-        ObservableList<Entity> customersFromDB =
-                Main.getDatabaseManager().getTableManager(TableNames.CUSTOMERS).getTableRows();
-        customersFromDB.forEach(e -> allCustomers.put(Integer.valueOf(e.getId()), (Customer) e));
-        return customersFromDB;
+        return Main.getDatabaseManager().getTableManager(TableNames.CUSTOMERS).getTableRows();
     }
 
     public void addGood() {
@@ -220,7 +213,7 @@ public class PurchaseController extends Controller implements Initializable {
             Map<String, String> value = new HashMap<>();
             value.put("good", k.getId());
             value.put("count", String.valueOf(v));
-            value.put("result_price", String.valueOf(Integer.parseInt(pricePerOne.getText()) * v));
+            value.put("result_price", String.valueOf(priceGoodInCart.get(k) * v));
             value.put("purchase_date", date.getValue().toString());
             values.add(value);
         });

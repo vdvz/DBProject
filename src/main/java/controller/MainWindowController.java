@@ -172,7 +172,10 @@ public class MainWindowController extends Controller implements Initializable, R
   }
 
   public void addDelivery() {
-
+    Controller controller =  Main.getNavigation().load("/window/shipment.fxml");
+    Stage newStage = Main.getNavigation().createNewStage();
+    controller.setStage(newStage);
+    controller.show();
   }
 
   public void addGood() {

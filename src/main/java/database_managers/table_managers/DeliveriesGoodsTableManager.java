@@ -20,7 +20,7 @@ public class DeliveriesGoodsTableManager extends TableManager {
 
     private static final Map<String, Class> columns = new LinkedHashMap<String, Class>(){
         {
-            put("provider_id", Integer.class);
+            //put("provider_id", Integer.class);
             put("good_id", Integer.class);
             put("delivery_id", Integer.class);
             put("count", Integer.class);
@@ -40,13 +40,13 @@ public class DeliveriesGoodsTableManager extends TableManager {
             result = getConnection().executeQuery(selectionQuery);
             while(result.next()){
                 String id = result.getObject("id").toString();
-                String providerId = result.getObject("provider_id").toString();
+                //String providerId = result.getObject("provider_id").toString();
                 String goodId = result.getObject("good_id").toString();
                 String deliveryId = result.getObject("delivery_id").toString();
                 String count = result.getObject("count").toString();
                 String price = result.getObject("price").toString();
 
-                resultList.add(new DeliveriesGood(id, providerId, goodId, deliveryId,count, price));
+                resultList.add(new DeliveriesGood(id/*, providerId*/, goodId, deliveryId,count, price));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
