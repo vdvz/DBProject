@@ -1,10 +1,8 @@
 package controller.request;
 
 import controller.Controller;
-import controller.MainController;
-import database_managers.request_managers.CountAndInfoAboutCustomersManager;
+import controller.table.Request;
 import database_managers.request_managers.CountAndInfoAboutProvidersManager;
-import entities.Customer;
 import entities.Entity;
 import entities.Good;
 import entities.Provider;
@@ -23,9 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import utils.ChoiceUnit;
+import utils.Navigation;
 import utils.TableNames;
 
-public class CountAndInfoAboutProvidersController extends Controller implements Initializable {
+public class CountAndInfoAboutProvidersController extends Controller implements Initializable,
+    Request {
 
     public static final String COUNT_AND_INFO_ABOUT_PROVIDERS_WINDOW_FXML = "/window/request/CountAndInfoAboutProviders.fxml";
 
@@ -95,7 +95,7 @@ public class CountAndInfoAboutProvidersController extends Controller implements 
             + " INNER JOIN DELIVERIES D on D.PROVIDER_ID = P.ID"
             + " INNER JOIN DELIVERIES_GOODS DG on D.ID = DG.DELIVERY_ID"
             + " INNER JOIN GOODS G on G.ID = DG.GOOD_ID"
-            + " WHERE 1=1 ";
+            + " WHERE 1=1";
 
         try {
             checkCorrectness();
@@ -103,13 +103,13 @@ public class CountAndInfoAboutProvidersController extends Controller implements 
             return;
         }
 
-        query+= " AND G.ID=" + good.getValue().getId() + " ";
+        query+= " AND G.ID=" + good.getValue().getId();
 
         if(dateFrom.getValue()!=null){
-            query+= "AND D.DELIVER_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= " AND D.DELIVER_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD')";
         }
         if(dateTo.getValue()!=null){
-            query+= "AND D.DELIVER_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= " AND D.DELIVER_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD')";
         }
         if(dateTo.getValue()==null && dateFrom.getValue()==null){
             query+=" AND COUNT >= " + Integer.valueOf(requestCount.getText());
@@ -119,15 +119,19 @@ public class CountAndInfoAboutProvidersController extends Controller implements 
         updateResultTable(manager.executeQuery(query));
     }
 
-    private void checkCorrectness() throws Exception {
-        if(good.getValue()==null){
-            MainController.showAlert("Ввод невалидных данных", "Выберите товар");
-            throw new Exception();
-        }
-        if(dateTo.getValue()==null && dateFrom.getValue()==null && requestCount.getText().equals("")){
-            MainController.showAlert("Ввод невалидных данных", "Введите дату, либо количество.");
-            throw new Exception();
-        }
+     public void checkCorrectness() throws Exception {
+         if(good.getValue()==null){
+             Navigation.showAlert("Ввод невалидных данных", "Выберите товар");
+             throw new Exception();
+         }
+         if(dateTo.getValue()==null && dateFrom.getValue()==null){
+             Navigation.showAlert("Ввод невалидных данных", "Введите дату.");
+             throw new Exception();
+         }
+         if(requestCount.getText().equals("")){
+             Navigation.showAlert("Ввод невалидных данных", "Введите количество.");
+             throw new Exception();
+         }
     }
 
     private void clearResultTable(){

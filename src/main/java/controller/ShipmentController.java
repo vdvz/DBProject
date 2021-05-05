@@ -191,6 +191,7 @@ public class ShipmentController extends Controller implements Initializable {
 
     manager.commitTransaction();
 
+    getStage().close();
     System.out.println("Successful transaction");
   }
 

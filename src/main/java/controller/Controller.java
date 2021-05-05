@@ -28,7 +28,7 @@ public abstract class Controller {
         return stage;
     }
 
-    void close(){
+    public void close(){
         getStage().close();
     }
 

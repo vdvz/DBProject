@@ -18,7 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public abstract class TableWindowController extends Controller implements Initializable, RoleController {
+public abstract class TableWindowController extends Controller implements Initializable, RoleController, Request {
 
     public static final String TABLE_WINDOW_FXML = "/window/table.fxml";
     final DatabaseManager manager;
@@ -74,17 +74,14 @@ public abstract class TableWindowController extends Controller implements Initia
 
     public void createNewRow(){
         InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
-                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName));
-        Stage newStage = Main.getNavigation().createNewStage();
+                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName), Main.getNavigation().createNewStage());
         controller.setMode(InsertionWindowController.MODE.INSERTING);
-        controller.setStage(newStage);
         controller.show();
     }
 
     public void updateRow(Entity entity){
         InsertionWindowController controller = (InsertionWindowController) Main.getNavigation()
-                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName));
-        controller.setStage(Main.getNavigation().createNewStage());
+                .loadTable("/window/insertion.fxml", InsertionWindowController.getNameOfController(tableName),Main.getNavigation().createNewStage());
         controller.setMode(InsertionWindowController.MODE.UPDATING);
         controller.initUpdating(entity);
         controller.show();

@@ -101,8 +101,7 @@ public class MainWindowController extends Controller implements Initializable, R
             Controller controller = null;
             controller =
                 Main.getNavigation()
-                    .loadTable(TableWindowController.TABLE_WINDOW_FXML, classForName);
-            controller.setStage(Main.getNavigation().createNewStage());
+                    .loadTable(TableWindowController.TABLE_WINDOW_FXML, classForName, Main.getNavigation().createNewStage());
             controller.show();
           }
           System.out.println(tableNamesView.getSelectionModel().getSelectedItems());
@@ -157,10 +156,8 @@ public class MainWindowController extends Controller implements Initializable, R
             Main.getNavigation()
                 .loadTable(
                     "/window/insertion.fxml",
-                    InsertionWindowController.getNameOfController(TableNames.ACCOUNTING));
-    Stage newStage = Main.getNavigation().createNewStage();
+                    InsertionWindowController.getNameOfController(TableNames.ACCOUNTING), Main.getNavigation().createNewStage());
     controller.setMode(InsertionWindowController.MODE.INSERTING);
-    controller.setStage(newStage);
     controller.show();
   }
 
@@ -184,10 +181,8 @@ public class MainWindowController extends Controller implements Initializable, R
             Main.getNavigation()
                 .loadTable(
                     "/window/insertion.fxml",
-                    InsertionWindowController.getNameOfController(TableNames.GOODS));
-    Stage newStage = Main.getNavigation().createNewStage();
+                    InsertionWindowController.getNameOfController(TableNames.GOODS), Main.getNavigation().createNewStage());
     controller.setMode(InsertionWindowController.MODE.INSERTING);
-    controller.setStage(newStage);
     controller.show();
   }
 
@@ -197,10 +192,8 @@ public class MainWindowController extends Controller implements Initializable, R
             Main.getNavigation()
                 .loadTable(
                     "/window/insertion.fxml",
-                    InsertionWindowController.getNameOfController(TableNames.PROVIDERS));
-    Stage newStage = Main.getNavigation().createNewStage();
+                    InsertionWindowController.getNameOfController(TableNames.PROVIDERS), Main.getNavigation().createNewStage());
     controller.setMode(InsertionWindowController.MODE.INSERTING);
-    controller.setStage(newStage);
     controller.show();
   }
 

@@ -22,9 +22,9 @@ import utils.ChoiceUnit;
 import utils.Navigation;
 import utils.TableNames;
 
-public class InfoAboutSellerSalaryController extends Controller implements Initializable, Request {
-  public static final String INFO_ABOUT_SELLER_SALARY_WINDOW_FXML =
-      "/window/request/InfoAboutSellerSalary.fxml";
+public class InfoAboutActiveCustomersController extends Controller implements Initializable, Request {
+  public static final String INFO_ABOUT_ACTIVE_CUSTOMERS_WINDOW_FXML =
+      "/window/request/InfoAboutActiveCustomers.fxml";
   private final InfoAboutSellerSalaryManager manager = new InfoAboutSellerSalaryManager();
   public ChoiceBox<ChoiceUnit> tradePoint;
   public ChoiceBox<ChoiceUnit> tradePointType;

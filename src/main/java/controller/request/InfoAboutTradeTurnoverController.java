@@ -5,7 +5,6 @@ import controller.table.Request;
 import database_managers.request_managers.InfoAboutCustomersManager;
 import entities.Customer;
 import entities.Entity;
-import entities.Good;
 import entities.TradePoint;
 import entities.TradeType;
 import init.Main;
@@ -24,11 +23,10 @@ import utils.ChoiceUnit;
 import utils.Navigation;
 import utils.TableNames;
 
-public class InfoAboutCustomersController extends Controller implements Initializable, Request {
-  public static final String INFO_ABOUT_CUSTOMERS_WINDOW_FXML =
-      "/window/request/InfoAboutCustomers.fxml";
+public class InfoAboutTradeTurnoverController extends Controller implements Initializable, Request {
+  public static final String INFO_ABOUT_TRADE_TURNOVER_WINDOW_FXML =
+      "/window/request/InfoTradeTurnover.fxml";
   private final InfoAboutCustomersManager manager = new InfoAboutCustomersManager();
-  @FXML private ChoiceBox<ChoiceUnit> good;
   @FXML private DatePicker dateFrom;
   @FXML private DatePicker dateTo;
   @FXML private ChoiceBox<ChoiceUnit> tradePointType;
@@ -37,9 +35,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    loadGood().stream()
-        .map(e -> new ChoiceUnit(e.getId(), ((Good) e).getName()))
-        .forEach(good.getItems()::addAll);
     loadTradePoint().stream()
         .map(e -> new ChoiceUnit(e.getId(), ((TradePoint) e).getName()))
         .forEach(tradePoint.getItems()::addAll);
@@ -56,22 +51,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
     columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
 
     resultTable.getColumns().addAll(columnId, columnName, columnAge);
-
-    good.setConverter(
-        new StringConverter<ChoiceUnit>() {
-          @Override
-          public String toString(ChoiceUnit object) {
-            return object.getDisplayedName();
-          }
-
-          @Override
-          public ChoiceUnit fromString(String string) {
-            return good.getItems().stream()
-                .filter(e -> e.getDisplayedName().equals(string))
-                .findFirst()
-                .orElse(null);
-          }
-        });
 
     tradePoint.setConverter(
         new StringConverter<ChoiceUnit>() {
@@ -104,10 +83,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
                 .orElse(null);
           }
         });
-  }
-
-  private ObservableList<Entity> loadGood() {
-    return Main.getDatabaseManager().getTableManager(TableNames.GOODS).getTableRows();
   }
 
   private ObservableList<Entity> loadTradePointType() {
@@ -143,8 +118,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
             + " INNER JOIN TRADE_TYPES TT on TP.TYPE=TT.ID "
             + " WHERE 1=1";
 
-    query += " AND G.ID=" + good.getValue().getId();
-
     if (dateFrom.getValue() != null) {
       query +=
           " AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD')";
@@ -167,19 +140,20 @@ public class InfoAboutCustomersController extends Controller implements Initiali
 
   @Override
   public void checkCorrectness() throws Exception {
-    if (good.getValue() == null) {
-      Navigation.showAlert("Ввод невалидных данных", "Выберите товар");
-      throw new Exception();
-    }
     if (dateTo.getValue() == null && dateFrom.getValue() == null) {
       Navigation.showAlert("Ввод невалидных данных", "Введите дату.");
       throw new Exception();
     }
 
+    if (tradePoint.getValue() == null && tradePointType.getValue() == null) {
+      Navigation.showAlert(
+          "Ввод невалидных данных", "Выберите торговую точку, либо тип торговой точки");
+      throw new Exception();
+    }
+
     if (tradePoint.getValue() != null && tradePointType.getValue() != null) {
       Navigation.showAlert(
-          "Ввод невалидных данных",
-          "Выберите торговую точку, тип торговой точки, либо оставьте оба значения пустыми");
+          "Ввод невалидных данных", "Выберите торговую точку, либо тип торговой точки");
       throw new Exception();
     }
   }

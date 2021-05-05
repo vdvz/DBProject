@@ -24,13 +24,11 @@ import utils.ChoiceUnit;
 import utils.Navigation;
 import utils.TableNames;
 
-public class InfoAboutCustomersController extends Controller implements Initializable, Request {
-  public static final String INFO_ABOUT_CUSTOMERS_WINDOW_FXML =
-      "/window/request/InfoAboutCustomers.fxml";
+public class InfoAboutCountAndPriceOnGoodsController extends Controller implements Initializable, Request {
+  public static final String INFO_ABOUT_COUNT_AND_PRICE_ON_GOODS_WINDOW_FXML =
+      "/window/request/InfoAboutCountAndPriceOnGoods.fxml";
   private final InfoAboutCustomersManager manager = new InfoAboutCustomersManager();
   @FXML private ChoiceBox<ChoiceUnit> good;
-  @FXML private DatePicker dateFrom;
-  @FXML private DatePicker dateTo;
   @FXML private ChoiceBox<ChoiceUnit> tradePointType;
   @FXML private ChoiceBox<ChoiceUnit> tradePoint;
   @FXML private TableView resultTable;
@@ -125,12 +123,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
   }
 
   @FXML
-  public void clearDate() {
-    dateFrom.setValue(null);
-    dateTo.setValue(null);
-  }
-
-  @FXML
   public void query() {
     String query =
         "SELECT C2.ID, C2.NAME, C2.AGE "
@@ -144,15 +136,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
             + " WHERE 1=1";
 
     query += " AND G.ID=" + good.getValue().getId();
-
-    if (dateFrom.getValue() != null) {
-      query +=
-          " AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD')";
-    }
-    if (dateTo.getValue() != null) {
-      query +=
-          " AND PC.PURCHASE_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD')";
-    }
 
     if (tradePoint.getValue() != null && tradePointType.getValue() == null) {
       query += " AND TP.NAME='" + tradePoint.getValue().getDisplayedName() + "'";
@@ -169,10 +152,6 @@ public class InfoAboutCustomersController extends Controller implements Initiali
   public void checkCorrectness() throws Exception {
     if (good.getValue() == null) {
       Navigation.showAlert("Ввод невалидных данных", "Выберите товар");
-      throw new Exception();
-    }
-    if (dateTo.getValue() == null && dateFrom.getValue() == null) {
-      Navigation.showAlert("Ввод невалидных данных", "Введите дату.");
       throw new Exception();
     }
 

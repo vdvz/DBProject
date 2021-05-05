@@ -1,7 +1,7 @@
 package controller.request;
 
 import controller.Controller;
-import controller.MainController;
+import controller.table.Request;
 import entities.*;
 import init.Main;
 import javafx.collections.ObservableList;
@@ -11,13 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import utils.ChoiceUnit;
+import utils.Navigation;
 import utils.TableNames;
 import database_managers.request_managers.CountAndInfoAboutCustomersManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CountAndInfoAboutCustomersController extends Controller implements Initializable {
+public class CountAndInfoAboutCustomersController extends Controller implements Initializable,
+    Request {
 
     public static final String COUNT_AND_INFO_ABOUT_CUSTOMERS_WINDOW_FXML = "/window/request/CountAndInfoAboutCustomers.fxml";
 
@@ -90,23 +92,21 @@ public class CountAndInfoAboutCustomersController extends Controller implements 
                 " INNER JOIN CUSTOMERS C on C.ID=S.CUSTOMER " +
                 " INNER JOIN PURCHASE_COMPOSITIONS PC on PC.ID=S.PURCHASE_COMPOSITION " +
                 " INNER JOIN GOODS G on G.ID=PC.GOOD " +
-                " WHERE G.NAME='";
-        if(good.getValue()==null){
-            MainController.showAlert("Ввод невалидных данных", "Выберите товар");
-            return;
-        }
-        if(dateTo.getValue()==null && dateFrom.getValue()==null && requestCount.getText().equals("")){
-            MainController.showAlert("Ввод невалидных данных", "Введите дату, либо количество.");
+                " WHERE 1=1 ";
+
+        try {
+            checkCorrectness();
+        } catch (Exception e) {
             return;
         }
 
-        query+= good.getValue().getDisplayedName() + "' ";
+        query+= " AND G.ID=" + good.getValue().getId();
 
         if(dateFrom.getValue()!=null){
-            query+= "AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= " AND PC.PURCHASE_DATE > TO_DATE('" + dateFrom.getValue().toString() + "', 'YYYY-MM-DD')";
         }
         if(dateTo.getValue()!=null){
-            query+= "AND PC.PURCHASE_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD') ";
+            query+= " AND PC.PURCHASE_DATE < TO_DATE('" + dateTo.getValue().toString() + "', 'YYYY-MM-DD')";
         }
         if(dateTo.getValue()==null && dateFrom.getValue()==null){
             query+=" AND COUNT >= " + Integer.valueOf(requestCount.getText());
@@ -114,6 +114,22 @@ public class CountAndInfoAboutCustomersController extends Controller implements 
         System.out.println("Query: " + query);
 
         updateResultTable(manager.executeQuery(query));
+    }
+
+    @Override
+    public void checkCorrectness() throws Exception {
+        if(good.getValue()==null){
+            Navigation.showAlert("Ввод невалидных данных", "Выберите товар");
+            throw new Exception();
+        }
+        if(dateTo.getValue()==null && dateFrom.getValue()==null){
+            Navigation.showAlert("Ввод невалидных данных", "Введите дату.");
+            throw new Exception();
+        }
+        if(requestCount.getText().equals("")){
+            Navigation.showAlert("Ввод невалидных данных", "Введите количество.");
+            throw new Exception();
+        }
     }
 
     private void clearResultTable(){
