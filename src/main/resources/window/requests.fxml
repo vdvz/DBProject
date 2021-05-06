@@ -76,7 +76,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="todo3" layoutX="410.0" layoutY="109.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="infoAboutSellerWork" layoutX="410.0" layoutY="109.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" text="Сведения о выработке продавца" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

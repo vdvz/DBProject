@@ -2,7 +2,7 @@ package controller.request;
 
 import controller.Controller;
 import controller.table.Request;
-import database_managers.request_managers.InfoAboutSellerSalaryManager;
+import database_managers.request_managers.InfoAboutActiveCustomersManager;
 import entities.Entity;
 import entities.Seller;
 import entities.TradePoint;
@@ -22,10 +22,11 @@ import utils.ChoiceUnit;
 import utils.Navigation;
 import utils.TableNames;
 
-public class InfoAboutActiveCustomersController extends Controller implements Initializable, Request {
+public class InfoAboutActiveCustomersController extends Controller
+    implements Initializable, Request {
   public static final String INFO_ABOUT_ACTIVE_CUSTOMERS_WINDOW_FXML =
       "/window/request/InfoAboutActiveCustomers.fxml";
-  private final InfoAboutSellerSalaryManager manager = new InfoAboutSellerSalaryManager();
+  private final InfoAboutActiveCustomersManager manager = new InfoAboutActiveCustomersManager();
   public ChoiceBox<ChoiceUnit> tradePoint;
   public ChoiceBox<ChoiceUnit> tradePointType;
   public TableView resultTable;
@@ -123,11 +124,7 @@ public class InfoAboutActiveCustomersController extends Controller implements In
 
     System.out.println(query);
 
-    try {
-      updateResultTable(manager.executeQuery(query));
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
+    updateResultTable(manager.executeQuery(query));
   }
 
   private void clearResultTable() {
@@ -146,6 +143,5 @@ public class InfoAboutActiveCustomersController extends Controller implements In
           "Выберите торговую точку, тип торговой точки, либо оставьте оба значения пустыми");
       throw new Exception();
     }
-
   }
 }

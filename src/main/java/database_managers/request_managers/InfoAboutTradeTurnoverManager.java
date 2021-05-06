@@ -9,10 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Connection;
 
-public class InfoAboutSellerSalaryManager {
+public class InfoAboutTradeTurnoverManager {
 
   private final Connection connection;
-  public InfoAboutSellerSalaryManager(){
+  public InfoAboutTradeTurnoverManager(){
     this.connection = Main.getDatabaseManager().getConnection();
   }
 

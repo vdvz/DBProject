@@ -3,6 +3,7 @@ package controller.request;
 import controller.Controller;
 import controller.table.Request;
 import database_managers.request_managers.InfoAboutCustomersManager;
+import database_managers.request_managers.InfoAboutTradeTurnoverManager;
 import entities.Customer;
 import entities.Entity;
 import entities.TradePoint;
@@ -26,7 +27,7 @@ import utils.TableNames;
 public class InfoAboutTradeTurnoverController extends Controller implements Initializable, Request {
   public static final String INFO_ABOUT_TRADE_TURNOVER_WINDOW_FXML =
       "/window/request/InfoTradeTurnover.fxml";
-  private final InfoAboutCustomersManager manager = new InfoAboutCustomersManager();
+  private final InfoAboutTradeTurnoverManager manager = new InfoAboutTradeTurnoverManager();
   @FXML private DatePicker dateFrom;
   @FXML private DatePicker dateTo;
   @FXML private ChoiceBox<ChoiceUnit> tradePointType;

@@ -2,7 +2,7 @@ package controller.request;
 
 import controller.Controller;
 import controller.table.Request;
-import database_managers.request_managers.InfoAboutCustomersManager;
+import database_managers.request_managers.InfoAboutCountAndPriceOnGoodManager;
 import entities.Customer;
 import entities.Entity;
 import entities.Good;
@@ -15,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,10 +23,12 @@ import utils.ChoiceUnit;
 import utils.Navigation;
 import utils.TableNames;
 
-public class InfoAboutCountAndPriceOnGoodsController extends Controller implements Initializable, Request {
+public class InfoAboutCountAndPriceOnGoodsController extends Controller
+    implements Initializable, Request {
   public static final String INFO_ABOUT_COUNT_AND_PRICE_ON_GOODS_WINDOW_FXML =
       "/window/request/InfoAboutCountAndPriceOnGoods.fxml";
-  private final InfoAboutCustomersManager manager = new InfoAboutCustomersManager();
+  private final InfoAboutCountAndPriceOnGoodManager manager =
+      new InfoAboutCountAndPriceOnGoodManager();
   @FXML private ChoiceBox<ChoiceUnit> good;
   @FXML private ChoiceBox<ChoiceUnit> tradePointType;
   @FXML private ChoiceBox<ChoiceUnit> tradePoint;

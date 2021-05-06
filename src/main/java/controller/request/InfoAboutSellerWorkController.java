@@ -3,6 +3,7 @@ package controller.request;
 import controller.Controller;
 import controller.table.Request;
 import database_managers.request_managers.InfoAboutCustomersManager;
+import database_managers.request_managers.InfoAboutSellerWorkManager;
 import entities.Customer;
 import entities.Entity;
 import entities.Good;
@@ -42,7 +43,7 @@ public class InfoAboutSellerWorkController extends Controller implements Initial
     @FXML
     private TableView resultTable;
 
-    private final InfoAboutCustomersManager manager = new InfoAboutCustomersManager();
+    private final InfoAboutSellerWorkManager manager = new InfoAboutSellerWorkManager();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
